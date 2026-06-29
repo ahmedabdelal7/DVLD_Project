@@ -365,14 +365,31 @@ namespace DVLD_DataAccessLayer
 
             return IsExist;
         }
-
         public static DataTable GetAllPeople()
         {
             DataTable dataTable = new DataTable();
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = "SELECT * FROM People";
+            string query = @"SELECT People.PersonID,
+			                            People.NationalNo,
+			                            People.FirstName,
+			                            SecondName,
+			                            ThirdName,
+			                            LastName,
+			                            Gendor = 
+			                            CASE 
+				                            WHEN Gendor = 1 THEN 'Female'
+				                            WHEN Gendor = 0 THEN 'Male'
+				                            ELSE 'Unknown'
+			                            END,
+			                            Address,
+			                            DateOfBirth,
+			                            Phone,
+			                            CountryName AS Nationality,
+			                            Email
+                            FROM People INNER JOIN Countries ON
+			                            People.NationalityCountryID = Countries.CountryID";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -382,7 +399,7 @@ namespace DVLD_DataAccessLayer
 
                 SqlDataReader reader = command.ExecuteReader();
 
-                if (reader.HasRows)
+                //if (reader.HasRows)
                     dataTable.Load(reader);
 
                 reader.Close();
