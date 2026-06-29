@@ -132,6 +132,11 @@ namespace DVLD_BussinessLayer
             return clsPersonData.IsPersonExistByNationalNo(NationalNo);
         }
 
+        public static DataTable ListAllPeople() { 
+            
+            return clsPersonData.GetAllPeople();
+        }
+
         public bool Save()
         {
             switch (_Mode)
