@@ -3,7 +3,7 @@
 
 A desktop application built with **C#**, **WinForms**, **ADO.NET**, and **SQL Server** to simulate a real-world Driving & Vehicle License Department management system.
 
-The project is currently under active development and aims to provide a complete solution for managing driver licenses, applications, tests, users, and related services through a clean multi-tier architecture.
+The project is currently under active development and aims to provide a complete solution for managing driver licenses, applications, tests, users, and related services through a clean multi-layer architecture.
 
 ## 🚧 Current Status
 This project is a work in progress. New features and improvements are being added continuously.
@@ -13,7 +13,7 @@ This project is a work in progress. New features and improvements are being adde
 - WinForms
 - SQL Server
 - ADO.NET
-- 3-Tier Architecture (Presentation, Business, Data Access)
+- 3-Layer Architecture (Presentation, Business, Data Access)
 - Object-Oriented Programming (OOP)
 
 ## 📌 Planned Features
