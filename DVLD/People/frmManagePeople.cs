@@ -44,5 +44,11 @@ namespace DVLD.People
 
             txtFilterText.Visible = (cbFilter.SelectedItem.ToString() != "None");
         }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            frmAddEditPerson frmAddEditPerson = new frmAddEditPerson();
+            frmAddEditPerson.ShowDialog();
+        }
     }
 }
