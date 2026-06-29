@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 
 namespace DVLD_DataAccessLayer
 {
-    public static class clsCountry
+    public static class clsCountryData
     {
 
 

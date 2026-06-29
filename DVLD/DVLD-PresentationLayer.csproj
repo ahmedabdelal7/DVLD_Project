@@ -98,9 +98,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DVLD-BussinessLayer\DVLD-BussinessLayer.csproj">
+    <ProjectReference Include="..\DVLD-BussinessLayer\DVLD-BusinessLayer.csproj">
       <Project>{e0b20243-d74a-44f7-9dcf-5079b8f466d6}</Project>
-      <Name>DVLD-BussinessLayer</Name>
+      <Name>DVLD-BusinessLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
