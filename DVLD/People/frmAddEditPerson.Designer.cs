@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAddEditPerson));
             this.lblAddEditPerson = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -72,6 +73,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblPersonID = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ppPersonImage)).BeginInit();
@@ -84,6 +86,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // lblAddEditPerson
@@ -186,6 +189,7 @@
             this.btnSave.TabIndex = 8;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnClose
             // 
@@ -357,6 +361,7 @@
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(184, 26);
             this.txtLastName.TabIndex = 3;
+            this.txtLastName.Validating += new System.ComponentModel.CancelEventHandler(this._ValidateTextBox);
             // 
             // txtThirdName
             // 
@@ -376,6 +381,7 @@
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(598, 107);
             this.txtAddress.TabIndex = 3;
+            this.txtAddress.Validating += new System.ComponentModel.CancelEventHandler(this._ValidateTextBox);
             // 
             // txtEmail
             // 
@@ -394,6 +400,7 @@
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(184, 26);
             this.txtPhone.TabIndex = 3;
+            this.txtPhone.Validating += new System.ComponentModel.CancelEventHandler(this._ValidateTextBox);
             // 
             // txtSecondName
             // 
@@ -403,6 +410,7 @@
             this.txtSecondName.Name = "txtSecondName";
             this.txtSecondName.Size = new System.Drawing.Size(184, 26);
             this.txtSecondName.TabIndex = 3;
+            this.txtSecondName.Validating += new System.ComponentModel.CancelEventHandler(this._ValidateTextBox);
             // 
             // txtNationalNo
             // 
@@ -412,6 +420,7 @@
             this.txtNationalNo.Name = "txtNationalNo";
             this.txtNationalNo.Size = new System.Drawing.Size(184, 26);
             this.txtNationalNo.TabIndex = 3;
+            this.txtNationalNo.Validating += new System.ComponentModel.CancelEventHandler(this._ValidateNationalNo);
             // 
             // txtFirstName
             // 
@@ -421,7 +430,7 @@
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(184, 26);
             this.txtFirstName.TabIndex = 3;
-            this.txtFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateTextBox);
+            this.txtFirstName.Validating += new System.ComponentModel.CancelEventHandler(this._ValidateTextBox);
             // 
             // label8
             // 
@@ -563,6 +572,10 @@
             this.lblPersonID.TabIndex = 2;
             this.lblPersonID.Text = "N/A";
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
             // frmAddEditPerson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -594,6 +607,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -644,5 +658,6 @@
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.LinkLabel llSetImage;
         private System.Windows.Forms.LinkLabel llRemove;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

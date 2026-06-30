@@ -1,4 +1,5 @@
-﻿using DVLD.Properties;
+﻿using DVLD.Common_Classes;
+using DVLD.Properties;
 using DVLD_BusinessLayer;
 using DVLD_BussinessLayer;
 using System;
@@ -77,6 +78,8 @@ namespace DVLD.People
             {
                 //do something and return if the user not exist in database.
                 //
+                MessageBox.Show("this person does not exist!");
+                this.Close();
                 return;
             }
             _Person = clsPerson.Find(_PersonID);
@@ -110,20 +113,98 @@ namespace DVLD.People
             }
 
         }
-        private void ValidateTextBox(object sender, CancelEventArgs e)
+        private void _ValidateTextBox(object sender, CancelEventArgs e)
         {
-            
+            TextBox textBox = sender as TextBox;
+            if (string.IsNullOrEmpty(textBox.Text.Trim()))
+            {
+                e.Cancel = true;
+                textBox.Focus();
+                errorProvider1.SetError(textBox, "This field should not be empty!");
+                return;
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider1.SetError(textBox, null);
+            }
         }
+        private void _ValidateEmail(object sender, CancelEventArgs e)
+        {
+            TextBox email = sender as TextBox;
+            if (string.IsNullOrEmpty(email.Text) || clsValidate.IsValidEmail(email.Text))
+            {
+                e.Cancel = false;
+                errorProvider1.SetError(email, null);
+                return;
+            }
+
+            e.Cancel = true;
+            email.Focus();
+            errorProvider1.SetError(email, "Email address is not valid!");
+            return;
+
+        }
+        private void _ValidateNationalNo(object sender, CancelEventArgs e)
+        {
+            TextBox nationalNo = sender as TextBox;
+            if (string.IsNullOrEmpty(txtNationalNo.Text.Trim()))
+            {
+                e.Cancel = true;
+                nationalNo.Focus();
+                errorProvider1.SetError(nationalNo, "National Number should not be empty!");
+                return;
+            }
+
+            if (clsPerson.IsExist(nationalNo.Text.Trim()))
+            {
+                e.Cancel = true;
+                nationalNo.Focus();
+                errorProvider1.SetError(nationalNo, "National Number is already exist, enter another one!");
+                return;
+            }
+
+            e.Cancel = false;
+            errorProvider1.SetError(nationalNo, null);
+        }
+
+
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
 
         private void frmAddEditPerson_Load(object sender, EventArgs e)
         {
             _LoadData();
         }
 
+        private void _FillDataToPersonObject()
+        {
+
+
+        }
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (!this.ValidateChildren())
+            {
+                MessageBox.Show("cannot save, fill required fields or enter valid fields first!","Failed",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (_Mode == enMode.AddNew) { 
+                
+                DialogResult msgResult =  MessageBox.Show("Are you sure you want to add this user?","Confirm",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question,MessageBoxDefaultButton.Button1);
+                if (msgResult == DialogResult.Yes) {
+                    
+
+                }
+                
+            }
+        }
+
+       
     }
 }
