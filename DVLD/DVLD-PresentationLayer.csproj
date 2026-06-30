@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common Classes\clsUtil.cs" />
     <Compile Include="Common Classes\clsValidate.cs" />
     <Compile Include="frmMain.cs">
       <SubType>Form</SubType>

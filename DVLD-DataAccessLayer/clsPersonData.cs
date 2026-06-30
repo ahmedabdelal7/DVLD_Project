@@ -208,7 +208,7 @@ namespace DVLD_DataAccessLayer
                     ThirdName = (reader["ThirdName"] == DBNull.Value ? "" : reader["ThirdName"].ToString());
                     LastName = reader["LastName"].ToString();
                     DateOfBirth = (DateTime)reader["DateOfBirth"];
-                    Gendor = (short)reader["Gendor"];
+                    Gendor = Convert.ToInt16(reader["Gendor"]);
                     Address = reader["Address"].ToString();
                     Phone = reader["Phone"].ToString();
                     Email = (reader["Email"] == DBNull.Value ? "" : reader["Email"].ToString());
