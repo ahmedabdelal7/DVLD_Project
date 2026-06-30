@@ -34,6 +34,11 @@ namespace DVLD.People
             _LoadPeople();
         }
 
+        private int _GetSelectedPersonID()
+        {
+            return (int)dgvPeople.SelectedCells[0].Value;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -49,6 +54,19 @@ namespace DVLD.People
         {
             frmAddEditPerson frmAddEditPerson = new frmAddEditPerson();
             frmAddEditPerson.ShowDialog();
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvPeople.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Please select person first!");
+                return;
+            }
+            int PersonID = _GetSelectedPersonID();
+
+            frmAddEditPerson editPerson = new frmAddEditPerson(PersonID);
+            editPerson.ShowDialog();
         }
     }
 }
