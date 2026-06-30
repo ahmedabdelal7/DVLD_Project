@@ -74,6 +74,7 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lblPersonID = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ppPersonImage)).BeginInit();
@@ -160,10 +161,11 @@
             this.llRemove.Location = new System.Drawing.Point(801, 312);
             this.llRemove.Name = "llRemove";
             this.llRemove.Size = new System.Drawing.Size(184, 23);
-            this.llRemove.TabIndex = 9;
+            this.llRemove.TabIndex = 13;
             this.llRemove.TabStop = true;
             this.llRemove.Text = "Remove";
             this.llRemove.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.llRemove.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llRemove_LinkClicked);
             // 
             // llSetImage
             // 
@@ -171,10 +173,11 @@
             this.llSetImage.Location = new System.Drawing.Point(801, 284);
             this.llSetImage.Name = "llSetImage";
             this.llSetImage.Size = new System.Drawing.Size(184, 23);
-            this.llSetImage.TabIndex = 9;
+            this.llSetImage.TabIndex = 12;
             this.llSetImage.TabStop = true;
             this.llSetImage.Text = "Set Image";
             this.llSetImage.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.llSetImage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llSetImage_LinkClicked);
             // 
             // btnSave
             // 
@@ -186,7 +189,7 @@
             this.btnSave.Location = new System.Drawing.Point(654, 351);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(124, 40);
-            this.btnSave.TabIndex = 8;
+            this.btnSave.TabIndex = 14;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
@@ -201,7 +204,7 @@
             this.btnClose.Location = new System.Drawing.Point(502, 351);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(124, 40);
-            this.btnClose.TabIndex = 8;
+            this.btnClose.TabIndex = 15;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
@@ -215,7 +218,7 @@
             this.cbCountries.Location = new System.Drawing.Point(594, 189);
             this.cbCountries.Name = "cbCountries";
             this.cbCountries.Size = new System.Drawing.Size(184, 28);
-            this.cbCountries.TabIndex = 7;
+            this.cbCountries.TabIndex = 10;
             // 
             // panel2
             // 
@@ -223,14 +226,14 @@
             this.panel2.Controls.Add(this.rbMale);
             this.panel2.Location = new System.Drawing.Point(180, 144);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(194, 34);
+            this.panel2.Size = new System.Drawing.Size(184, 34);
             this.panel2.TabIndex = 6;
             // 
             // rbFemale
             // 
             this.rbFemale.AutoSize = true;
             this.rbFemale.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbFemale.Location = new System.Drawing.Point(104, 3);
+            this.rbFemale.Location = new System.Drawing.Point(101, 3);
             this.rbFemale.Name = "rbFemale";
             this.rbFemale.Size = new System.Drawing.Size(80, 24);
             this.rbFemale.TabIndex = 7;
@@ -246,7 +249,7 @@
             this.rbMale.Location = new System.Drawing.Point(14, 3);
             this.rbMale.Name = "rbMale";
             this.rbMale.Size = new System.Drawing.Size(61, 24);
-            this.rbMale.TabIndex = 7;
+            this.rbMale.TabIndex = 6;
             this.rbMale.TabStop = true;
             this.rbMale.Text = "Male";
             this.rbMale.UseVisualStyleBackColor = true;
@@ -271,7 +274,7 @@
             this.dateTimePicker1.Location = new System.Drawing.Point(594, 100);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(184, 26);
-            this.dateTimePicker1.TabIndex = 4;
+            this.dateTimePicker1.TabIndex = 5;
             // 
             // pictureBox10
             // 
@@ -370,7 +373,7 @@
             this.txtThirdName.Location = new System.Drawing.Point(594, 57);
             this.txtThirdName.Name = "txtThirdName";
             this.txtThirdName.Size = new System.Drawing.Size(184, 26);
-            this.txtThirdName.TabIndex = 3;
+            this.txtThirdName.TabIndex = 2;
             // 
             // txtAddress
             // 
@@ -380,7 +383,7 @@
             this.txtAddress.Multiline = true;
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(598, 107);
-            this.txtAddress.TabIndex = 3;
+            this.txtAddress.TabIndex = 11;
             this.txtAddress.Validating += new System.ComponentModel.CancelEventHandler(this._ValidateTextBox);
             // 
             // txtEmail
@@ -390,7 +393,8 @@
             this.txtEmail.Location = new System.Drawing.Point(180, 191);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(184, 26);
-            this.txtEmail.TabIndex = 3;
+            this.txtEmail.TabIndex = 9;
+            this.txtEmail.Validating += new System.ComponentModel.CancelEventHandler(this._ValidateEmail);
             // 
             // txtPhone
             // 
@@ -399,7 +403,7 @@
             this.txtPhone.Location = new System.Drawing.Point(594, 148);
             this.txtPhone.Name = "txtPhone";
             this.txtPhone.Size = new System.Drawing.Size(184, 26);
-            this.txtPhone.TabIndex = 3;
+            this.txtPhone.TabIndex = 8;
             this.txtPhone.Validating += new System.ComponentModel.CancelEventHandler(this._ValidateTextBox);
             // 
             // txtSecondName
@@ -409,7 +413,7 @@
             this.txtSecondName.Location = new System.Drawing.Point(387, 57);
             this.txtSecondName.Name = "txtSecondName";
             this.txtSecondName.Size = new System.Drawing.Size(184, 26);
-            this.txtSecondName.TabIndex = 3;
+            this.txtSecondName.TabIndex = 1;
             this.txtSecondName.Validating += new System.ComponentModel.CancelEventHandler(this._ValidateTextBox);
             // 
             // txtNationalNo
@@ -419,7 +423,7 @@
             this.txtNationalNo.Location = new System.Drawing.Point(180, 100);
             this.txtNationalNo.Name = "txtNationalNo";
             this.txtNationalNo.Size = new System.Drawing.Size(184, 26);
-            this.txtNationalNo.TabIndex = 3;
+            this.txtNationalNo.TabIndex = 4;
             this.txtNationalNo.Validating += new System.ComponentModel.CancelEventHandler(this._ValidateNationalNo);
             // 
             // txtFirstName
@@ -429,7 +433,7 @@
             this.txtFirstName.Location = new System.Drawing.Point(180, 57);
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(184, 26);
-            this.txtFirstName.TabIndex = 3;
+            this.txtFirstName.TabIndex = 0;
             this.txtFirstName.Validating += new System.ComponentModel.CancelEventHandler(this._ValidateTextBox);
             // 
             // label8
@@ -576,6 +580,10 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // openFileDialog1
+            // 
+            this.openFileDialog1.FileName = "openFileDialog1";
+            // 
             // frmAddEditPerson
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -659,5 +667,6 @@
         private System.Windows.Forms.LinkLabel llSetImage;
         private System.Windows.Forms.LinkLabel llRemove;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
     }
 }

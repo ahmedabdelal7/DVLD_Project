@@ -54,6 +54,7 @@ namespace DVLD.People
         {
             frmAddEditPerson frmAddEditPerson = new frmAddEditPerson();
             frmAddEditPerson.ShowDialog();
+            _LoadPeople();
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
@@ -67,6 +68,7 @@ namespace DVLD.People
 
             frmAddEditPerson editPerson = new frmAddEditPerson(PersonID);
             editPerson.ShowDialog();
+            _LoadPeople();
         }
     }
 }

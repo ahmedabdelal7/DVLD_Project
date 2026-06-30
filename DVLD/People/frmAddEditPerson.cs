@@ -70,6 +70,8 @@ namespace DVLD.People
                 ppPersonImage.Image = Resources.man;
                 ppPersonImage.ImageLocation = null;
                 cbCountries.SelectedItem = "Egypt";
+
+                llRemove.Visible = false;
     
                 return;
             }
@@ -82,6 +84,8 @@ namespace DVLD.People
                 this.Close();
                 return;
             }
+
+            lblAddEditPerson.Text = "Update Person";
             _Person = clsPerson.Find(_PersonID);
 
 
@@ -103,6 +107,7 @@ namespace DVLD.People
             else
                 rbFemale.Checked = true;
 
+            llRemove.Visible = (ppPersonImage.ImageLocation == ""? false: true);
 
         }
         private void _GenderCheckedChange(object sender, EventArgs e)
@@ -156,7 +161,7 @@ namespace DVLD.People
                 return;
             }
 
-            if (clsPerson.IsExist(nationalNo.Text.Trim()))
+            if (clsPerson.IsExist(nationalNo.Text.Trim()) && _Mode == enMode.AddNew)
             {
                 e.Cancel = true;
                 nationalNo.Focus();
@@ -181,6 +186,22 @@ namespace DVLD.People
 
         private void _FillDataToPersonObject()
         {
+            _Person.NationalNo = txtNationalNo.Text.Trim();
+            _Person.FirstName = txtFirstName.Text.Trim();
+            _Person.SecondName = txtSecondName.Text.Trim();
+            _Person.ThirdName = txtThirdName.Text.Trim();
+            _Person.LastName = txtLastName.Text.Trim();
+            _Person.Email = txtEmail.Text.Trim();
+            _Person.Phone = txtPhone.Text.Trim();
+            _Person.Address = txtAddress.Text.Trim();
+            _Person.DateOfBirth = dateTimePicker1.Value;
+            _Person.Gender = (rbMale.Checked == true ? (short)enGender.Male :  (short)enGender.Female);
+
+            _Person.NationalityCountryID = clsCountry.FindByName(cbCountries.SelectedItem.ToString()).CountryID;
+            //_Person.NationalityCountryID = cbCountries.SelectedIndex;
+
+            _Person.ImagePath = ppPersonImage.ImageLocation;
+
 
 
         }
@@ -192,19 +213,71 @@ namespace DVLD.People
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            //Handel Image
+            //....
+
 
             if (_Mode == enMode.AddNew) { 
                 
                 DialogResult msgResult =  MessageBox.Show("Are you sure you want to add this user?","Confirm",
                     MessageBoxButtons.YesNo, MessageBoxIcon.Question,MessageBoxDefaultButton.Button1);
-                if (msgResult == DialogResult.Yes) {
-                    
 
+                if (msgResult == DialogResult.Yes) {
+
+                    _Mode = enMode.Update;
+                    _FillDataToPersonObject();
+                    if (_Person.Save())
+                    {
+                        _PersonID = _Person.PersonID;
+                        MessageBox.Show($"Person added successfully with id [{_PersonID}]");
+                        //_LoadData();
+                        lblAddEditPerson.Text = "Update Person";
+                        lblPersonID.Text = _PersonID.ToString();
+                        return;
+                    }
                 }
-                
+
+            }
+
+            DialogResult dialogResult = MessageBox.Show($"Are you sure you want to Update User [{_PersonID}]?", "Confirm",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+
+            if (dialogResult == DialogResult.Yes)
+            {
+
+                _FillDataToPersonObject();
+                if (_Person.Save())
+                {
+                    //_PersonID = _Person.PersonID;
+                    MessageBox.Show($"Person Updated successfully.");
+                    //_LoadData();
+                    return;
+                }
+            }
+
+
+        }
+
+        private void llSetImage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            openFileDialog1.InitialDirectory = @"E:\";
+            openFileDialog1.FileName = "";
+            openFileDialog1.Title = "Select an Image";
+            openFileDialog1.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.tif;*.tiff;*.webp";
+            openFileDialog1.FilterIndex = 1;
+            openFileDialog1.RestoreDirectory = true;
+
+            if (openFileDialog1.ShowDialog() == DialogResult.OK) {
+                ppPersonImage.ImageLocation = openFileDialog1.FileName;
+                llRemove.Visible = true;
             }
         }
 
-       
+        private void llRemove_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            ppPersonImage.ImageLocation = "";
+            llRemove.Visible = false;
+            ppPersonImage.Image = (rbMale.Checked == true ? Resources.man : Resources.woman);
+        }
     }
 }
