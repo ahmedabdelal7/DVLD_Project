@@ -101,7 +101,10 @@ namespace DVLD.People
 
         }
 
-
-
+        private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmPersonDetails frmPersonDetails = new frmPersonDetails();
+            frmPersonDetails.ShowDialog();
+        }
     }
 }
