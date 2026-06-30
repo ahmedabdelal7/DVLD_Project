@@ -70,5 +70,38 @@ namespace DVLD.People
             editPerson.ShowDialog();
             _LoadPeople();
         }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int PersonID = _GetSelectedPersonID();
+            DialogResult msgResult = MessageBox.Show($"Are you sure you want to delete this person [{PersonID}]",
+                "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
+
+            if (msgResult == DialogResult.Yes) {
+                if (clsPerson.IsExist(PersonID)) {
+
+                    if (clsPerson.Delete(PersonID)) { 
+
+                        MessageBox.Show("Person deleted successfully.","Success",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        _LoadPeople();
+                        return;
+                    }
+                    
+                    MessageBox.Show("Failed to this person because he has a related data in the system!",
+                        "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+
+                }else
+                {
+                    MessageBox.Show("Failed, this person does not exist!","Failed",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }                    
+            }
+
+        }
+
+
+
     }
 }

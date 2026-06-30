@@ -216,7 +216,7 @@ namespace DVLD.People
 
             //_Person.ImagePath = "";
 
-            Guid guid = Guid.NewGuid();
+           
 
             //Get person image and change its name to guid and copy this image into
             //program specified path and store this path in person object  
@@ -226,7 +226,7 @@ namespace DVLD.People
             string imageExtension = clsUtil.GetPathExtension(sourceImage);
             string folderPath = @"C:\DVLD\People-Images\";
 
-            string destinationFileName = folderPath + guid.ToString() + imageExtension;
+            string destinationFileName = folderPath + Guid.NewGuid().ToString() + imageExtension;
 
 
             //if the person already have image, delete it to replace with new image
