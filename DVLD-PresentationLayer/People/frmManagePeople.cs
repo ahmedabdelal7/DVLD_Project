@@ -100,11 +100,48 @@ namespace DVLD.People
             }
 
         }
+        private void _ShowPersonDetails()
+        {
+            int PersonID = _GetSelectedPersonID();
+            if (PersonID < -1)
+                MessageBox.Show("Please select person first.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (!clsPerson.IsExist(PersonID))
+            {
+                MessageBox.Show("this person does not exist, chose another one.", "Invalid", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                _LoadPeople();
+            }
 
+
+            frmPersonDetails frmPersonDetails = new frmPersonDetails(PersonID);
+            frmPersonDetails.ShowDialog();
+
+            _LoadPeople();
+
+        }
         private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmPersonDetails frmPersonDetails = new frmPersonDetails();
-            frmPersonDetails.ShowDialog();
+            _ShowPersonDetails();
+        }
+
+        private void dgvPeople_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            _ShowPersonDetails();
+        }
+
+        private void addNewPersonToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAddEditPerson AddNewPerson = new frmAddEditPerson();
+            AddNewPerson.ShowDialog();
+            _LoadPeople();
+        }
+
+        private void sendEmailToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("The feature is not implemented yet.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+        private void phoneCallToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("The feature is not implemented yet.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
     }
 }

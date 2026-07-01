@@ -24,6 +24,11 @@ namespace DVLD.People
         enMode _Mode;
         int _PersonID;
         clsPerson _Person;
+
+        public delegate void DataBackEventHandler(object sender, int PersonID );
+
+        // 2. Declare event based on delegate
+        public event DataBackEventHandler DataBack;
         public frmAddEditPerson()
         {
             InitializeComponent();
@@ -177,6 +182,8 @@ namespace DVLD.People
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            DataBack?.Invoke(this, _PersonID);
+
             this.Close();
         }
 
@@ -210,31 +217,17 @@ namespace DVLD.People
         private void _HandelPersonImage()
         {
 
-            //Check if pictureBox is not have an image. and Check if the person object also not have an image
-            if (string.IsNullOrEmpty(ppPersonImage.ImageLocation) && string.IsNullOrEmpty(_Person.ImagePath))
+            if (ppPersonImage.ImageLocation == _Person.ImagePath)
                 return;
-
-            //_Person.ImagePath = "";
-
-           
-
-            //Get person image and change its name to guid and copy this image into
-            //program specified path and store this path in person object  
-
-
-            string sourceImage = ppPersonImage.ImageLocation;
-            string imageExtension = clsUtil.GetPathExtension(sourceImage);
+            
             string folderPath = @"C:\DVLD\People-Images\";
 
-            string destinationFileName = folderPath + Guid.NewGuid().ToString() + imageExtension;
-
-
-            //if the person already have image, delete it to replace with new image
-            if (_Person.ImagePath.Contains(folderPath))
+            if (_Person.ImagePath.Contains(folderPath) )
             {
                 try
                 {
                     File.Delete(_Person.ImagePath.ToString());
+                    
                 }
                 catch { }
             }
@@ -245,13 +238,19 @@ namespace DVLD.People
                 return;
             }
 
-            //Create  DVLD\People-Images folder if not exist.
             if (!Directory.Exists(folderPath))
                 Directory.CreateDirectory(folderPath);
 
+            string sourceImage = ppPersonImage.ImageLocation;
+            string imageExtension = clsUtil.GetPathExtension(sourceImage);
+            string destinationFileName = folderPath + Guid.NewGuid().ToString() + imageExtension;
 
-            //Copy selected image form its location to DVLD\People-Images folder and change its name to GUID.
-            File.Copy(sourceImage, destinationFileName, true);
+
+            try
+            {
+                File.Copy(sourceImage, destinationFileName, true);
+            }
+            catch { }
 
             //Update person object to new to the new image path
             _Person.ImagePath = destinationFileName;
