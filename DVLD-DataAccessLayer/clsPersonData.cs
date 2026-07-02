@@ -371,9 +371,9 @@ namespace DVLD_DataAccessLayer
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"SELECT People.PersonID,
-			                            People.NationalNo,
-			                            People.FirstName,
+            string query = @"SELECT PersonID,
+			                            NationalNo,
+			                            FirstName,
 			                            SecondName,
 			                            ThirdName,
 			                            LastName,

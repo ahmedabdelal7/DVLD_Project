@@ -112,7 +112,7 @@
             this.sendEmailToolStripMenuItem,
             this.phoneCallToolStripMenuItem});
             this.msManagePeople.Name = "msManagePeople";
-            this.msManagePeople.Size = new System.Drawing.Size(204, 254);
+            this.msManagePeople.Size = new System.Drawing.Size(204, 232);
             // 
             // showDetailsToolStripMenuItem
             // 
@@ -230,6 +230,8 @@
             this.txtFilterText.Name = "txtFilterText";
             this.txtFilterText.Size = new System.Drawing.Size(243, 26);
             this.txtFilterText.TabIndex = 5;
+            this.txtFilterText.TextChanged += new System.EventHandler(this.txtFilterText_TextChanged);
+            this.txtFilterText.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtFilterText_KeyPress);
             // 
             // button1
             // 

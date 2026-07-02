@@ -1,4 +1,5 @@
-﻿using DVLD_BussinessLayer;
+﻿using DVLD.Common_Classes;
+using DVLD_BussinessLayer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,20 +18,39 @@ namespace DVLD.People
         {
             InitializeComponent();
         }
+        enum enFilterBY
+        {
+            None = 0, PersonID, NationalNo, FirstName, SecondName,
+            ThirdName, LastName, Nationality, Gender, Phone, Email
+        }
 
+        DataTable _dtPeople;
         private void _LoadPeople()
         {
-            DataTable dt = clsPerson.ListAllPeople();
-            dgvPeople.DataSource = dt;
+            _dtPeople = clsPerson.ListAllPeople();
+            dgvPeople.DataSource = _dtPeople;
 
-            cbFilter.SelectedIndex = 0;
+            //cbFilter.SelectedIndex = 0;
 
-            lblRecords.Text = dt.Rows.Count.ToString();
-            txtFilterText.Visible = false;
+            lblRecords.Text = _dtPeople.Rows.Count.ToString();
+            //txtFilterText.Visible = false;
 
         }
+        private void _LoadPeople(DataTable dataTable)
+        {
+            dgvPeople.DataSource = dataTable;
+
+            //cbFilter.SelectedIndex = 0;
+
+            lblRecords.Text = dataTable.Rows.Count.ToString();
+            //txtFilterText.Visible = false;
+
+        }
+
         private void frmManagePeople_Load(object sender, EventArgs e)
         {
+            cbFilter.SelectedIndex = 0;
+            txtFilterText.Visible = false;
             _LoadPeople();
         }
 
@@ -46,8 +66,7 @@ namespace DVLD.People
 
         private void cbFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            txtFilterText.Visible = (cbFilter.SelectedItem.ToString() != "None");
+            txtFilterText.Visible = (cbFilter.SelectedIndex != (int)enFilterBY.None);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -77,26 +96,30 @@ namespace DVLD.People
             DialogResult msgResult = MessageBox.Show($"Are you sure you want to delete this person [{PersonID}]",
                 "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
-            if (msgResult == DialogResult.Yes) {
-                if (clsPerson.IsExist(PersonID)) {
+            if (msgResult == DialogResult.Yes)
+            {
+                if (clsPerson.IsExist(PersonID))
+                {
 
-                    if (clsPerson.Delete(PersonID)) { 
+                    if (clsPerson.Delete(PersonID))
+                    {
 
-                        MessageBox.Show("Person deleted successfully.","Success",
+                        MessageBox.Show("Person deleted successfully.", "Success",
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         _LoadPeople();
                         return;
                     }
-                    
+
                     MessageBox.Show("Failed to this person because he has a related data in the system!",
                         "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
 
-                }else
+                }
+                else
                 {
-                    MessageBox.Show("Failed, this person does not exist!","Failed",MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }                    
+                    MessageBox.Show("Failed, this person does not exist!", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
 
         }
@@ -143,5 +166,55 @@ namespace DVLD.People
         {
             MessageBox.Show("The feature is not implemented yet.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
+        private void txtFilterText_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(cbFilter.SelectedIndex== (short)enFilterBY.PersonID)
+            {
+                TextBox txtFilterText = (TextBox)sender;
+
+                //if the text is not digit and not Key control (Enter BackSpace ESC) then ignore it.
+                e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+            }
+        }
+
+        private void txtFilterText_TextChanged(object sender, EventArgs e)
+        {
+            string searchText = txtFilterText.Text;
+            if (string.IsNullOrEmpty(searchText))
+            {
+                _LoadPeople();
+                return;
+            }
+
+            DataTable dtPeople = _dtPeople;
+            DataView dv = dtPeople.DefaultView;
+
+            //Search by PersonID & National No Exact Match
+            if(cbFilter.SelectedIndex == (short)enFilterBY.PersonID || cbFilter.SelectedIndex == (short)enFilterBY.NationalNo)
+            {
+                string searchBy = cbFilter.SelectedItem.ToString();
+                dv.RowFilter = $"{searchBy} = {searchText}";
+                _LoadPeople(dtPeople = dv.ToTable());
+                return;
+            }
+
+            if (cbFilter.SelectedIndex == (short)enFilterBY.Gender)
+            {
+                dv.RowFilter = $"Gendor LIKE '{searchText}%'";
+                _LoadPeople(dtPeople = dv.ToTable());
+                return;
+            }
+
+            else
+            {
+                string searchBy = cbFilter.SelectedItem.ToString();
+                dv.RowFilter = $"{searchBy} LIKE '%{searchText}%'";
+                _LoadPeople(dtPeople = dv.ToTable());
+                return;
+            }
+
+
+        }
     }
 }
+ 
