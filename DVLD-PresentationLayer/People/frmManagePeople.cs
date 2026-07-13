@@ -168,13 +168,8 @@ namespace DVLD.People
         }
         private void txtFilterText_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(cbFilter.SelectedIndex== (short)enFilterBY.PersonID)
-            {
-                TextBox txtFilterText = (TextBox)sender;
-
-                //if the text is not digit and not Key control (Enter BackSpace ESC) then ignore it.
-                e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-            }
+            if (cbFilter.SelectedIndex == (short)enFilterBY.PersonID)
+                e.Handled = !clsValidate.IsValidInteger(sender, e);
         }
 
         private void txtFilterText_TextChanged(object sender, EventArgs e)
@@ -189,11 +184,21 @@ namespace DVLD.People
             DataTable dtPeople = _dtPeople;
             DataView dv = dtPeople.DefaultView;
 
+            string searchBy = cbFilter.SelectedItem.ToString();
+
             //Search by PersonID & National No Exact Match
-            if(cbFilter.SelectedIndex == (short)enFilterBY.PersonID || cbFilter.SelectedIndex == (short)enFilterBY.NationalNo)
+            if(cbFilter.SelectedIndex == (short)enFilterBY.PersonID )
             {
-                string searchBy = cbFilter.SelectedItem.ToString();
                 dv.RowFilter = $"{searchBy} = {searchText}";
+                _LoadPeople(dtPeople = dv.ToTable());
+                return;
+            }
+
+            //Search by NationalNo & National No Exact Match
+            if (cbFilter.SelectedIndex == (short)enFilterBY.NationalNo)
+            {
+                //string searchBy = cbFilter.SelectedItem.ToString();
+                dv.RowFilter = $"{searchBy} = '{searchText}'";
                 _LoadPeople(dtPeople = dv.ToTable());
                 return;
             }
@@ -202,12 +207,12 @@ namespace DVLD.People
             {
                 dv.RowFilter = $"Gendor LIKE '{searchText}%'";
                 _LoadPeople(dtPeople = dv.ToTable());
+
                 return;
             }
-
             else
             {
-                string searchBy = cbFilter.SelectedItem.ToString();
+                //string searchBy = cbFilter.SelectedItem.ToString();
                 dv.RowFilter = $"{searchBy} LIKE '%{searchText}%'";
                 _LoadPeople(dtPeople = dv.ToTable());
                 return;

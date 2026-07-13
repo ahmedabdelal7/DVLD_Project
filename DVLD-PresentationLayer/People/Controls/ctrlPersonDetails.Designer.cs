@@ -431,8 +431,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblPersonID;
@@ -460,7 +458,8 @@
         private System.Windows.Forms.Label lblDateOfBirth;
         private System.Windows.Forms.Label lblCountry;
         private System.Windows.Forms.Label lblPhone;
-        private System.Windows.Forms.PictureBox ppPersonImage;
         private System.Windows.Forms.LinkLabel llEditPerson;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.PictureBox ppPersonImage;
     }
 }

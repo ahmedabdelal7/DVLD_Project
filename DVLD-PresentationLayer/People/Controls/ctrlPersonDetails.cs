@@ -23,8 +23,11 @@ namespace DVLD.People.Controls
         clsPerson _Person;
         enum enGender { Male = 0, Female = 1}
 
+        public int PersonID
+        {
+            get { return _Person.PersonID; }
+        }
         
-
         private void _SetPersonImage()
         {
             if (string.IsNullOrEmpty(_Person.ImagePath))
@@ -35,12 +38,11 @@ namespace DVLD.People.Controls
             {
                 ppPersonImage.ImageLocation = _Person.ImagePath;
             }
+            
         }
 
-        public void LoadPersonInfo(object sender,int personID)
+        private void _LoadInfo()
         {
-            _Person = clsPerson.Find(personID);
-
             lblPersonID.Text = _Person.PersonID.ToString();
             lblNationalNo.Text = _Person.NationalNo;
             lblName.Text = _Person.FullName;
@@ -52,12 +54,45 @@ namespace DVLD.People.Controls
             lblCountry.Text = clsCountry.FindByID(_Person.NationalityCountryID).CountryName;
             _SetPersonImage();
         }
+        public void LoadPersonInfo(object sender,int personID)
+        {
+            ResetPersonCard();
+            _Person = clsPerson.Find(personID);
 
+            _LoadInfo();
+        }
+
+        public void LoadPersonInfo(object sender, string NationalNo)
+        {
+            ResetPersonCard();
+            _Person = clsPerson.Find(NationalNo);
+
+            _LoadInfo();
+        }
         private void llEditPerson_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+            if(_Person == null)
+            {
+                return; 
+            }
             frmAddEditPerson frm = new frmAddEditPerson(_Person.PersonID);
             frm.DataBack += LoadPersonInfo;
             frm.ShowDialog();
+        }
+        public void ResetPersonCard()
+        {
+            lblPersonID.Text = "N/A";
+            lblNationalNo.Text = "[??]";
+            lblName.Text = "[???]";
+            lblGender.Text = "[??]";
+            lblCountry.Text = "[??]";
+            lblEmail.Text = "[??]";
+            lblPhone.Text = "[??]";
+            lblAddress.Text = "[??]";
+            lblDateOfBirth.Text = "[??]";
+            ppPersonImage.Image = Resources.man;
+            _Person = null;
+
         }
     }
 }
