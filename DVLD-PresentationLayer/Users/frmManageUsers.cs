@@ -1,4 +1,5 @@
-﻿using DVLD.People.Controls;
+﻿using DVLD.Common_Classes;
+using DVLD.People.Controls;
 using DVLD_BussinessLayer;
 using System;
 using System.Collections.Generic;
@@ -24,17 +25,17 @@ namespace DVLD.Users
             this.Close();
         }
 
-        enum enFilterBy { None = 0, UserID, UserName, PersonID, FullName, IsActive};
-        
+        enum enFilterBy { None = 0, UserID, UserName, PersonID, FullName, IsActive };
+        enum enIsActive { All = 0, Yes, No };
 
         DataTable _dtUsers;
-        private void _LoadUsers()
+
+        private void _FillGridWithUsers(DataTable dtUsers)
         {
             dgvUsers.Rows.Clear();
-            _dtUsers = clsUser.ListAllUsers();
-
-            foreach (DataRow row in _dtUsers.Rows)
+            foreach (DataRow row in dtUsers.Rows)
             {
+                
                 dgvUsers.Rows.Add
                     (
                         row["UserID"],
@@ -44,8 +45,19 @@ namespace DVLD.Users
                         row["IsActive"]
                     );
             }
+            lblRecordsCount.Text = dtUsers.Rows.Count.ToString();
+
+        }
+        private void _LoadUsers()
+        {
+            
+            _dtUsers = clsUser.ListAllUsers();
+            _FillGridWithUsers(_dtUsers);
             //dgvUsers.ClearSelection();
-            cbFilter.SelectedIndex = (int)enFilterBy.None; 
+ 
+            cbFilter.SelectedIndex = (int)enFilterBy.None;
+            cbIsActive.SelectedIndex = (int)enIsActive.All;
+
         }
 
         private int _GetSelectedUserID()
@@ -130,7 +142,99 @@ namespace DVLD.Users
 
         private void cbFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
+            txtFilterValue.Visible =
+                cbFilter.SelectedIndex != (int)enFilterBy.None && cbFilter.SelectedIndex != (int)enFilterBy.IsActive;
+
+            cbIsActive.Visible =
+                 cbFilter.SelectedIndex == (int)enFilterBy.IsActive;
+
+            _FillGridWithUsers(_dtUsers);
+        }
+
+        private void txtFilterValue_TextChanged(object sender, EventArgs e)
+        {
+            DataView dvUsers = _dtUsers.DefaultView;
+            string FilterValue =  txtFilterValue.Text.ToString().Trim();
+            if (FilterValue == "")
+            {
+                _FillGridWithUsers(_dtUsers);
+                return;
+            }
+
+            if(cbFilter.SelectedIndex == (int)enFilterBy.UserID)
+            {
+                if(int.TryParse(FilterValue.ToString(), out int InsertedID))
+                {
+                    dvUsers.RowFilter = $"UserID = {InsertedID}";
+                    _FillGridWithUsers(dvUsers.ToTable());
+                    return;
+
+                }
+
+            }
+
+            if(cbFilter.SelectedIndex == (int)enFilterBy.PersonID)
+            {
+                if (int.TryParse(FilterValue, out int InsertedID))
+                {
+                    dvUsers.RowFilter = $"PersonID = {InsertedID}";
+                    _FillGridWithUsers(dvUsers.ToTable());
+                    return;
+
+                }
+
+                return;
+            }
+
+            if (cbFilter.SelectedIndex == (int)enFilterBy.UserName)
+            {
+                
+                dvUsers.RowFilter = $"UserName LIKE '%{FilterValue}%'";
+                _FillGridWithUsers(dvUsers.ToTable());
+                return;
+                
+            }
+            if (cbFilter.SelectedIndex == (int)enFilterBy.FullName)
+            {
+                dvUsers.RowFilter = $"FullName LIKE '%{FilterValue}%'";
+                _FillGridWithUsers(dvUsers.ToTable());
+                return;
+            }
+
 
         }
+
+        private void txtFilterValue_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (cbFilter.SelectedIndex == (int)enFilterBy.PersonID || cbFilter.SelectedIndex == (int)enFilterBy.UserID)
+            {
+                e.Handled = !clsValidate.IsValidInteger(sender, e);
+            }
+        }
+
+        private void cbIsActive_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            if(cbIsActive.SelectedIndex == (int)enIsActive.All)
+            {
+                _FillGridWithUsers(_dtUsers);
+                return;
+            }
+
+            DataView dvUsers = _dtUsers.DefaultView;
+
+            if (cbIsActive.SelectedIndex == (int)enIsActive.Yes)
+            {
+                dvUsers.RowFilter = "IsActive = 1";
+            }
+            else
+            {
+                dvUsers.RowFilter = "IsActive = 0";
+            }
+            
+                _FillGridWithUsers(dvUsers.ToTable());
+        }
+
+
     }
 }
