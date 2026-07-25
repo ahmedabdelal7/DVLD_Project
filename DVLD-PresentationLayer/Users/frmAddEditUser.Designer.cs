@@ -188,6 +188,7 @@
             this.txtConfirmPassword.Name = "txtConfirmPassword";
             this.txtConfirmPassword.Size = new System.Drawing.Size(248, 26);
             this.txtConfirmPassword.TabIndex = 12;
+            this.txtConfirmPassword.UseSystemPasswordChar = true;
             this.txtConfirmPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtConfirmPassword_Validating);
             // 
             // txtPassword
@@ -196,8 +197,10 @@
             this.txtPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPassword.Location = new System.Drawing.Point(259, 154);
             this.txtPassword.Name = "txtPassword";
+            this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(248, 26);
             this.txtPassword.TabIndex = 11;
+            this.txtPassword.UseSystemPasswordChar = true;
             this.txtPassword.Validating += new System.ComponentModel.CancelEventHandler(this.txtPassword_Validating);
             // 
             // label5
@@ -326,6 +329,7 @@
             this.Name = "frmAddEditUser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmAddNewUser";
+            this.Activated += new System.EventHandler(this.frmAddEditUser_Activated);
             this.Load += new System.EventHandler(this.frmAddEditUser_Load);
             this.tabLoginInfo.ResumeLayout(false);
             this.tabLoginInfo.PerformLayout();

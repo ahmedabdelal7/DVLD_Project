@@ -235,6 +235,19 @@ namespace DVLD.Users
                 _FillGridWithUsers(dvUsers.ToTable());
         }
 
+        private void msShowDetails_Click(object sender, EventArgs e)
+        {
+            int UserID = _GetSelectedUserID();
+            
+            frmUserInfo frmUserInfo = new frmUserInfo(UserID);
+            frmUserInfo.ShowDialog();
+        }
 
+        private void msChangePassword_Click(object sender, EventArgs e)
+        {
+            int UserID = _GetSelectedUserID() ;
+            frmChangePassword frmChangePassword = new frmChangePassword(UserID);
+            frmChangePassword.ShowDialog();
+        }
     }
 }

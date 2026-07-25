@@ -232,5 +232,11 @@ namespace DVLD.Users
         {
             _LoadInfo();
         }
+
+        private void frmAddEditUser_Activated(object sender, EventArgs e)
+        {
+            //this.Activate();
+            
+        }
     }
 }

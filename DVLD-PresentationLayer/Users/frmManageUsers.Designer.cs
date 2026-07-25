@@ -40,6 +40,13 @@
             this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IsActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.label3 = new System.Windows.Forms.Label();
+            this.cbFilter = new System.Windows.Forms.ComboBox();
+            this.lblRecordsCount = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtFilterValue = new System.Windows.Forms.TextBox();
+            this.cbIsActive = new System.Windows.Forms.ComboBox();
             this.msShowDetails = new System.Windows.Forms.ToolStripMenuItem();
             this.msAddNewUser = new System.Windows.Forms.ToolStripMenuItem();
             this.msEdit = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,16 +54,9 @@
             this.msChangePassword = new System.Windows.Forms.ToolStripMenuItem();
             this.msSendEmail = new System.Windows.Forms.ToolStripMenuItem();
             this.msPhoneCall = new System.Windows.Forms.ToolStripMenuItem();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cbFilter = new System.Windows.Forms.ComboBox();
-            this.lblRecordsCount = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnAdd = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.txtFilterValue = new System.Windows.Forms.TextBox();
-            this.cbIsActive = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -100,7 +100,7 @@
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvUsers.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUsers.Size = new System.Drawing.Size(892, 313);
+            this.dgvUsers.Size = new System.Drawing.Size(1057, 313);
             this.dgvUsers.TabIndex = 10;
             // 
             // UserID
@@ -146,66 +146,7 @@
             this.msSendEmail,
             this.msPhoneCall});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(210, 270);
-            // 
-            // msShowDetails
-            // 
-            this.msShowDetails.Image = ((System.Drawing.Image)(resources.GetObject("msShowDetails.Image")));
-            this.msShowDetails.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.msShowDetails.Name = "msShowDetails";
-            this.msShowDetails.Size = new System.Drawing.Size(209, 38);
-            this.msShowDetails.Text = "Show Details";
-            // 
-            // msAddNewUser
-            // 
-            this.msAddNewUser.Image = ((System.Drawing.Image)(resources.GetObject("msAddNewUser.Image")));
-            this.msAddNewUser.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.msAddNewUser.Name = "msAddNewUser";
-            this.msAddNewUser.Size = new System.Drawing.Size(209, 38);
-            this.msAddNewUser.Text = "Add New User";
-            this.msAddNewUser.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // msEdit
-            // 
-            this.msEdit.Image = ((System.Drawing.Image)(resources.GetObject("msEdit.Image")));
-            this.msEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.msEdit.Name = "msEdit";
-            this.msEdit.Size = new System.Drawing.Size(209, 38);
-            this.msEdit.Text = "Edit";
-            this.msEdit.Click += new System.EventHandler(this.msEdit_Click);
-            // 
-            // msDelete
-            // 
-            this.msDelete.Image = ((System.Drawing.Image)(resources.GetObject("msDelete.Image")));
-            this.msDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.msDelete.Name = "msDelete";
-            this.msDelete.Size = new System.Drawing.Size(209, 38);
-            this.msDelete.Text = "Delete";
-            this.msDelete.Click += new System.EventHandler(this.msDelete_Click);
-            // 
-            // msChangePassword
-            // 
-            this.msChangePassword.Image = ((System.Drawing.Image)(resources.GetObject("msChangePassword.Image")));
-            this.msChangePassword.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.msChangePassword.Name = "msChangePassword";
-            this.msChangePassword.Size = new System.Drawing.Size(209, 38);
-            this.msChangePassword.Text = "Change Password";
-            // 
-            // msSendEmail
-            // 
-            this.msSendEmail.Image = ((System.Drawing.Image)(resources.GetObject("msSendEmail.Image")));
-            this.msSendEmail.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.msSendEmail.Name = "msSendEmail";
-            this.msSendEmail.Size = new System.Drawing.Size(209, 38);
-            this.msSendEmail.Text = "Send Email";
-            // 
-            // msPhoneCall
-            // 
-            this.msPhoneCall.Image = ((System.Drawing.Image)(resources.GetObject("msPhoneCall.Image")));
-            this.msPhoneCall.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.msPhoneCall.Name = "msPhoneCall";
-            this.msPhoneCall.Size = new System.Drawing.Size(209, 38);
-            this.msPhoneCall.Text = "Phone Call";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(210, 292);
             // 
             // label3
             // 
@@ -213,7 +154,7 @@
             this.label3.ForeColor = System.Drawing.Color.Firebrick;
             this.label3.Location = new System.Drawing.Point(20, 209);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(891, 50);
+            this.label3.Size = new System.Drawing.Size(1056, 50);
             this.label3.TabIndex = 15;
             this.label3.Text = "Manage Users";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -267,44 +208,6 @@
             this.label1.TabIndex = 13;
             this.label1.Text = "Filter By: ";
             // 
-            // btnAdd
-            // 
-            this.btnAdd.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAdd.BackgroundImage")));
-            this.btnAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAdd.Location = new System.Drawing.Point(842, 297);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(69, 54);
-            this.btnAdd.TabIndex = 18;
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // button1
-            // 
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(787, 676);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(124, 40);
-            this.button1.TabIndex = 17;
-            this.button1.Text = "Close";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(362, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(200, 194);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 16;
-            this.pictureBox1.TabStop = false;
-            // 
             // txtFilterValue
             // 
             this.txtFilterValue.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -332,12 +235,111 @@
             this.cbIsActive.TabIndex = 20;
             this.cbIsActive.SelectedIndexChanged += new System.EventHandler(this.cbIsActive_SelectedIndexChanged);
             // 
+            // msShowDetails
+            // 
+            this.msShowDetails.Image = ((System.Drawing.Image)(resources.GetObject("msShowDetails.Image")));
+            this.msShowDetails.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.msShowDetails.Name = "msShowDetails";
+            this.msShowDetails.Size = new System.Drawing.Size(209, 38);
+            this.msShowDetails.Text = "Show Details";
+            this.msShowDetails.Click += new System.EventHandler(this.msShowDetails_Click);
+            // 
+            // msAddNewUser
+            // 
+            this.msAddNewUser.Image = ((System.Drawing.Image)(resources.GetObject("msAddNewUser.Image")));
+            this.msAddNewUser.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.msAddNewUser.Name = "msAddNewUser";
+            this.msAddNewUser.Size = new System.Drawing.Size(209, 38);
+            this.msAddNewUser.Text = "Add New User";
+            this.msAddNewUser.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // msEdit
+            // 
+            this.msEdit.Image = ((System.Drawing.Image)(resources.GetObject("msEdit.Image")));
+            this.msEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.msEdit.Name = "msEdit";
+            this.msEdit.Size = new System.Drawing.Size(209, 38);
+            this.msEdit.Text = "Edit";
+            this.msEdit.Click += new System.EventHandler(this.msEdit_Click);
+            // 
+            // msDelete
+            // 
+            this.msDelete.Image = ((System.Drawing.Image)(resources.GetObject("msDelete.Image")));
+            this.msDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.msDelete.Name = "msDelete";
+            this.msDelete.Size = new System.Drawing.Size(209, 38);
+            this.msDelete.Text = "Delete";
+            this.msDelete.Click += new System.EventHandler(this.msDelete_Click);
+            // 
+            // msChangePassword
+            // 
+            this.msChangePassword.Image = ((System.Drawing.Image)(resources.GetObject("msChangePassword.Image")));
+            this.msChangePassword.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.msChangePassword.Name = "msChangePassword";
+            this.msChangePassword.Size = new System.Drawing.Size(209, 38);
+            this.msChangePassword.Text = "Change Password";
+            this.msChangePassword.Click += new System.EventHandler(this.msChangePassword_Click);
+            // 
+            // msSendEmail
+            // 
+            this.msSendEmail.Image = ((System.Drawing.Image)(resources.GetObject("msSendEmail.Image")));
+            this.msSendEmail.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.msSendEmail.Name = "msSendEmail";
+            this.msSendEmail.Size = new System.Drawing.Size(209, 38);
+            this.msSendEmail.Text = "Send Email";
+            // 
+            // msPhoneCall
+            // 
+            this.msPhoneCall.Image = ((System.Drawing.Image)(resources.GetObject("msPhoneCall.Image")));
+            this.msPhoneCall.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.msPhoneCall.Name = "msPhoneCall";
+            this.msPhoneCall.Size = new System.Drawing.Size(209, 38);
+            this.msPhoneCall.Text = "Phone Call";
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAdd.BackgroundImage")));
+            this.btnAdd.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAdd.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAdd.Location = new System.Drawing.Point(1007, 297);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(69, 54);
+            this.btnAdd.TabIndex = 18;
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // button1
+            // 
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(952, 676);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(124, 40);
+            this.button1.TabIndex = 17;
+            this.button1.Text = "Close";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(452, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(200, 194);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 16;
+            this.pictureBox1.TabStop = false;
+            // 
             // frmManageUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(927, 749);
+            this.ClientSize = new System.Drawing.Size(1105, 741);
             this.Controls.Add(this.cbIsActive);
             this.Controls.Add(this.txtFilterValue);
             this.Controls.Add(this.dgvUsers);
