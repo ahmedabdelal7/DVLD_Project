@@ -25,7 +25,7 @@ namespace DVLD.People
         int _PersonID;
         clsPerson _Person;
 
-        public delegate void DataBackEventHandler(object sender, int PersonID );
+        public delegate void DataBackEventHandler(int PersonID );
 
         // 2. Declare event based on delegate
         public event DataBackEventHandler DataBack;
@@ -74,7 +74,7 @@ namespace DVLD.People
 
                 //Set default person image to man 
                 ppPersonImage.Image = Resources.man;
-                ppPersonImage.ImageLocation = null;
+                ppPersonImage.ImageLocation = "";
                 cbCountries.SelectedItem = "Egypt";
 
                 llRemove.Visible = false;
@@ -167,12 +167,27 @@ namespace DVLD.People
                 return;
             }
 
-            if (clsPerson.IsExist(nationalNo.Text.Trim()) && _Mode == enMode.AddNew)
+            if(_Mode == enMode.AddNew)
             {
-                e.Cancel = true;
-                nationalNo.Focus();
-                errorProvider1.SetError(nationalNo, "National Number is already exist, enter another one!");
-                return;
+                if (clsPerson.IsExist(nationalNo.Text.Trim()))
+                {
+                    e.Cancel = true;
+                    nationalNo.Focus();
+                    errorProvider1.SetError(nationalNo, "National Number is already exist, enter another one!");
+                    return;
+                }
+            }
+            else
+            {
+
+                if(clsPerson.IsExist(txtNationalNo.Text) && _Person.NationalNo != txtNationalNo.Text)
+                {
+                    e.Cancel = true;
+                    nationalNo.Focus();
+
+                    errorProvider1.SetError(nationalNo, "National Number is already exist to another user, enter another one!");
+                    return;
+                }
             }
 
             e.Cancel = false;
@@ -182,7 +197,7 @@ namespace DVLD.People
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            DataBack?.Invoke(this, _PersonID);
+            DataBack?.Invoke(_PersonID);
 
             this.Close();
         }

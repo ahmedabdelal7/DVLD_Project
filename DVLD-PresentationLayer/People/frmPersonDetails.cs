@@ -13,7 +13,7 @@ namespace DVLD.People
     public partial class frmPersonDetails : Form
     {
         int _PersonID;
-        string _NationalNo;
+       // string _NationalNo;
         public frmPersonDetails(int personID)
         {
             InitializeComponent();
@@ -22,7 +22,7 @@ namespace DVLD.People
 
         private void ctrlPersonDetails1_Load(object sender, EventArgs e)
         {
-            ctrlPersonDetails1.LoadPersonInfo(sender,_PersonID);
+            ctrlPersonDetails1.LoadPersonInfo(_PersonID);
         }
 
         private void btnClose_Click(object sender, EventArgs e)

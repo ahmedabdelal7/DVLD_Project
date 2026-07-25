@@ -13,10 +13,16 @@ namespace DVLD.Common_Classes
             string Ext = "";
 
             int extIndex = -1;
+            try
+            {
+                if (path.Contains('.'))
+                    extIndex = path.LastIndexOf(".");
+                else return "";
 
-            if (path.Contains('.'))
-                extIndex = path.LastIndexOf(".");
-            else return "";
+            }
+            catch (Exception) {
+                return "";
+            }
 
             Ext = path.Remove(0,extIndex);
 

@@ -69,9 +69,9 @@ namespace DVLD_BussinessLayer
             bool isActive = false;
 
 
-            DateTime DateOfBirth = DateTime.MinValue;
+            
 
-            if (clsUserData.GetUserByID(userID, ref personID,ref userName,ref password,isActive))
+            if (clsUserData.GetUserByID(userID, ref personID,ref userName,ref password,ref isActive))
             {
                 return new clsUser(userID, personID, userName, password, isActive);
             }
@@ -79,11 +79,23 @@ namespace DVLD_BussinessLayer
 
         }
         
-        public static bool IsExist(int UserID)
+        public static bool IsExistByUserID(int UserID)
         {
             return clsUserData.IsUserExistByID(UserID);
         }
-       
+        public static bool IsExistByUserName(string UserName)
+        {
+            return clsUserData.IsUserExistByUserName(UserName);
+        }
+        public static bool IsExistByPersonID(int PersonID)
+        {
+            return clsUserData.IsUserExistByPersonID(PersonID);
+        }
+        public static bool IsExistByNationalNo(string NationalNo)
+        {
+            return clsUserData.IsUserExistByNationalNo(NationalNo);
+        }
+
         public static DataTable ListAllUsers()
         {
 

@@ -29,31 +29,30 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctrlPersonCardWithFilter));
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.gbFilter = new System.Windows.Forms.GroupBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.cbFindBy = new System.Windows.Forms.ComboBox();
             this.ctrlPersonDetails1 = new DVLD.People.Controls.ctrlPersonDetails();
-            this.groupBox1.SuspendLayout();
+            this.gbFilter.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // gbFilter
             // 
-            this.groupBox1.Controls.Add(this.btnSearch);
-            this.groupBox1.Controls.Add(this.btnAdd);
-            this.groupBox1.Controls.Add(this.txtSearch);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.cbFindBy);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(14, 20);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(887, 100);
-            this.groupBox1.TabIndex = 2;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Filter";
-            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+            this.gbFilter.Controls.Add(this.btnSearch);
+            this.gbFilter.Controls.Add(this.btnAdd);
+            this.gbFilter.Controls.Add(this.txtSearch);
+            this.gbFilter.Controls.Add(this.label1);
+            this.gbFilter.Controls.Add(this.cbFindBy);
+            this.gbFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gbFilter.Location = new System.Drawing.Point(14, 20);
+            this.gbFilter.Name = "gbFilter";
+            this.gbFilter.Size = new System.Drawing.Size(887, 100);
+            this.gbFilter.TabIndex = 2;
+            this.gbFilter.TabStop = false;
+            this.gbFilter.Text = "Filter";
             // 
             // btnSearch
             // 
@@ -79,6 +78,7 @@
             this.btnAdd.Size = new System.Drawing.Size(51, 43);
             this.btnAdd.TabIndex = 19;
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // txtSearch
             // 
@@ -110,6 +110,7 @@
             this.cbFindBy.Name = "cbFindBy";
             this.cbFindBy.Size = new System.Drawing.Size(228, 28);
             this.cbFindBy.TabIndex = 0;
+            this.cbFindBy.SelectedIndexChanged += new System.EventHandler(this.cbFindBy_SelectedIndexChanged);
             // 
             // ctrlPersonDetails1
             // 
@@ -123,13 +124,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gbFilter);
             this.Controls.Add(this.ctrlPersonDetails1);
             this.Name = "ctrlPersonCardWithFilter";
             this.Size = new System.Drawing.Size(915, 454);
             this.Load += new System.EventHandler(this.ctrlPersonCardWithFilter_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.gbFilter.ResumeLayout(false);
+            this.gbFilter.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -137,7 +138,7 @@
         #endregion
 
         private ctrlPersonDetails ctrlPersonDetails1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox gbFilter;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.TextBox txtSearch;

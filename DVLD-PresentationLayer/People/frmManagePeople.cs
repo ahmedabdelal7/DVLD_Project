@@ -111,6 +111,7 @@ namespace DVLD.People
                         return;
                     }
 
+                    //referential integrity.
                     MessageBox.Show("Failed to this person because he has a related data in the system!",
                         "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;

@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Data;
+using System.ComponentModel;
 
 namespace DVLD.Common_Classes
 {
@@ -25,9 +27,12 @@ namespace DVLD.Common_Classes
             return char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar);
             
         }
-        
 
-        
+       
+
+
+
+
 
 
     }

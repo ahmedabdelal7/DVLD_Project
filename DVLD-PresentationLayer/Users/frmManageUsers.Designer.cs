@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -38,6 +39,14 @@
             this.FullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IsActive = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.msShowDetails = new System.Windows.Forms.ToolStripMenuItem();
+            this.msAddNewUser = new System.Windows.Forms.ToolStripMenuItem();
+            this.msEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.msDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.msChangePassword = new System.Windows.Forms.ToolStripMenuItem();
+            this.msSendEmail = new System.Windows.Forms.ToolStripMenuItem();
+            this.msPhoneCall = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
             this.cbFilter = new System.Windows.Forms.ComboBox();
             this.lblRecordsCount = new System.Windows.Forms.Label();
@@ -47,6 +56,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -72,6 +82,7 @@
             this.FullName,
             this.UserName,
             this.IsActive});
+            this.dgvUsers.ContextMenuStrip = this.contextMenuStrip1;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -121,6 +132,78 @@
             this.IsActive.HeaderText = "IsActive";
             this.IsActive.Name = "IsActive";
             this.IsActive.ReadOnly = true;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.msShowDetails,
+            this.msAddNewUser,
+            this.msEdit,
+            this.msDelete,
+            this.msChangePassword,
+            this.msSendEmail,
+            this.msPhoneCall});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(210, 292);
+            // 
+            // msShowDetails
+            // 
+            this.msShowDetails.Image = ((System.Drawing.Image)(resources.GetObject("msShowDetails.Image")));
+            this.msShowDetails.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.msShowDetails.Name = "msShowDetails";
+            this.msShowDetails.Size = new System.Drawing.Size(209, 38);
+            this.msShowDetails.Text = "Show Details";
+            // 
+            // msAddNewUser
+            // 
+            this.msAddNewUser.Image = ((System.Drawing.Image)(resources.GetObject("msAddNewUser.Image")));
+            this.msAddNewUser.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.msAddNewUser.Name = "msAddNewUser";
+            this.msAddNewUser.Size = new System.Drawing.Size(209, 38);
+            this.msAddNewUser.Text = "Add New User";
+            this.msAddNewUser.Click += new System.EventHandler(this.btnAdd_Click);
+            // 
+            // msEdit
+            // 
+            this.msEdit.Image = ((System.Drawing.Image)(resources.GetObject("msEdit.Image")));
+            this.msEdit.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.msEdit.Name = "msEdit";
+            this.msEdit.Size = new System.Drawing.Size(209, 38);
+            this.msEdit.Text = "Edit";
+            this.msEdit.Click += new System.EventHandler(this.msEdit_Click);
+            // 
+            // msDelete
+            // 
+            this.msDelete.Image = ((System.Drawing.Image)(resources.GetObject("msDelete.Image")));
+            this.msDelete.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.msDelete.Name = "msDelete";
+            this.msDelete.Size = new System.Drawing.Size(209, 38);
+            this.msDelete.Text = "Delete";
+            this.msDelete.Click += new System.EventHandler(this.msDelete_Click);
+            // 
+            // msChangePassword
+            // 
+            this.msChangePassword.Image = ((System.Drawing.Image)(resources.GetObject("msChangePassword.Image")));
+            this.msChangePassword.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.msChangePassword.Name = "msChangePassword";
+            this.msChangePassword.Size = new System.Drawing.Size(209, 38);
+            this.msChangePassword.Text = "Change Password";
+            // 
+            // msSendEmail
+            // 
+            this.msSendEmail.Image = ((System.Drawing.Image)(resources.GetObject("msSendEmail.Image")));
+            this.msSendEmail.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.msSendEmail.Name = "msSendEmail";
+            this.msSendEmail.Size = new System.Drawing.Size(209, 38);
+            this.msSendEmail.Text = "Send Email";
+            // 
+            // msPhoneCall
+            // 
+            this.msPhoneCall.Image = ((System.Drawing.Image)(resources.GetObject("msPhoneCall.Image")));
+            this.msPhoneCall.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.msPhoneCall.Name = "msPhoneCall";
+            this.msPhoneCall.Size = new System.Drawing.Size(209, 38);
+            this.msPhoneCall.Text = "Phone Call";
             // 
             // label3
             // 
@@ -245,6 +328,7 @@
             this.Text = "frmManageUsers";
             this.Load += new System.EventHandler(this.frmManageUsers_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsers)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -267,5 +351,13 @@
         private System.Windows.Forms.Label lblRecordsCount;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem msShowDetails;
+        private System.Windows.Forms.ToolStripMenuItem msAddNewUser;
+        private System.Windows.Forms.ToolStripMenuItem msEdit;
+        private System.Windows.Forms.ToolStripMenuItem msDelete;
+        private System.Windows.Forms.ToolStripMenuItem msChangePassword;
+        private System.Windows.Forms.ToolStripMenuItem msSendEmail;
+        private System.Windows.Forms.ToolStripMenuItem msPhoneCall;
     }
 }

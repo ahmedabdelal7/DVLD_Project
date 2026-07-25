@@ -54,7 +54,7 @@ namespace DVLD.People.Controls
             lblCountry.Text = clsCountry.FindByID(_Person.NationalityCountryID).CountryName;
             _SetPersonImage();
         }
-        public void LoadPersonInfo(object sender,int personID)
+        public void LoadPersonInfo(int personID)
         {
             ResetPersonCard();
             _Person = clsPerson.Find(personID);
@@ -62,7 +62,7 @@ namespace DVLD.People.Controls
             _LoadInfo();
         }
 
-        public void LoadPersonInfo(object sender, string NationalNo)
+        public void LoadPersonInfo( string NationalNo)
         {
             ResetPersonCard();
             _Person = clsPerson.Find(NationalNo);
