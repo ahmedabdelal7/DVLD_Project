@@ -78,7 +78,24 @@ namespace DVLD_BussinessLayer
             return null;
 
         }
-        
+        public static clsUser Find(string userName, string password)
+        {
+            int personID = -1;
+            int userID = -1;
+            //string userName = "", password = "";
+            bool isActive = false;
+
+
+
+
+            if (clsUserData.GetUserByUserNameAndPassword(userName,password,ref userID, ref personID, ref isActive))
+            {
+                return new clsUser(userID, personID, userName, password, isActive);
+            }
+            return null;
+
+        }
+
         public static bool IsExistByUserID(int UserID)
         {
             return clsUserData.IsUserExistByID(UserID);

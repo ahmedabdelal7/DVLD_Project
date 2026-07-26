@@ -246,6 +246,90 @@ namespace DVLD_DataAccessLayer
 
             return IsExist;
         }
+        //public static bool IsUserExistByUserNameAndPassword(string UserName, string Password)
+        //{
+        //    bool IsExist = false;
+
+        //    SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+        //    string query = "SELECT Found=1 FROM Users WHERE UserName = @UserName and Password = @Password";
+
+        //    SqlCommand command = new SqlCommand(query, connection);
+        //    command.Parameters.AddWithValue("@UserName", UserName);
+        //    command.Parameters.AddWithValue("@Password", Password);
+
+        //    try
+        //    {
+        //        connection.Open();
+
+        //        object result = command.ExecuteScalar();
+
+        //        IsExist = (result != null && int.TryParse(result.ToString(), out int InsertedID));
+
+        //        //Doctor approach:
+        //        //SqlDataReader reader = command.ExecuteReader();
+        //        //IsExist = reader.HasRows;
+        //        //reader.Close();
+
+        //    }
+        //    catch (Exception)
+        //    {
+        //        IsExist = false;
+        //    }
+        //    finally
+        //    {
+        //        connection.Close();
+        //    }
+
+        //    return IsExist;
+        //}
+        public static bool GetUserByUserNameAndPassword(string UserName, string Password, ref int UserID, ref int PersonID, ref bool IsActive)
+        {
+            bool IsFound = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = "SELECT * FROM Users WHERE UserName = @UserName and Password = @Password";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@UserName", UserName);
+            command.Parameters.AddWithValue("@Password", Password);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    IsFound = true;
+
+                    PersonID = Convert.ToInt32(reader["PersonID"]);
+                    UserID = Convert.ToInt32(reader["UserID"]);
+                    IsActive = Convert.ToBoolean(reader["IsActive"]);
+
+                }
+
+                else
+                {
+                    IsFound = false;
+                }
+
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                IsFound = false;
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return IsFound;
+        }
         public static bool IsUserExistByUserName(string UserName)
         {
             bool IsExist = false;
