@@ -60,7 +60,7 @@ namespace DVLD
                    
             //clsGlobalSettings.UserName = txtUserName.Text;  
             //clsGlobalSettings.Password = txtPassword.Text;
-            clsGlobalSettings.UserID = _User.UserID;
+            clsGlobalSettings.LoggedInUserID = _User.UserID;
 
             //open main form screen
             frmMain frm = new frmMain();

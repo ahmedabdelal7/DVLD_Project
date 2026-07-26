@@ -31,7 +31,7 @@ namespace DVLD
         private void frmMain_Load(object sender, EventArgs e)
         {
             //MessageBox.Show($"{clsGlobalSettings.UserName} & {clsGlobalSettings.Password}");
-            _CurrentUser = clsUser.Find(clsGlobalSettings.UserID);
+            _CurrentUser = clsUser.Find(clsGlobalSettings.LoggedInUserID);
             //MessageBox.Show($"UserID = {_CurrentUser.UserID}");
         }
 
@@ -56,6 +56,18 @@ namespace DVLD
         private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             DataBack?.Invoke(true);
+        }
+
+        private void currentUserInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmUserInfo frmUserInfo = new frmUserInfo(clsGlobalSettings.LoggedInUserID);
+            frmUserInfo.ShowDialog();
+        }
+
+        private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmChangePassword frmChangePassword = new frmChangePassword(clsGlobalSettings.LoggedInUserID);
+            frmChangePassword.ShowDialog();
         }
     }
 }
