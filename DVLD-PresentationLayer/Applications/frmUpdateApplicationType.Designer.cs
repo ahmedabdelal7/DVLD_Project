@@ -195,6 +195,7 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "frmUpdateApplicationType";
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmUpdateApplicationType";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmUpdateApplicationType_FormClosing);

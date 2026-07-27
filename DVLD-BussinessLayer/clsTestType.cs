@@ -1,0 +1,66 @@
+﻿using DVLD_DataAccessLayer;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DVLD_BussinessLayer
+{
+    public class clsTestType
+    {
+        public int TestTypeID { get; }
+        public string TestTypeTitle { get; set; }
+        public string TestTypeDescription { get; set; }
+        public double TestTypeFees { get; set; }
+
+        public clsTestType()
+        {
+            TestTypeID = -1;
+            TestTypeTitle = string.Empty;
+            TestTypeDescription = string.Empty;
+            TestTypeFees = 0.0;
+        }
+
+        clsTestType(int testTypeID, string testTypeTitle, string testTypeDescription, double testTypeFees)
+        {
+            TestTypeID = testTypeID;
+            TestTypeTitle = testTypeTitle;
+            TestTypeDescription= testTypeDescription;
+            TestTypeFees = testTypeFees;
+        }
+
+        public static clsTestType Find(int TestTypeID)
+        {
+            string TestTypeTitle = "";
+            string TestTypeDescription = "";
+            double TestTypeFees = 0.0;
+
+            if (clsTestTypeData.GetTestTypeInfoByID(TestTypeID, ref TestTypeTitle, ref TestTypeDescription, ref TestTypeFees))
+            {
+                return new clsTestType(TestTypeID, TestTypeTitle, TestTypeDescription, TestTypeFees);
+            }
+            return null;
+
+
+        }
+
+        public static DataTable ListAllTestTypes()
+        {
+            return clsTestTypeData.GetAllTestTypes();
+        }
+
+        private bool _UpdateTestType()
+        {
+            return (clsTestTypeData.UpdateTestType(TestTypeID, TestTypeTitle, TestTypeDescription, TestTypeFees));
+
+        }
+
+        public bool Save()
+        {
+            return (_UpdateTestType());
+
+        }
+    }
+}
