@@ -1,6 +1,7 @@
 ﻿using DVLD.Applications;
 using DVLD.Common_Classes;
 using DVLD.People;
+using DVLD.Tests;
 using DVLD.Users;
 using DVLD_BussinessLayer;
 using System;
@@ -75,6 +76,12 @@ namespace DVLD
         {
             frmManageApplicationTypes frmManageApplicationTypes = new frmManageApplicationTypes();
             frmManageApplicationTypes.ShowDialog(); 
+        }
+
+        private void manageTestTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageTestTypes frmManageTestTypes = new frmManageTestTypes();
+            frmManageTestTypes.ShowDialog();
         }
     }
 }
