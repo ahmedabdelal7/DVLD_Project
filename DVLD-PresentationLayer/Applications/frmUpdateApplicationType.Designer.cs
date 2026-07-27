@@ -55,7 +55,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(594, 50);
             this.label1.TabIndex = 8;
-            this.label1.Text = "Manage Application Types";
+            this.label1.Text = "Update Application Type";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label2

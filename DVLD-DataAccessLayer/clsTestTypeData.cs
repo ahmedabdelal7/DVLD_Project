@@ -36,7 +36,7 @@ namespace DVLD_DataAccessLayer
                     //...
 
                     TestTypeTitle = reader["TestTypeTitle"].ToString();
-                    TestTypeTitle = reader["TestTypeDescription"].ToString();
+                    TestTypeDescription = reader["TestTypeDescription"].ToString();
                     TestTypeFees = Convert.ToDouble(reader["TestTypeFees"]);
                 }
                 else
@@ -98,7 +98,7 @@ namespace DVLD_DataAccessLayer
 
             string query = @"UPDATE TestTypes
                              SET TestTypeTitle = @TestTypeTitle,
-                                 TestTypeDescription = @TestTypeDescription
+                                 TestTypeDescription = @TestTypeDescription,
 							     TestTypeFees  = @TestTypeFees
                              WHERE TestTypeID  = @TestTypeID;";
 

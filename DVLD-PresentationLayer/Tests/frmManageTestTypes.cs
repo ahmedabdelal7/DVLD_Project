@@ -70,10 +70,10 @@ namespace DVLD.Tests
             }
 
 
-            frmUpdateTestType frmUpdateTestType = new frmUpdateTestType();
+            frmUpdateTestType frmUpdateTestType = new frmUpdateTestType(TestTypeID);
             //Delegate subscribe code.......
             //..
-            //frmUpdateTestType.DataBack += _RefreshTestTypes;
+            frmUpdateTestType.DataBack += _RefreshTestTypes;
 
             frmUpdateTestType.ShowDialog();
         }
