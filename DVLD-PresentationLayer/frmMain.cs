@@ -1,4 +1,5 @@
-﻿using DVLD.Common_Classes;
+﻿using DVLD.Applications;
+using DVLD.Common_Classes;
 using DVLD.People;
 using DVLD.Users;
 using DVLD_BussinessLayer;
@@ -68,6 +69,12 @@ namespace DVLD
         {
             frmChangePassword frmChangePassword = new frmChangePassword(clsGlobalSettings.LoggedInUserID);
             frmChangePassword.ShowDialog();
+        }
+
+        private void manageApplicationTypesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmManageApplicationTypes frmManageApplicationTypes = new frmManageApplicationTypes();
+            frmManageApplicationTypes.ShowDialog(); 
         }
     }
 }

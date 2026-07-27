@@ -249,5 +249,15 @@ namespace DVLD.Users
             frmChangePassword frmChangePassword = new frmChangePassword(UserID);
             frmChangePassword.ShowDialog();
         }
+
+        private void msSendEmail_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("The feature is not implemented yet.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
+
+        private void msPhoneCall_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("The feature is not implemented yet.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        }
     }
 }
