@@ -97,13 +97,14 @@ namespace DVLD_DataAccessLayer
 
             string query = @"UPDATE ApplicationTypes
                              SET ApplicationTypeTitle = @ApplicationTypeTitle,
-							     ApplicationFees      = @ApplicationFees,
+							     ApplicationFees      = @ApplicationFees
                              WHERE ApplicationTypeID  = @ApplicationTypeID;";
 
             SqlCommand command = new SqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@ApplicationTypeTitle", ApplicationTypeTitle);
             command.Parameters.AddWithValue("@ApplicationFees", ApplicationFees);
+            command.Parameters.AddWithValue("@ApplicationTypeID", ApplicationTypeID);
             //...
 
             try
