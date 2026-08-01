@@ -36,7 +36,7 @@ namespace DVLD_DataAccessLayer
                 object result = command.ExecuteScalar();
 
                 if (result != null)
-                    LocalDrivingLicenseApplicationID = (int)result;
+                    LocalDrivingLicenseApplicationID = Convert.ToInt32( result);
 
             }
             catch (Exception)
@@ -66,7 +66,7 @@ namespace DVLD_DataAccessLayer
 
             command.Parameters.AddWithValue("@ApplicationID", ApplicationID);
             command.Parameters.AddWithValue("@LicenseClassID", LicenseClassID);
-            command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LDLApplicationID);
+            command.Parameters.AddWithValue("@LDLApplicationID", LDLApplicationID);
 
             //...
 
@@ -163,7 +163,7 @@ namespace DVLD_DataAccessLayer
             return IsFound;
         }
 
-        public static bool GetPersonActiveApplicationWithLicenseClass(int ApplicantPersonID, int LicenseClassID , ref  int LocalDrivingLicenseApplicationID)
+        public static bool GetPersonActiveApplicationWithLicenseClass(int ApplicantPersonID, int LicenseClassID, ref  int LocalDrivingLicenseApplicationID,ref int ApplicationID)
         {
             bool IsFound = false;
 
@@ -190,7 +190,8 @@ namespace DVLD_DataAccessLayer
 
                     // Param1 = (string)reader["Param1"];
                     //...
-                    LocalDrivingLicenseApplicationID = (int)reader["LocalDrivingLicenseApplicationID"];
+                    LocalDrivingLicenseApplicationID = Convert.ToInt32( reader["LocalDrivingLicenseApplicationID"]);
+                    ApplicationID = Convert.ToInt32(reader["ApplicationID"]);
 
                 }
                 else

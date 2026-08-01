@@ -11,7 +11,7 @@ namespace DVLD_DataAccessLayer
     public class clsLicenseClassData
     {
 
-        public static bool GetLicenseClassInfoByID(int LicenseClassID, ref string LicenseClassTitle, ref string ClassDescription,
+        public static bool GetLicenseClassInfoByID(int LicenseClassID, ref string ClassName, ref string ClassDescription,
             ref short MinimumAllowedAge,ref short DefaultValidityLength,ref double ClassFees)
         {
             bool IsFound = false;
@@ -36,7 +36,7 @@ namespace DVLD_DataAccessLayer
                     // Param1 = (string)reader["Param1"];
                     //...
 
-                    LicenseClassTitle = reader["LicenseClassTitle"].ToString();
+                    ClassName = reader["ClassName"].ToString();
                     ClassDescription = reader["ClassDescription"].ToString();
                     MinimumAllowedAge = Convert.ToInt16(reader["MinimumAllowedAge"]);
                     DefaultValidityLength = Convert.ToInt16(reader["DefaultValidityLength"]);
@@ -62,6 +62,56 @@ namespace DVLD_DataAccessLayer
             return IsFound;
         }
 
+        public static bool GetLicenseClassInfoByTitle(string ClassName, ref int LicenseClassID,ref string ClassDescription,
+            ref short MinimumAllowedAge, ref short DefaultValidityLength, ref double ClassFees)
+        {
+            bool IsFound = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = "SELECT * FROM LicenseClasses WHERE ClassName = @ClassName;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@ClassName", ClassName);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    IsFound = true;
+
+                    // Param1 = (string)reader["Param1"];
+                    //...
+
+                    LicenseClassID = Convert.ToInt32(reader["LicenseClassID"]);
+                    ClassDescription = reader["ClassDescription"].ToString();
+                    MinimumAllowedAge = Convert.ToInt16(reader["MinimumAllowedAge"]);
+                    DefaultValidityLength = Convert.ToInt16(reader["DefaultValidityLength"]);
+                    ClassFees = Convert.ToDouble(reader["ClassFees"]);
+
+                }
+                else
+                {
+                    IsFound = false;
+                }
+
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                IsFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return IsFound;
+        }
 
         public static bool IsLicenseClassExist(int LicenseClassID)
         {

@@ -46,6 +46,7 @@ namespace DVLD_BussinessLayer
             LastStatusDate = DateTime.Now;
             PaidFees = 0.0;
             CreatedByUserID = -1;
+            _Mode = enMode.AddNew;
 
         }
 

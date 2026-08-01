@@ -8,7 +8,7 @@ namespace DVLD.Common_Classes
 {
     public static class clsGlobalSettings
     {
-        public static string UserName { get;set; }
+        public static string LoggedInUserName { get;set; }
         public static string Password { get;set; }
         public static int LoggedInUserID { get;set; }
 

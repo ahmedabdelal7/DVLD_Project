@@ -58,7 +58,7 @@ namespace DVLD
             }
 
                    
-            //clsGlobalSettings.UserName = txtUserName.Text;  
+            clsGlobalSettings.LoggedInUserName = _User.UserName;  
             //clsGlobalSettings.Password = txtPassword.Text;
             clsGlobalSettings.LoggedInUserID = _User.UserID;
 

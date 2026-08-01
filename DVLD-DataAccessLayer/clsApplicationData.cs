@@ -55,7 +55,7 @@ namespace DVLD_DataAccessLayer
                 object result = command.ExecuteScalar();
 
                 if (result != null)
-                    ApplicationID = (int)result;
+                    ApplicationID = Convert.ToInt32( result);
 
             }
             catch (Exception)

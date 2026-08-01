@@ -30,6 +30,8 @@ namespace DVLD_BussinessLayer
             ID = -1;
             LicenseClassID = enLicenseClass.OrdinaryDrivingLicense;
             ApplicationID = -1;
+            ApplicationTypeID = enApplicationType.NewLocalLicense; 
+            PaidFees = clsApplicationType.Find((int)ApplicationTypeID).ApplicationFees;
 
             _Mode = enMode.AddNew;
 
@@ -55,14 +57,21 @@ namespace DVLD_BussinessLayer
             _Mode = enMode.Update;
         }
 
-        public static int GetPersonActiveApplicationLicenseWithClass(int personID, enLicenseClass licenseClass)
+        public static clsLocalDrivingLicenseApplication GetPersonActiveApplicationLicenseWithClass(int personID, enLicenseClass licenseClass)
         {
             //We should return object later on :
-            int ID = -1;
-            if(clsLocalDrivingLicenseApplicationData.GetPersonActiveApplicationWithLicenseClass(personID,(int)licenseClass, ref ID)){
-                return ID;
+
+            int applicationID = -1;
+            int LocalLicenseAppID = -1;
+
+
+            if(clsLocalDrivingLicenseApplicationData.GetPersonActiveApplicationWithLicenseClass(personID,(int)licenseClass, ref LocalLicenseAppID, ref applicationID)){
+
+                clsApplication application =  clsApplication.Find(applicationID);
+                return new clsLocalDrivingLicenseApplication(LocalLicenseAppID, applicationID, application.ApplicationID, application.ApplicationDate, application.ApplicationTypeID
+                    , application.ApplicationStatus, application.LastStatusDate, application.PaidFees, licenseClass, application.CreatedByUserID);
             }
-            return -1;
+            return null;
         }
         private bool _AddNew()
         {
@@ -79,13 +88,11 @@ namespace DVLD_BussinessLayer
         }
         public bool _Update() {
 
-            int localDrivingLicenseAppID = -1;
-            int applicationID = -1;
-            int LicenseClassID = -1;
+
 
             if (base.Save()) {
 
-                return (clsLocalDrivingLicenseApplicationData.UpdateLocalDrivingLicenseApplication(localDrivingLicenseAppID, applicationID, (int)LicenseClassID));
+                return (clsLocalDrivingLicenseApplicationData.UpdateLocalDrivingLicenseApplication(ID, ApplicationID, (int)LicenseClassID));
 
             }
             return false;

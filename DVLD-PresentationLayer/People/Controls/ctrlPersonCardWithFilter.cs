@@ -64,6 +64,7 @@ namespace DVLD.People.Controls
                 }
 
                 _NationalNo = NationalNo;
+                _PersonID = clsPerson.Find(_NationalNo).PersonID;
                 ctrlPersonDetails1.LoadPersonInfo( _NationalNo);
                 return;
             }
@@ -80,6 +81,7 @@ namespace DVLD.People.Controls
                 }
 
                 _PersonID = PersonID;
+                _NationalNo = clsPerson.Find(_PersonID).NationalNo;
                 ctrlPersonDetails1.LoadPersonInfo(_PersonID);
                 return;
 
