@@ -14,11 +14,11 @@ namespace DVLD_BussinessLayer
         //int ApplicationID, ref int ApplicantPersonID,ref DateTime ApplicationDate,ref int ApplicationTypeID,
         //    ref ,ref DateTime LastStatusDate,ref double PaidFees,ref int CreatedByUserID
 
-        enum enMode
+        public enum enMode
         {
             Update, AddNew
         }
-        enMode _Mode;
+        public enMode _Mode;
 
         public enum enApplicationStatus { New =1, Cancelled = 2, Completed = 3}
 
@@ -38,19 +38,7 @@ namespace DVLD_BussinessLayer
         public int CreatedByUserID {  get; set; }
 
 
-        public clsApplication() { 
-            ApplicantPersonID = -1;
-            ApplicationDate = DateTime.Now;
-            ApplicationTypeID = enApplicationType.NewLocalLicense;
-            ApplicationStatus = enApplicationStatus.New;
-            LastStatusDate = DateTime.Now;
-            PaidFees = 0.0;
-            CreatedByUserID = -1;
-            _Mode = enMode.AddNew;
-
-        }
-
-        clsApplication(int applicationID, int applicantPersonID, DateTime applicationDate, enApplicationType applicationTypeID,
+        public clsApplication(int applicationID, int applicantPersonID, DateTime applicationDate, enApplicationType applicationTypeID,
             enApplicationStatus applicationStatus, DateTime lastStatusDate, double paidFees, int createdByUserID )
         {
             _Mode = enMode.Update;
@@ -63,6 +51,18 @@ namespace DVLD_BussinessLayer
             PaidFees = paidFees;
             CreatedByUserID = createdByUserID;
         }
+        public clsApplication() { 
+            ApplicantPersonID = -1;
+            ApplicationDate = DateTime.Now;
+            ApplicationTypeID = enApplicationType.NewLocalLicense;
+            ApplicationStatus = enApplicationStatus.New;
+            LastStatusDate = DateTime.Now;
+            PaidFees = 0.0;
+            CreatedByUserID = -1;
+            _Mode = enMode.AddNew;
+
+        }
+
 
         private bool _AddNew()
         {

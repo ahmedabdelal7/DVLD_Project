@@ -54,7 +54,9 @@ namespace DVLD_BussinessLayer
             LicenseClassID = licenseClassID;
             CreatedByUserID = createdByUserID;
 
+            base._Mode = clsApplication.enMode.Update;
             _Mode = enMode.Update;
+            
         }
 
         public static clsLocalDrivingLicenseApplication GetPersonActiveApplicationLicenseWithClass(int personID, enLicenseClass licenseClass)
@@ -68,6 +70,7 @@ namespace DVLD_BussinessLayer
             if(clsLocalDrivingLicenseApplicationData.GetPersonActiveApplicationWithLicenseClass(personID,(int)licenseClass, ref LocalLicenseAppID, ref applicationID)){
 
                 clsApplication application =  clsApplication.Find(applicationID);
+                
                 return new clsLocalDrivingLicenseApplication(LocalLicenseAppID, applicationID, application.ApplicationID, application.ApplicationDate, application.ApplicationTypeID
                     , application.ApplicationStatus, application.LastStatusDate, application.PaidFees, licenseClass, application.CreatedByUserID);
             }
@@ -152,10 +155,10 @@ namespace DVLD_BussinessLayer
 
         }
 
-        public bool Delete(int LocalDrivingLicenseAppID)
+        public bool Delete()
         {
             //Delete local then delete base
-            if (clsLocalDrivingLicenseApplicationData.DeleteLocalDrivingLicenseApplication(LocalDrivingLicenseAppID))
+            if (clsLocalDrivingLicenseApplicationData.DeleteLocalDrivingLicenseApplication(ID))
             {
                 if (base.Delete(ApplicationID))
                     return true;
@@ -164,6 +167,10 @@ namespace DVLD_BussinessLayer
 
         }
         
+        public static DataTable ListAllLocalDrivingLicenseApplications()
+        {
+            return clsLocalDrivingLicenseApplicationData.GetAllLocalDrivingLicenseApplications();
+        }
 
     }
 }

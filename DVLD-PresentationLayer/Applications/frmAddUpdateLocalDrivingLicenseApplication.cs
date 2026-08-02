@@ -15,6 +15,14 @@ namespace DVLD.Applications
 {
     public partial class frmAddUpdateLocalDrivingLicenseApplication : Form
     {
+
+        public delegate void DataBackEventHandler(bool IsUpdated);
+
+        // 2. Declare event based on delegate
+        public event DataBackEventHandler DataBack;
+
+        bool _IsUpdated = false;
+
         enum enMode { AddNew, Update };
         enMode _Mode;
 
@@ -24,11 +32,6 @@ namespace DVLD.Applications
         int _LocalDrivingLicenseApplicationID = -1;
         clsLocalDrivingLicenseApplication _LocalDrivingLicenseApplication;
 
-        public enum enLicenseClass
-        {
-            SmallMotorcycle = 0, HeavyMotorcycle , OrdinaryDrivingLicense ,
-            Commercial , Agricultural, SmallAndMediumBus , TruckAndHeavyVehicles 
-        }
         public frmAddUpdateLocalDrivingLicenseApplication(int ApplicationID)
         {
             _Mode = enMode.Update;
@@ -59,9 +62,11 @@ namespace DVLD.Applications
         {
             _FillComboBoxWithLicenseClasses();
 
+            pnlLoginInfo.Enabled = false;
+            btnSave.Enabled = false;
+
             if (_Mode == enMode.AddNew)
             {
-                pnlLoginInfo.Enabled = false;
                 lblAddEditApplication.Text = "Add New Local Driving License Application";
 
                 _LocalDrivingLicenseApplication = new clsLocalDrivingLicenseApplication();
@@ -118,6 +123,7 @@ namespace DVLD.Applications
 
             //if mode == update
             pnlLoginInfo.Enabled = true;
+            btnSave.Enabled = false;
 
             tabControl1.SelectedIndex = 1;
     
@@ -126,7 +132,7 @@ namespace DVLD.Applications
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
+            _IsUpdated = false; 
             _LocalDrivingLicenseApplication.LicenseClassID = (clsLocalDrivingLicenseApplication.enLicenseClass) cbLicenseClasses.SelectedValue;
 
             clsLocalDrivingLicenseApplication ActiveApplication =
@@ -134,6 +140,12 @@ namespace DVLD.Applications
 
             if (_Mode == enMode.Update) {
 
+                //if (_LocalDrivingLicenseApplication.ApplicationStatus != clsApplication.enApplicationStatus.New)
+                //{
+                //    MessageBox.Show($"The selected person has already active application with same selected license class with ID = " +
+                //        $"{ActiveApplication.ID.ToString()}, choose another license class!", "failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //    return;
+                //}
                 if (ActiveApplication != null && _LocalDrivingLicenseApplication.ID != ActiveApplication.ID)
                 {
                     MessageBox.Show($"The selected person has already active application with same selected license class with ID = " +
@@ -144,7 +156,7 @@ namespace DVLD.Applications
                 if (_LocalDrivingLicenseApplication.Save())
                 {
                     MessageBox.Show($"Application Updated successfully.", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    _IsUpdated = true;
                     return;
                 }
               
@@ -175,6 +187,7 @@ namespace DVLD.Applications
                 _Mode = enMode.Update;
                 _LocalDrivingLicenseApplicationID = _LocalDrivingLicenseApplication.ID;
                 _LoadInfo();
+                _IsUpdated = true;
             }
             else
             {
@@ -186,7 +199,16 @@ namespace DVLD.Applications
 
         private void btnClose_Click(object sender, EventArgs e)
         {
+            DataBack?.Invoke(_IsUpdated);
             this.Close();
+        }
+
+        private void cbLicenseClasses_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_Mode == enMode.Update && _LocalDrivingLicenseApplication != null)
+            {
+                btnSave.Enabled = (int)_LocalDrivingLicenseApplication.LicenseClassID != (int)(clsLocalDrivingLicenseApplication.enLicenseClass)cbLicenseClasses.SelectedValue;
+            }
         }
     }
 }

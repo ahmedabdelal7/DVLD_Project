@@ -28,5 +28,10 @@ namespace DVLD.Common_Classes
 
             return Ext;
         }
+
+        public static string CustomShortDate(DateTime date)
+        {
+            return date.ToString("g");
+        }
     }
 }

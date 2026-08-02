@@ -19,6 +19,7 @@ namespace DVLD.Users
         public delegate void DataBackEventHandler();
 
         // 2. Declare event based on delegate
+        public event DataBackEventHandler DataBack;
         enum enMode { AddNew,Update};
         enMode _Mode;
 
@@ -27,7 +28,6 @@ namespace DVLD.Users
         int _UserID;
         clsUser _User;
 
-        public event DataBackEventHandler DataBack;
 
         public frmAddEditUser(int UserID)
         {

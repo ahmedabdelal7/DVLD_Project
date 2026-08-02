@@ -255,7 +255,7 @@ namespace DVLD_DataAccessLayer
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = "SELECT * FROM LocalDrivingLicenseApplications";
+            string query = "SELECT * FROM LocalDrivingLicenseApplications_View";
 
             SqlCommand command = new SqlCommand(query, connection);
 
