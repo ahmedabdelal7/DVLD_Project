@@ -32,3 +32,23 @@ This project is a work in progress. New features and improvements are being adde
 - 📊 Reports and Statistics
 
 ⭐ More updates coming soon...
+
+---
+# 📌 Project Status
+
+```
+Version : 1.0
+
+Status  : 🚧 Under Development
+```
+
+---
+
+<div align="center">
+
+### ⭐ If you like this project, don't forget to leave a Star!
+
+Made with ❤️ by **Ahmed Abdelal**
+
+</div>
+
