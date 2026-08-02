@@ -39,8 +39,8 @@
             this.tabPersonInfo = new System.Windows.Forms.TabPage();
             this.ctrlPersonCardWithFilter1 = new DVLD.People.Controls.ctrlPersonCardWithFilter();
             this.btnClose = new System.Windows.Forms.Button();
-            this.tabLoginInfo = new System.Windows.Forms.TabPage();
-            this.pnlLoginInfo = new System.Windows.Forms.Panel();
+            this.tabApplicationInfo = new System.Windows.Forms.TabPage();
+            this.pnlApplicationInfo = new System.Windows.Forms.Panel();
             this.cbLicenseClasses = new System.Windows.Forms.ComboBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
@@ -58,8 +58,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabPersonInfo.SuspendLayout();
-            this.tabLoginInfo.SuspendLayout();
-            this.pnlLoginInfo.SuspendLayout();
+            this.tabApplicationInfo.SuspendLayout();
+            this.pnlApplicationInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -169,39 +169,39 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // tabLoginInfo
+            // tabApplicationInfo
             // 
-            this.tabLoginInfo.BackColor = System.Drawing.Color.White;
-            this.tabLoginInfo.Controls.Add(this.pnlLoginInfo);
-            this.tabLoginInfo.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.tabLoginInfo.Location = new System.Drawing.Point(4, 29);
-            this.tabLoginInfo.Name = "tabLoginInfo";
-            this.tabLoginInfo.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLoginInfo.Size = new System.Drawing.Size(1080, 566);
-            this.tabLoginInfo.TabIndex = 1;
-            this.tabLoginInfo.Text = "Login Info";
+            this.tabApplicationInfo.BackColor = System.Drawing.Color.White;
+            this.tabApplicationInfo.Controls.Add(this.pnlApplicationInfo);
+            this.tabApplicationInfo.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tabApplicationInfo.Location = new System.Drawing.Point(4, 29);
+            this.tabApplicationInfo.Name = "tabApplicationInfo";
+            this.tabApplicationInfo.Padding = new System.Windows.Forms.Padding(3);
+            this.tabApplicationInfo.Size = new System.Drawing.Size(1080, 566);
+            this.tabApplicationInfo.TabIndex = 1;
+            this.tabApplicationInfo.Text = "Application Info";
             // 
-            // pnlLoginInfo
+            // pnlApplicationInfo
             // 
-            this.pnlLoginInfo.Controls.Add(this.cbLicenseClasses);
-            this.pnlLoginInfo.Controls.Add(this.pictureBox5);
-            this.pnlLoginInfo.Controls.Add(this.pictureBox4);
-            this.pnlLoginInfo.Controls.Add(this.pictureBox3);
-            this.pnlLoginInfo.Controls.Add(this.pictureBox2);
-            this.pnlLoginInfo.Controls.Add(this.pictureBox1);
-            this.pnlLoginInfo.Controls.Add(this.lblCreatedBy);
-            this.pnlLoginInfo.Controls.Add(this.lblFees);
-            this.pnlLoginInfo.Controls.Add(this.lblApplicationDate);
-            this.pnlLoginInfo.Controls.Add(this.lblLocalApplicationID);
-            this.pnlLoginInfo.Controls.Add(this.label6);
-            this.pnlLoginInfo.Controls.Add(this.label4);
-            this.pnlLoginInfo.Controls.Add(this.label3);
-            this.pnlLoginInfo.Controls.Add(this.label2);
-            this.pnlLoginInfo.Controls.Add(this.label1);
-            this.pnlLoginInfo.Location = new System.Drawing.Point(44, 25);
-            this.pnlLoginInfo.Name = "pnlLoginInfo";
-            this.pnlLoginInfo.Size = new System.Drawing.Size(805, 382);
-            this.pnlLoginInfo.TabIndex = 16;
+            this.pnlApplicationInfo.Controls.Add(this.cbLicenseClasses);
+            this.pnlApplicationInfo.Controls.Add(this.pictureBox5);
+            this.pnlApplicationInfo.Controls.Add(this.pictureBox4);
+            this.pnlApplicationInfo.Controls.Add(this.pictureBox3);
+            this.pnlApplicationInfo.Controls.Add(this.pictureBox2);
+            this.pnlApplicationInfo.Controls.Add(this.pictureBox1);
+            this.pnlApplicationInfo.Controls.Add(this.lblCreatedBy);
+            this.pnlApplicationInfo.Controls.Add(this.lblFees);
+            this.pnlApplicationInfo.Controls.Add(this.lblApplicationDate);
+            this.pnlApplicationInfo.Controls.Add(this.lblLocalApplicationID);
+            this.pnlApplicationInfo.Controls.Add(this.label6);
+            this.pnlApplicationInfo.Controls.Add(this.label4);
+            this.pnlApplicationInfo.Controls.Add(this.label3);
+            this.pnlApplicationInfo.Controls.Add(this.label2);
+            this.pnlApplicationInfo.Controls.Add(this.label1);
+            this.pnlApplicationInfo.Location = new System.Drawing.Point(44, 25);
+            this.pnlApplicationInfo.Name = "pnlApplicationInfo";
+            this.pnlApplicationInfo.Size = new System.Drawing.Size(805, 382);
+            this.pnlApplicationInfo.TabIndex = 16;
             // 
             // cbLicenseClasses
             // 
@@ -339,7 +339,7 @@
             // tabControl1
             // 
             this.tabControl1.Controls.Add(this.tabPersonInfo);
-            this.tabControl1.Controls.Add(this.tabLoginInfo);
+            this.tabControl1.Controls.Add(this.tabApplicationInfo);
             this.tabControl1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(39, 105);
             this.tabControl1.Name = "tabControl1";
@@ -367,9 +367,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabPersonInfo.ResumeLayout(false);
-            this.tabLoginInfo.ResumeLayout(false);
-            this.pnlLoginInfo.ResumeLayout(false);
-            this.pnlLoginInfo.PerformLayout();
+            this.tabApplicationInfo.ResumeLayout(false);
+            this.pnlApplicationInfo.ResumeLayout(false);
+            this.pnlApplicationInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -389,7 +389,7 @@
         private System.Windows.Forms.TabPage tabPersonInfo;
         private People.Controls.ctrlPersonCardWithFilter ctrlPersonCardWithFilter1;
         private System.Windows.Forms.Button btnNext;
-        private System.Windows.Forms.TabPage tabLoginInfo;
+        private System.Windows.Forms.TabPage tabApplicationInfo;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label lblLocalApplicationID;
         private System.Windows.Forms.Label label2;
@@ -405,6 +405,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbLicenseClasses;
-        private System.Windows.Forms.Panel pnlLoginInfo;
+        private System.Windows.Forms.Panel pnlApplicationInfo;
     }
 }

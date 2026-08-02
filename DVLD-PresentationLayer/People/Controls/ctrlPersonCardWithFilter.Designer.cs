@@ -52,7 +52,7 @@
             this.gbFilter.Size = new System.Drawing.Size(887, 100);
             this.gbFilter.TabIndex = 2;
             this.gbFilter.TabStop = false;
-            this.gbFilter.Text = "Filter";
+            this.gbFilter.Text = "Find Person";
             // 
             // btnSearch
             // 

@@ -62,11 +62,12 @@ namespace DVLD.Applications
         {
             _FillComboBoxWithLicenseClasses();
 
-            pnlLoginInfo.Enabled = false;
-            btnSave.Enabled = false;
 
             if (_Mode == enMode.AddNew)
             {
+                pnlApplicationInfo.Enabled = false;
+                btnSave.Enabled = false;
+
                 lblAddEditApplication.Text = "Add New Local Driving License Application";
 
                 _LocalDrivingLicenseApplication = new clsLocalDrivingLicenseApplication();
@@ -80,7 +81,7 @@ namespace DVLD.Applications
             }
 
             btnNext.Enabled = true;
-
+            //tabControl1.SelectedIndex = 0;  
             lblAddEditApplication.Text = "Update Local Driving License Application";
 
             _LocalDrivingLicenseApplication = clsLocalDrivingLicenseApplication.Find(_LocalDrivingLicenseApplicationID);
@@ -122,8 +123,8 @@ namespace DVLD.Applications
 
 
             //if mode == update
-            pnlLoginInfo.Enabled = true;
-            btnSave.Enabled = false;
+            pnlApplicationInfo.Enabled = true;
+            btnSave.Enabled = _Mode == enMode.AddNew;
 
             tabControl1.SelectedIndex = 1;
     
@@ -140,12 +141,6 @@ namespace DVLD.Applications
 
             if (_Mode == enMode.Update) {
 
-                //if (_LocalDrivingLicenseApplication.ApplicationStatus != clsApplication.enApplicationStatus.New)
-                //{
-                //    MessageBox.Show($"The selected person has already active application with same selected license class with ID = " +
-                //        $"{ActiveApplication.ID.ToString()}, choose another license class!", "failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                //    return;
-                //}
                 if (ActiveApplication != null && _LocalDrivingLicenseApplication.ID != ActiveApplication.ID)
                 {
                     MessageBox.Show($"The selected person has already active application with same selected license class with ID = " +
