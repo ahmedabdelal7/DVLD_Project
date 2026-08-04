@@ -60,6 +60,16 @@ namespace DVLD_BussinessLayer
             return clsLicenseClassData.GetAllLicenseClasses();
         }
 
+        public static string GetLicenseClassName(int LicenseClassID) {
+
+            string ClassName = "";
+
+            clsLicenseClassData.GetLicenseClassName(LicenseClassID,ref ClassName);
+
+            return ClassName;
+
+        }
+
 
     }
 }

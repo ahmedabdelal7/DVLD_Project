@@ -125,6 +125,42 @@ namespace DVLD_DataAccessLayer
             return (rowsAffected > 0);
         }
 
+        public static string GetApplicationTypeName(int ApplicationTypeID) {
 
+            string ApplicationName = "";
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = "Select ApplicationTypeTitle from ApplicationTypes Where ApplicationTypeID = @ApplicationTypeID;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@ApplicationTypeID", ApplicationTypeID);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    ApplicationName =  reader[0].ToString();
+                }
+                
+
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return ApplicationName;
+
+        }
     }
 }

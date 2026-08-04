@@ -55,7 +55,7 @@ namespace DVLD.Applications
 
             //cbLicenseClasses.SelectedValue
 
-            cbLicenseClasses.SelectedValue = (int)clsLocalDrivingLicenseApplication.enLicenseClass.OrdinaryDrivingLicense;
+            cbLicenseClasses.SelectedValue = 3;
         }
 
         private void _LoadInfo()
@@ -134,7 +134,7 @@ namespace DVLD.Applications
         private void btnSave_Click(object sender, EventArgs e)
         {
             _IsUpdated = false; 
-            _LocalDrivingLicenseApplication.LicenseClassID = (clsLocalDrivingLicenseApplication.enLicenseClass) cbLicenseClasses.SelectedValue;
+            _LocalDrivingLicenseApplication.LicenseClassID = (int)cbLicenseClasses.SelectedValue;
 
             clsLocalDrivingLicenseApplication ActiveApplication =
                 clsLocalDrivingLicenseApplication.GetPersonActiveApplicationLicenseWithClass(_PersonID, _LocalDrivingLicenseApplication.LicenseClassID);
@@ -202,7 +202,7 @@ namespace DVLD.Applications
         {
             if (_Mode == enMode.Update && _LocalDrivingLicenseApplication != null)
             {
-                btnSave.Enabled = (int)_LocalDrivingLicenseApplication.LicenseClassID != (int)(clsLocalDrivingLicenseApplication.enLicenseClass)cbLicenseClasses.SelectedValue;
+                btnSave.Enabled = (int)_LocalDrivingLicenseApplication.LicenseClassID != (int)cbLicenseClasses.SelectedValue;
             }
         }
     }

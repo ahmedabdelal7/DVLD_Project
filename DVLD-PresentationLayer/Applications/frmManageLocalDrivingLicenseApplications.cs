@@ -1,4 +1,5 @@
 ﻿using DVLD.Common_Classes;
+using DVLD.Tests;
 using DVLD_BussinessLayer;
 using System;
 using System.Collections.Generic;
@@ -236,19 +237,20 @@ namespace DVLD.Applications
             cancelApplicationToolStripMenuItem.Enabled = perm;
             scheduleTestToolStripMenuItem.Enabled = perm;
             editApplicationToolStripMenuItem.Enabled = perm;
+           
         }
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             showApplicationDetailsToolStripMenuItem.Enabled = true;
             _ChangeContextUpdatePermission(true);
             issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = true;
-            showApplicationDetailsToolStripMenuItem.Enabled = true;
             showLicenseToolStripMenuItem.Enabled = true;
 
-            int SelectedID = _GetSelectedLicenseApplicationID();
-            clsLocalDrivingLicenseApplication licenseApplication  = clsLocalDrivingLicenseApplication.Find(SelectedID);
-            if(licenseApplication.ApplicationStatus == clsApplication.enApplicationStatus.Completed
-                || licenseApplication.ApplicationStatus == clsApplication.enApplicationStatus.Cancelled)
+            int SelectedAppID = _GetSelectedLicenseApplicationID();
+
+            clsLocalDrivingLicenseApplication licenseApplication  = clsLocalDrivingLicenseApplication.Find(SelectedAppID);
+
+            if(licenseApplication.ApplicationStatus == clsApplication.enApplicationStatus.Completed)
             {
                 _ChangeContextUpdatePermission(false);
 
@@ -258,14 +260,32 @@ namespace DVLD.Applications
             if(licenseApplication.ApplicationStatus == clsApplication.enApplicationStatus.Cancelled)
             {
                 _ChangeContextUpdatePermission(false );
-                issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
+                //issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
                 showLicenseToolStripMenuItem .Enabled = false;
 
             }
             if(licenseApplication.ApplicationStatus == clsApplication.enApplicationStatus.New)
             {
-                issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
+
+                //Should pass 3 tests to open issue license
+                issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = 
+                    clsLocalDrivingLicenseApplication.DoesPassTestType(SelectedAppID,clsTestType.enTestType.Practical);
+
+                //if he has license show it 
                 showLicenseToolStripMenuItem.Enabled = false;
+
+                //handle tests
+
+                bool PassedVision = clsLocalDrivingLicenseApplication.DoesPassTestType(SelectedAppID, clsTestType.enTestType.Vision);
+                bool PassedWritten = clsLocalDrivingLicenseApplication.DoesPassTestType(SelectedAppID, clsTestType.enTestType.Written);
+                bool PassedPractical = clsLocalDrivingLicenseApplication.DoesPassTestType(SelectedAppID, clsTestType.enTestType.Practical);
+
+                visionTestToolStripMenuItem.Enabled = !PassedVision;
+                writtenTestToolStripMenuItem.Enabled = (PassedVision) && !PassedWritten ;
+                practicalTestToolStripMenuItem.Enabled = (PassedVision && PassedWritten) && !PassedPractical;
+
+
+
             }
 
                         
@@ -328,6 +348,12 @@ namespace DVLD.Applications
             MessageBox.Show($"Failed to cancel this application", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
+        private void visionTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int LDLAppID =  _GetSelectedLicenseApplicationID();
+            frmManageTestAppointments frm = new frmManageTestAppointments(clsTestType.enTestType.Vision, LDLAppID);
+            frm.ShowDialog();
 
+        }
     }
 }

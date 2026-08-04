@@ -14,7 +14,7 @@ namespace DVLD.Tests
 {
     public partial class frmUpdateTestType : Form
     {
-        int _TestTypeID = -1;
+        clsTestType.enTestType _TestTypeID = clsTestType.enTestType.Vision;
         clsTestType _TestType;
         bool _IsUpdated = false;
 
@@ -24,7 +24,7 @@ namespace DVLD.Tests
         public event DataBackEventHandler DataBack;
         public frmUpdateTestType(int TestTypeID)
         {
-            _TestTypeID = TestTypeID;
+            _TestTypeID = (clsTestType.enTestType)TestTypeID;
             InitializeComponent();
         }
 

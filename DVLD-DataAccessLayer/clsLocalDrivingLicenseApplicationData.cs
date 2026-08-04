@@ -283,6 +283,88 @@ namespace DVLD_DataAccessLayer
             return dataTable;
         }
 
+        public static bool DoesPassTestType(int LDLAppID, int TestTypeID) {
+
+            bool doesPass = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"SELECT Top 1 TestResult
+							FROM LocalDrivingLicenseApplications AS ld JOIN
+								TestAppointments AS ta ON ld.LocalDrivingLicenseApplicationID =
+								ta.LocalDrivingLicenseApplicationID JOIN
+								Tests ON ta.TestAppointmentID = Tests.TestAppointmentID
+							WHERE ld.LocalDrivingLicenseApplicationID = @LDLAppID
+									AND(ta.TestTypeID = @TestTypeID)	
+							order by Tests.TestID DESC;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            //param
+
+            command.Parameters.AddWithValue("@LDLAppID", LDLAppID);
+            command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
+
+
+            try
+            {
+                connection.Open();
+                
+                object result = command.ExecuteScalar();
+
+                doesPass = result != null;
+
+            }
+            catch (Exception ex) { 
+            
+                doesPass = false;
+            }
+            finally
+            {
+                connection.Close();
+                
+            }
+            return doesPass;
+            
+        }
+
+        public static int GetPassedTestsCount(int LDLAppID) {
+            int passedTestsCount = 0;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"select count(*) as PassedTestsCount  from LocalDrivingLicenseApplications ld join 
+	                            TestAppointments ta ON ta.LocalDrivingLicenseApplicationID = ld.LocalDrivingLicenseApplicationID join 
+	                            Tests ON Tests.TestAppointmentID = ta.TestAppointmentID
+                            where ld.LocalDrivingLicenseApplicationID = @LDLAppID and Tests.TestResult = 1;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            //param
+
+            command.Parameters.AddWithValue("@LDLAppID", LDLAppID);
+
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                if (result != null && int.TryParse(result.ToString(), out int Count))  
+                    passedTestsCount = Count;
+
+
+            }
+            catch { }
+            finally
+            {
+                connection.Close();
+
+            }
+            return passedTestsCount;
+        }
+
 
     }
 }

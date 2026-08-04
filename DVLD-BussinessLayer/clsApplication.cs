@@ -28,6 +28,14 @@ namespace DVLD_BussinessLayer
             ReplaceDamagedLicense = 4, ReleaseDetainedLicense = 5, NewInternationalLicense = 6, RetakeTest = 7
         };
 
+        public string ApplicantFullName
+        {
+            get
+            {
+                return clsPerson.Find(ApplicantPersonID).FullName;
+            }
+        }
+
         public int ApplicationID {  get; set; }
         public int ApplicantPersonID {  get; set; }
         public DateTime ApplicationDate {  get; set; }
@@ -159,8 +167,20 @@ namespace DVLD_BussinessLayer
 
         }
 
-
-
+        public string GetStatusText()
+        {
+            switch (ApplicationStatus)
+            {
+                case enApplicationStatus.New:
+                    return "New";
+                case enApplicationStatus.Cancelled:
+                    return "Cancelled";
+                case enApplicationStatus.Completed:
+                    return "Completed";
+                default:
+                    return "";
+            }
+        }
 
 
 

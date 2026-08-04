@@ -10,20 +10,24 @@ namespace DVLD_BussinessLayer
 {
     public class clsTestType
     {
-        public int TestTypeID { get; }
+        public enTestType TestTypeID { get; }
         public string TestTypeTitle { get; set; }
         public string TestTypeDescription { get; set; }
         public double TestTypeFees { get; set; }
 
+        public enum enTestType
+        {
+            Vision = 1, Written, Practical 
+        }
         public clsTestType()
         {
-            TestTypeID = -1;
+            TestTypeID = enTestType.Vision;
             TestTypeTitle = string.Empty;
             TestTypeDescription = string.Empty;
             TestTypeFees = 0.0;
         }
 
-        clsTestType(int testTypeID, string testTypeTitle, string testTypeDescription, double testTypeFees)
+        clsTestType(enTestType testTypeID, string testTypeTitle, string testTypeDescription, double testTypeFees)
         {
             TestTypeID = testTypeID;
             TestTypeTitle = testTypeTitle;
@@ -31,13 +35,13 @@ namespace DVLD_BussinessLayer
             TestTypeFees = testTypeFees;
         }
 
-        public static clsTestType Find(int TestTypeID)
+        public static clsTestType Find(enTestType TestTypeID)
         {
             string TestTypeTitle = "";
             string TestTypeDescription = "";
             double TestTypeFees = 0.0;
 
-            if (clsTestTypeData.GetTestTypeInfoByID(TestTypeID, ref TestTypeTitle, ref TestTypeDescription, ref TestTypeFees))
+            if (clsTestTypeData.GetTestTypeInfoByID((int)TestTypeID, ref TestTypeTitle, ref TestTypeDescription, ref TestTypeFees))
             {
                 return new clsTestType(TestTypeID, TestTypeTitle, TestTypeDescription, TestTypeFees);
             }
@@ -53,7 +57,7 @@ namespace DVLD_BussinessLayer
 
         private bool _UpdateTestType()
         {
-            return (clsTestTypeData.UpdateTestType(TestTypeID, TestTypeTitle, TestTypeDescription, TestTypeFees));
+            return (clsTestTypeData.UpdateTestType((int)TestTypeID, TestTypeTitle, TestTypeDescription, TestTypeFees));
 
         }
 

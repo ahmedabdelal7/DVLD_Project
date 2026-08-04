@@ -60,5 +60,12 @@ namespace DVLD_BussinessLayer
         }
 
 
+        public static string GetApplicationTypeTitle(int ApplicationTypeID) {
+
+            return clsApplicationTypesData.GetApplicationTypeName(ApplicationTypeID);
+
+        }
+
+
     }
 }
