@@ -13,6 +13,12 @@ namespace DVLD_BussinessLayer
 
         public int ID {  get; set; }
         public int LicenseClassID { get; set; }
+        public string LicenseClassName {
+            get
+            {
+                return clsLicenseClass.GetLicenseClassName(LicenseClassID);
+            }
+        }
 
         enum enMode { AddNew, Update}
         enMode _Mode;
@@ -176,7 +182,21 @@ namespace DVLD_BussinessLayer
             return clsLocalDrivingLicenseApplicationData.GetPassedTestsCount(ID);
         }
 
-        
+        public static int GetTestTrialCount(int LDLAppID, clsTestType.enTestType TestTypeID)
+        {
+            return clsTestAppointmentData.GetTestTrialCount(LDLAppID, (int)TestTypeID);
+        }
+
+        public static bool DoesHaveActiveTestAppointment(int LDLAppID, clsTestType.enTestType TestTypeID)
+        {
+            return clsTestAppointmentData.DoesHaveActiveTestAppointment(LDLAppID, (int)TestTypeID);
+        }
+
+        public static bool DoesFailPrevTest(int LDLAppID, clsTestType.enTestType TestTypeID)
+        {
+            return clsLocalDrivingLicenseApplicationData.DoesFailPrevTest(LDLAppID, (int)TestTypeID);
+        }
+
 
     }
 }

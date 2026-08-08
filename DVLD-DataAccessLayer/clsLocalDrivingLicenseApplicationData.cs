@@ -212,6 +212,7 @@ namespace DVLD_DataAccessLayer
 
             return IsFound;
         }
+
         public static bool IsLocalDrivingLicenseApplicationExist(int LDLApplicationID)
         {
             bool IsExist = false;
@@ -312,7 +313,10 @@ namespace DVLD_DataAccessLayer
                 
                 object result = command.ExecuteScalar();
 
-                doesPass = result != null;
+                if(result != null){
+                    doesPass = Convert.ToBoolean(result);
+                }
+                
 
             }
             catch (Exception ex) { 
@@ -365,6 +369,93 @@ namespace DVLD_DataAccessLayer
             return passedTestsCount;
         }
 
+        public static bool DoesHaveActiveTestAppointment(int LDLAppID, int TestTypeID)
+        {
 
+            bool doesPass = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"SELECT Top 1 TestResult
+							FROM LocalDrivingLicenseApplications AS ld JOIN
+								TestAppointments AS ta ON ld.LocalDrivingLicenseApplicationID =
+								ta.LocalDrivingLicenseApplicationID JOIN
+								Tests ON ta.TestAppointmentID = Tests.TestAppointmentID
+							WHERE ld.LocalDrivingLicenseApplicationID = @LDLAppID
+									AND(ta.TestTypeID = @TestTypeID)	
+							order by Tests.TestID DESC;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            //param
+
+            command.Parameters.AddWithValue("@LDLAppID", LDLAppID);
+            command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
+
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                doesPass = result != null;
+
+            }
+            catch (Exception ex)
+            {
+
+                doesPass = false;
+            }
+            finally
+            {
+                connection.Close();
+
+            }
+            return doesPass;
+
+        }
+
+        public static bool DoesFailPrevTest(int LDLAppID, int TestTypeID)
+        {
+
+            bool DoesFail = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"select Fail = 1  from Tests join TestAppointments on Tests.TestAppointmentID = TestAppointments.TestAppointmentID 
+                            where TestTypeID = @TestTypeID
+                            and LocalDrivingLicenseApplicationID = @LocalDrivingLicenseApplicationID
+                            and TestResult = 0;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@TestTypeID", TestTypeID);
+            command.Parameters.AddWithValue("@LocalDrivingLicenseApplicationID", LDLAppID);
+
+
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                if(result != null )
+                    DoesFail = Convert.ToBoolean(result);
+
+            }
+            catch (Exception ex)
+            {
+
+                
+            }
+            finally
+            {
+                connection.Close();
+
+            }
+            return DoesFail;
+
+        }
     }
 }

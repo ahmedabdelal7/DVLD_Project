@@ -46,34 +46,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Applications\ctrlLocalDrivingLicenseApplicationInfo.cs">
+    <Compile Include="Applications\Local Driving License Applications\Controls\ctrlLocalDrivingLicenseApplicationInfo.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Applications\ctrlLocalDrivingLicenseApplicationInfo.Designer.cs">
+    <Compile Include="Applications\Local Driving License Applications\Controls\ctrlLocalDrivingLicenseApplicationInfo.Designer.cs">
       <DependentUpon>ctrlLocalDrivingLicenseApplicationInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Applications\frmAddUpdateLocalDrivingLicenseApplication.cs">
+    <Compile Include="Applications\Local Driving License Applications\frmAddUpdateLocalDrivingLicenseApplication.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Applications\frmAddUpdateLocalDrivingLicenseApplication.Designer.cs">
+    <Compile Include="Applications\Local Driving License Applications\frmAddUpdateLocalDrivingLicenseApplication.Designer.cs">
       <DependentUpon>frmAddUpdateLocalDrivingLicenseApplication.cs</DependentUpon>
     </Compile>
-    <Compile Include="Applications\frmManageApplicationTypes.cs">
+    <Compile Include="Applications\Application Types\frmManageApplicationTypes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Applications\frmManageApplicationTypes.Designer.cs">
+    <Compile Include="Applications\Application Types\frmManageApplicationTypes.Designer.cs">
       <DependentUpon>frmManageApplicationTypes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Applications\frmManageLocalDrivingLicenseApplications.cs">
+    <Compile Include="Applications\Local Driving License Applications\frmManageLocalDrivingLicenseApplications.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Applications\frmManageLocalDrivingLicenseApplications.Designer.cs">
+    <Compile Include="Applications\Local Driving License Applications\frmManageLocalDrivingLicenseApplications.Designer.cs">
       <DependentUpon>frmManageLocalDrivingLicenseApplications.cs</DependentUpon>
     </Compile>
-    <Compile Include="Applications\frmUpdateApplicationType.cs">
+    <Compile Include="Applications\Application Types\frmUpdateApplicationType.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Applications\frmUpdateApplicationType.Designer.cs">
+    <Compile Include="Applications\Application Types\frmUpdateApplicationType.Designer.cs">
       <DependentUpon>frmUpdateApplicationType.cs</DependentUpon>
     </Compile>
     <Compile Include="Common Classes\clsGlobalSettings.cs" />
@@ -129,23 +129,29 @@
     <Compile Include="Test.Designer.cs">
       <DependentUpon>Test.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tests\frmManageTestAppointments.cs">
+    <Compile Include="Tests\Test Appointments\frmManageTestAppointments.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tests\frmManageTestAppointments.Designer.cs">
+    <Compile Include="Tests\Test Appointments\frmManageTestAppointments.Designer.cs">
       <DependentUpon>frmManageTestAppointments.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tests\frmManageTestTypes.cs">
+    <Compile Include="Tests\Test Types\frmManageTestTypes.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tests\frmManageTestTypes.Designer.cs">
+    <Compile Include="Tests\Test Types\frmManageTestTypes.Designer.cs">
       <DependentUpon>frmManageTestTypes.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tests\frmUpdateTestType.cs">
+    <Compile Include="Tests\Test Types\frmUpdateTestType.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tests\frmUpdateTestType.Designer.cs">
+    <Compile Include="Tests\Test Types\frmUpdateTestType.Designer.cs">
       <DependentUpon>frmUpdateTestType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tests\Test Appointments\frmScheduleTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tests\Test Appointments\frmScheduleTest.Designer.cs">
+      <DependentUpon>frmScheduleTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Users\Controls\ctrlUserInformation.cs">
       <SubType>UserControl</SubType>
@@ -177,19 +183,19 @@
     <Compile Include="Users\frmUserInfo.Designer.cs">
       <DependentUpon>frmUserInfo.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Applications\ctrlLocalDrivingLicenseApplicationInfo.resx">
+    <EmbeddedResource Include="Applications\Local Driving License Applications\Controls\ctrlLocalDrivingLicenseApplicationInfo.resx">
       <DependentUpon>ctrlLocalDrivingLicenseApplicationInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Applications\frmAddUpdateLocalDrivingLicenseApplication.resx">
+    <EmbeddedResource Include="Applications\Local Driving License Applications\frmAddUpdateLocalDrivingLicenseApplication.resx">
       <DependentUpon>frmAddUpdateLocalDrivingLicenseApplication.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Applications\frmManageApplicationTypes.resx">
+    <EmbeddedResource Include="Applications\Application Types\frmManageApplicationTypes.resx">
       <DependentUpon>frmManageApplicationTypes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Applications\frmManageLocalDrivingLicenseApplications.resx">
+    <EmbeddedResource Include="Applications\Local Driving License Applications\frmManageLocalDrivingLicenseApplications.resx">
       <DependentUpon>frmManageLocalDrivingLicenseApplications.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Applications\frmUpdateApplicationType.resx">
+    <EmbeddedResource Include="Applications\Application Types\frmUpdateApplicationType.resx">
       <DependentUpon>frmUpdateApplicationType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmLoginScreen.resx">
@@ -226,14 +232,17 @@
     <EmbeddedResource Include="Test.resx">
       <DependentUpon>Test.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tests\frmManageTestAppointments.resx">
+    <EmbeddedResource Include="Tests\Test Appointments\frmManageTestAppointments.resx">
       <DependentUpon>frmManageTestAppointments.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tests\frmManageTestTypes.resx">
+    <EmbeddedResource Include="Tests\Test Types\frmManageTestTypes.resx">
       <DependentUpon>frmManageTestTypes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tests\frmUpdateTestType.resx">
+    <EmbeddedResource Include="Tests\Test Types\frmUpdateTestType.resx">
       <DependentUpon>frmUpdateTestType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tests\Test Appointments\frmScheduleTest.resx">
+      <DependentUpon>frmScheduleTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Users\Controls\ctrlUserInformation.resx">
       <DependentUpon>ctrlUserInformation.cs</DependentUpon>
@@ -274,6 +283,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\man.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\driving-test 512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Written Test 512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Vision 512.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

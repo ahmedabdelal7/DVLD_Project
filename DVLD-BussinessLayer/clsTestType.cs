@@ -66,5 +66,10 @@ namespace DVLD_BussinessLayer
             return (_UpdateTestType());
 
         }
+
+        public static double GetTestFees(enTestType TestTypeID)
+        {
+            return clsTestTypeData.GetTestFeesByTestTypeID((int)TestTypeID);
+        }
     }
 }

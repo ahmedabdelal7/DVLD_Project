@@ -66,6 +66,9 @@ namespace DVLD_BussinessLayer
 
         }
 
+        public static double GetApplicationFees(int ApplicationTypeID) { 
+            return clsApplicationTypesData.GetApplicationTypeFees(ApplicationTypeID);
+        }
 
     }
 }

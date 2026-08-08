@@ -11,7 +11,7 @@ namespace DVLD_DataAccessLayer
     public class clsApplicationTypesData
     {
 
-        public static bool GetApplicationTypeInfoByID(int ApplicationTypeID, ref string ApplicationTypeTitle,ref double ApplicationFees)
+        public static bool GetApplicationTypeInfoByID(int ApplicationTypeID, ref string ApplicationTypeTitle, ref double ApplicationFees)
         {
             bool IsFound = false;
 
@@ -125,7 +125,8 @@ namespace DVLD_DataAccessLayer
             return (rowsAffected > 0);
         }
 
-        public static string GetApplicationTypeName(int ApplicationTypeID) {
+        public static string GetApplicationTypeName(int ApplicationTypeID)
+        {
 
             string ApplicationName = "";
 
@@ -144,15 +145,15 @@ namespace DVLD_DataAccessLayer
 
                 if (reader.Read())
                 {
-                    ApplicationName =  reader[0].ToString();
+                    ApplicationName = reader[0].ToString();
                 }
-                
+
 
                 reader.Close();
             }
             catch (Exception)
             {
-                
+
             }
             finally
             {
@@ -162,5 +163,48 @@ namespace DVLD_DataAccessLayer
             return ApplicationName;
 
         }
+        public static double GetApplicationTypeFees(int ApplicationTypeID)
+        {
+
+            double ApplicationFees = 0;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = "select ApplicationFees from ApplicationTypes where ApplicationTypeID = @ApplicationTypeID;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@ApplicationTypeID", ApplicationTypeID);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    ApplicationFees = Convert.ToDouble(reader[0]);
+                }
+
+
+                reader.Close();
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return ApplicationFees;
+
+            
+        }
+
+
+
+
     }
 }

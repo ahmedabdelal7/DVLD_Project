@@ -127,7 +127,41 @@ namespace DVLD_DataAccessLayer
 
             return (rowsAffected > 0);
         }
+        public static double GetTestFeesByTestTypeID(int TestTypeID)
+        {
+            double TestFees = 0.0;
 
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = "select TestTypeFees from TestTypes where TestTypeID = @TestTypeID;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("TestTypeID", TestTypeID);
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                if(result != null)
+                {
+                    TestFees = Convert.ToDouble(result);
+                }
+
+
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return TestFees;
+        }
 
     }
 }

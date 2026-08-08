@@ -355,5 +355,19 @@ namespace DVLD.Applications
             frm.ShowDialog();
 
         }
+
+        private void writtenTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int LDLAppID = _GetSelectedLicenseApplicationID();
+            frmManageTestAppointments frm = new frmManageTestAppointments(clsTestType.enTestType.Written, LDLAppID);
+            frm.ShowDialog();
+        }
+
+        private void practicalTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int LDLAppID = _GetSelectedLicenseApplicationID();
+            frmManageTestAppointments frm = new frmManageTestAppointments(clsTestType.enTestType.Practical, LDLAppID);
+            frm.ShowDialog();
+        }
     }
 }
