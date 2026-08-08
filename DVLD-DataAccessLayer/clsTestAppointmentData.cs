@@ -72,7 +72,7 @@ namespace DVLD_DataAccessLayer
 
             return TestAppointmentID;
         }
-        public static bool UpdateTestAppointment(int TestAppointmentID, DateTime AppointmentDate,bool IsLocked, int RetakeTestAppointmentID )
+        public static bool UpdateTestAppointment(int TestAppointmentID, DateTime AppointmentDate,bool IsLocked, int RetakeTestApplicationID)
         {
             int rowsAffected = 0;
 
@@ -81,7 +81,7 @@ namespace DVLD_DataAccessLayer
             string query = @"UPDATE TestAppointments
                              SET AppointmentDate = @AppointmentDate,
 							     IsLocked = @IsLocked,
-							     RetakeTestAppointmentID = RetakeTestAppointmentID
+							     RetakeTestApplicationID = @RetakeTestApplicationID
                              WHERE TestAppointmentID = @TestAppointmentID;";
 
             SqlCommand command = new SqlCommand(query, connection);
@@ -89,11 +89,11 @@ namespace DVLD_DataAccessLayer
             command.Parameters.AddWithValue("@AppointmentDate", AppointmentDate);
             command.Parameters.AddWithValue("@IsLocked", IsLocked);
 
-            if (RetakeTestAppointmentID == -1)
+            if (RetakeTestApplicationID == -1)
             {
-                command.Parameters.AddWithValue("@RetakeTestAppointmentID", System.DBNull.Value);
-            }
-            command.Parameters.AddWithValue("@RetakeTestAppointmentID", RetakeTestAppointmentID);
+                command.Parameters.AddWithValue("@RetakeTestApplicationID", System.DBNull.Value);
+            }else
+                command.Parameters.AddWithValue("@RetakeTestApplicationID", RetakeTestApplicationID);
 
             command.Parameters.AddWithValue("@TestAppointmentID", TestAppointmentID);
             //...

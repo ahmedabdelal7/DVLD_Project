@@ -122,6 +122,7 @@
             this.lblAlert.TabIndex = 52;
             this.lblAlert.Text = "Alert";
             this.lblAlert.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblAlert.Visible = false;
             // 
             // btnSave
             // 
