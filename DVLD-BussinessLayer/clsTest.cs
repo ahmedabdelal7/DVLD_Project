@@ -1,10 +1,11 @@
-﻿using System;
+﻿using DVLD_DataAccessLayer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DVLD_DataAccessLayer
+namespace DVLD_BussinessLayer
 {
     public class clsTest
     {
@@ -18,14 +19,14 @@ namespace DVLD_DataAccessLayer
         public int TestAppointmentID { get; set; }
         public bool TestResult { get; set; }
         public string Notes {  get; set; }
-        public int CreatedByUser {  get; set; }
+        public int CreatedByUserID {  get; set; }
 
         public clsTest() {
             TestID = -1;
             TestAppointmentID = -1;
             TestResult = false;
             Notes = string.Empty;
-            CreatedByUser = -1;
+            CreatedByUserID = -1;
             _Mode = enMode.AddNew;  
         }
 
@@ -35,7 +36,7 @@ namespace DVLD_DataAccessLayer
             TestAppointmentID = testAppointmentID;
             TestResult = testResult;
             Notes = notes;
-            CreatedByUser = createdByUser;
+            CreatedByUserID = createdByUser;
 
             _Mode= enMode.Updated;
         }
@@ -47,9 +48,38 @@ namespace DVLD_DataAccessLayer
             bool testResult = false;
             string notes = "";
 
-
+            if (clsTestData.GetTestInfoByID(testID, ref testAppointmentID, ref testResult, ref notes, ref createdByUser)) {
+                return new clsTest(testID, testAppointmentID, testResult, notes, createdByUser);
+            } else
+                return null;
 
         }
+
+        private bool _AddNew()
+        {
+            this.TestID = clsTestData.AddNewTest(TestAppointmentID,TestResult,Notes,CreatedByUserID);
+            return TestID != -1;
+        }
+
+        public bool Save()
+        {
+            switch (_Mode)
+            {
+                case enMode.AddNew:
+                    if (_AddNew())
+                    {
+                        _Mode = enMode.Updated;
+                        return true;
+                    }
+                    return false;
+                case enMode.Updated:
+                    return true; ///update method here...
+                default:
+                    return false;
+            }
+        }
+
+
 
 
     }

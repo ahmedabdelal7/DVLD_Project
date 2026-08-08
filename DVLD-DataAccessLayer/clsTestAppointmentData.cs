@@ -11,28 +11,28 @@ namespace DVLD_DataAccessLayer
     public class clsTestAppointmentData
     {
 
-        public static int AddNewTestAppointment(int TestTypeID, int LDLAppID, DateTime AppointmentDate, double PaidFees, int CreatedByUserID, bool IsLocked, int RetakeTestAppointmentID)
+        public static int AddNewTestAppointment(int TestTypeID, int LDLAppID, DateTime AppointmentDate, double PaidFees, int CreatedByUserID, bool IsLocked, int RetakeTestApplicationID)
         {
             int TestAppointmentID = -1;
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"INSERT INTO TestAppointments (
-				                TestTypeID,
-				                LocalDrivingLicenseApplicationID,
-				                AppointmentDate,
-				                PaidFees,
-				                CreatedByUserID,
-				                IsLocked,
-				                RetakeTestAppointmentID)
-                            VALUES(
-				                @TestTypeID,
-				                @LocalDrivingLicenseApplicationID,
-				                @AppointmentDate,
-				                @PaidFees,
-				                @CreatedByUserID,
-				                @IsLocked,
-				                @RetakeTestAppointmentID);
+            string query = @"INSERT INTO TestAppointments
+                                       (TestTypeID
+                                       ,LocalDrivingLicenseApplicationID
+                                       ,AppointmentDate
+                                       ,PaidFees
+                                       ,CreatedByUserID
+                                       ,IsLocked
+                                       ,RetakeTestApplicationID)
+                                 VALUES
+                                       (@TestTypeID, 
+                                       @LocalDrivingLicenseApplicationID, 
+                                       @AppointmentDate, 
+                                       @PaidFees,
+                                       @CreatedByUserID, 
+                                       @IsLocked,
+                                       @RetakeTestApplicationID);
                             SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
             SqlCommand command = new SqlCommand(query, connection);
@@ -44,11 +44,11 @@ namespace DVLD_DataAccessLayer
             command.Parameters.AddWithValue("@CreatedByUserID", CreatedByUserID);
             command.Parameters.AddWithValue("@IsLocked", IsLocked);
 
-            if(RetakeTestAppointmentID == -1)
+            if(RetakeTestApplicationID == -1)
             {
-                command.Parameters.AddWithValue("@RetakeTestAppointmentID", System.DBNull.Value);
+                command.Parameters.AddWithValue("@RetakeTestApplicationID", System.DBNull.Value);
             }
-            else command.Parameters.AddWithValue("@RetakeTestAppointmentID", RetakeTestAppointmentID);
+            else command.Parameters.AddWithValue("@RetakeTestApplicationID", RetakeTestApplicationID);
             
 
             try
@@ -116,7 +116,7 @@ namespace DVLD_DataAccessLayer
             return (rowsAffected > 0);
         }
         public static bool GetTestAppointmentInfoByID(int TestAppointmentID, ref int TestTypeID, ref int LDLAppID, ref DateTime AppointmentDate,
-            ref double PaidFees, ref int CreatedByUserID, ref bool IsLocked, ref int RetakeTestAppointmentID)
+            ref double PaidFees, ref int CreatedByUserID, ref bool IsLocked, ref int RetakeTestApplicationID)
         {
             bool IsFound = false;
 
@@ -144,7 +144,7 @@ namespace DVLD_DataAccessLayer
                     CreatedByUserID = Convert.ToInt32(reader["CreatedByUserID"]);
                     IsLocked = Convert.ToBoolean(reader["IsLocked"]);
 
-                    RetakeTestAppointmentID = reader[7] == DBNull.Value ? -1 : reader.GetInt32(7);
+                    RetakeTestApplicationID = reader[7] == DBNull.Value ? -1 : reader.GetInt32(7);
 
                 }
                 else

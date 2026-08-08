@@ -66,6 +66,9 @@ namespace DVLD.Tests
 
             if (_Mode == enMode.AddNew) {
                 _RetakeTestApp = new clsApplication();
+                lblRetakeAppFees.Text = clsApplicationType.GetApplicationFees(7).ToString();
+                lblTotalFees.Text
+                     = (Convert.ToDouble( lblTestFees.Text) + Convert.ToDouble(lblRetakeAppFees.Text)).ToString() ;
             }
             else
             {

@@ -140,7 +140,17 @@ namespace DVLD.Tests
 
         private void takeTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmTakeTest frmTakeTest = new frmTakeTest(_GetSelectedTestAppointmentID());
+            int TestAppID = _GetSelectedTestAppointmentID();
+
+            clsTestAppointment TestApp = clsTestAppointment.Find(TestAppID);
+
+            if (TestApp.IsLocked)
+            {
+                MessageBox.Show("This person already took this test before, the test is locked!", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            frmTakeTest frmTakeTest = new frmTakeTest(TestAppID);
             frmTakeTest.ShowDialog();
             _LoadInfo();
         }

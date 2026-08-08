@@ -59,7 +59,8 @@ namespace DVLD_BussinessLayer
             PaidFees = paidFees;
             CreatedByUserID = createdByUserID;
         }
-        public clsApplication() { 
+        public clsApplication() {
+            ApplicationID = -1;
             ApplicantPersonID = -1;
             ApplicationDate = DateTime.Now;
             ApplicationTypeID = enApplicationType.NewLocalLicense;

@@ -48,7 +48,6 @@
     <Compile Include="clsLicenseClassData.cs" />
     <Compile Include="clsLocalDrivingLicenseApplicationData.cs" />
     <Compile Include="clsPersonData.cs" />
-    <Compile Include="clsTest.cs" />
     <Compile Include="clsTestAppointmentData.cs" />
     <Compile Include="clsTestData.cs" />
     <Compile Include="clsTestTypeData.cs" />
