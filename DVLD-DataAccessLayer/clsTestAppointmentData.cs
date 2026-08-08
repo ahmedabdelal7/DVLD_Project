@@ -48,7 +48,7 @@ namespace DVLD_DataAccessLayer
             {
                 command.Parameters.AddWithValue("@RetakeTestAppointmentID", System.DBNull.Value);
             }
-            command.Parameters.AddWithValue("@RetakeTestAppointmentID", RetakeTestAppointmentID);
+            else command.Parameters.AddWithValue("@RetakeTestAppointmentID", RetakeTestAppointmentID);
             
 
             try
@@ -57,8 +57,8 @@ namespace DVLD_DataAccessLayer
 
                 object result = command.ExecuteScalar();
 
-                if (result != null)
-                    TestAppointmentID = (int)result;
+                if (result != null && int.TryParse(result.ToString(), out int InsertedID))
+                    TestAppointmentID = InsertedID;
 
             }
             catch (Exception)

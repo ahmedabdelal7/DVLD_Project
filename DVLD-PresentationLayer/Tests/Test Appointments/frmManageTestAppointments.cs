@@ -110,6 +110,7 @@ namespace DVLD.Tests
             
             frmScheduleTest frmScheduleTest = new frmScheduleTest(_LDLAppID, _TestType);
             frmScheduleTest.ShowDialog();
+            _LoadInfo();
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
@@ -123,6 +124,12 @@ namespace DVLD.Tests
 
             frmScheduleTest frmScheduleTest = new frmScheduleTest(SelectedAppID);
             frmScheduleTest.ShowDialog();
+            _LoadInfo();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

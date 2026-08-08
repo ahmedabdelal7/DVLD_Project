@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmScheduleTest));
             this.gbTestName = new System.Windows.Forms.GroupBox();
+            this.lblAlert = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.gbRetakeTestInfo = new System.Windows.Forms.GroupBox();
             this.lblTotalFees = new System.Windows.Forms.Label();
@@ -63,7 +64,6 @@
             this.ppTestPicture = new System.Windows.Forms.PictureBox();
             this.lblTestTittle = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.lblAlert = new System.Windows.Forms.Label();
             this.gbTestName.SuspendLayout();
             this.gbRetakeTestInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
@@ -112,6 +112,17 @@
             this.gbTestName.TabStop = false;
             this.gbTestName.Text = "VisionTest";
             // 
+            // lblAlert
+            // 
+            this.lblAlert.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
+            this.lblAlert.ForeColor = System.Drawing.Color.Firebrick;
+            this.lblAlert.Location = new System.Drawing.Point(11, 172);
+            this.lblAlert.Name = "lblAlert";
+            this.lblAlert.Size = new System.Drawing.Size(593, 20);
+            this.lblAlert.TabIndex = 52;
+            this.lblAlert.Text = "Alert";
+            this.lblAlert.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // btnSave
             // 
             this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -125,6 +136,7 @@
             this.btnSave.TabIndex = 51;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // gbRetakeTestInfo
             // 
@@ -459,17 +471,7 @@
             this.button1.TabIndex = 45;
             this.button1.Text = "Close";
             this.button1.UseVisualStyleBackColor = true;
-            // 
-            // lblAlert
-            // 
-            this.lblAlert.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(178)));
-            this.lblAlert.ForeColor = System.Drawing.Color.Firebrick;
-            this.lblAlert.Location = new System.Drawing.Point(11, 172);
-            this.lblAlert.Name = "lblAlert";
-            this.lblAlert.Size = new System.Drawing.Size(593, 20);
-            this.lblAlert.TabIndex = 52;
-            this.lblAlert.Text = "Alert";
-            this.lblAlert.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmScheduleTest
             // 

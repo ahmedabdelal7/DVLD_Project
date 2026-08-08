@@ -1,4 +1,5 @@
-﻿using DVLD.Properties;
+﻿using DVLD.Common_Classes;
+using DVLD.Properties;
 using DVLD_BussinessLayer;
 using System;
 using System.Collections.Generic;
@@ -114,6 +115,10 @@ namespace DVLD.Tests
 
                 }
             }
+            else
+            {
+                _TestAppointment = new clsTestAppointment();
+            }
 
 
 
@@ -138,6 +143,56 @@ namespace DVLD.Tests
                 
                 ppTestPicture.Image = Resources.driving_test_512;
                 return;
+
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (_Mode == enMode.AddNew)
+            {
+                _TestAppointment.LDLAppID = _LDLAppID;
+                _TestAppointment.AppointmentDate = dateTimePicker1.Value;
+                _TestAppointment.CreatedByUserID = clsGlobalSettings.LoggedInUserID;
+                _TestAppointment.PaidFees = clsTestType.GetTestFees(_TestType);
+                _TestAppointment.TestTypeID = _TestType;
+
+                if (_DoesFailPrevTest)
+                {
+                    _RetakeTestApp.ApplicantPersonID = _LDLApplication.ApplicantPersonID;
+                    _RetakeTestApp.ApplicationDate = DateTime.Now;
+                    _RetakeTestApp.ApplicationStatus = clsApplication.enApplicationStatus.New;
+                    _RetakeTestApp.ApplicationTypeID = clsApplication.enApplicationType.RetakeTest;
+                    _RetakeTestApp.CreatedByUserID = clsGlobalSettings.LoggedInUserID;
+                    _RetakeTestApp.LastStatusDate = DateTime.Now;
+                    _RetakeTestApp.PaidFees = clsApplicationType.GetApplicationFees(7);
+
+                    if (_RetakeTestApp.Save())
+                    {
+                        _TestAppointment.RetakeTestApplicationID = _RetakeTestApp.ApplicationID; 
+                    }
+
+                }
+
+                if(_TestAppointment.Save())
+                {
+                    MessageBox.Show("Appointment saved successfully.","Done",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    this.Close();
+                }else
+                    MessageBox.Show("Failed to save this appointment!", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return;
+            }
+
+            //update mode
+
+            if (_DoesFailPrevTest)
+            {
 
             }
         }
