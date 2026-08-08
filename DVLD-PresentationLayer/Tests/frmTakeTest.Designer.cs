@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTakeTest));
             this.gbTestName = new System.Windows.Forms.GroupBox();
-            this.btnSave = new System.Windows.Forms.Button();
+            this.lblTestAppointmentDate = new System.Windows.Forms.Label();
             this.lblTestFees = new System.Windows.Forms.Label();
             this.lblTrial = new System.Windows.Forms.Label();
             this.lblApplicantName = new System.Windows.Forms.Label();
@@ -50,7 +50,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.ppTestPicture = new System.Windows.Forms.PictureBox();
             this.lblTestTittle = new System.Windows.Forms.Label();
-            this.lblTestAppointmentDate = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.rbPass = new System.Windows.Forms.RadioButton();
             this.rbFail = new System.Windows.Forms.RadioButton();
@@ -102,21 +102,16 @@
             this.gbTestName.TabIndex = 1;
             this.gbTestName.TabStop = false;
             this.gbTestName.Text = "VisionTest";
-            this.gbTestName.Enter += new System.EventHandler(this.gbTestName_Enter);
             // 
-            // btnSave
+            // lblTestAppointmentDate
             // 
-            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
-            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(484, 703);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(146, 43);
-            this.btnSave.TabIndex = 51;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
+            this.lblTestAppointmentDate.AutoSize = true;
+            this.lblTestAppointmentDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTestAppointmentDate.Location = new System.Drawing.Point(197, 387);
+            this.lblTestAppointmentDate.Name = "lblTestAppointmentDate";
+            this.lblTestAppointmentDate.Size = new System.Drawing.Size(29, 20);
+            this.lblTestAppointmentDate.TabIndex = 52;
+            this.lblTestAppointmentDate.Text = "??";
             // 
             // lblTestFees
             // 
@@ -309,15 +304,20 @@
             this.lblTestTittle.Text = "Schedule Test";
             this.lblTestTittle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // lblTestAppointmentDate
+            // btnSave
             // 
-            this.lblTestAppointmentDate.AutoSize = true;
-            this.lblTestAppointmentDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTestAppointmentDate.Location = new System.Drawing.Point(197, 387);
-            this.lblTestAppointmentDate.Name = "lblTestAppointmentDate";
-            this.lblTestAppointmentDate.Size = new System.Drawing.Size(29, 20);
-            this.lblTestAppointmentDate.TabIndex = 52;
-            this.lblTestAppointmentDate.Text = "??";
+            this.btnSave.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSave.Location = new System.Drawing.Point(484, 703);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(146, 43);
+            this.btnSave.TabIndex = 51;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // label7
             // 
@@ -436,6 +436,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Take Test";
+            this.Load += new System.EventHandler(this.frmTakeTest_Load);
             this.gbTestName.ResumeLayout(false);
             this.gbTestName.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DVLD_BussinessLayer.clsTestType;
 
 namespace DVLD.Tests
 {
@@ -111,24 +112,14 @@ namespace DVLD.Tests
                 dateTimePicker1.Value = _TestAppointment.AppointmentDate;
             }
         }
-        private void _LoadTestNameAndImage()
+        private void _LoadTestNameAndImage(clsTestType.enTestType TestType)
         {
-            switch (_TestType)
-            {
-                case clsTestType.enTestType.Vision:
-                    gbTestName.Text = "Vision Test";
-                    ppTestPicture.Image = Resources.Vision_512;
-                    return;
-                case clsTestType.enTestType.Written:
-                    gbTestName.Text = "Written Test";
-                    ppTestPicture.Image = Resources.Written_Test_512;
-                    return;
-                case clsTestType.enTestType.Practical:
-                    gbTestName.Text = "Practical Test";
-                    ppTestPicture.Image = Resources.driving_test_512;
-                    return;
+            ppTestPicture.Image =
+                TestType == clsTestType.enTestType.Vision ? Resources.Vision_512 :
+                (TestType == clsTestType.enTestType.Written ? Resources.Written_Test_512 : Resources.driving_test_512);
 
-            }
+            gbTestName.Text = TestType.ToString() + " Test";
+
         }
         private void ScheduleTest_Load(object sender, EventArgs e)
         {
@@ -153,8 +144,7 @@ namespace DVLD.Tests
             }
 
 
-            _LoadTestNameAndImage();
-
+            _LoadTestNameAndImage(_TestType);
 
         }
 

@@ -114,7 +114,7 @@ namespace DVLD.Tests
             _LoadInfo();
         }
 
-        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        private int _GetSelectedTestAppointmentID()
         {
             int SelectedAppID = -1;
             try
@@ -122,8 +122,13 @@ namespace DVLD.Tests
                 SelectedAppID = int.Parse(dgvTestAppointments.SelectedCells[0].Value.ToString());
             }
             catch { SelectedAppID = -1; }
+            return SelectedAppID;
+        }
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
 
-            frmScheduleTest frmScheduleTest = new frmScheduleTest(SelectedAppID);
+            frmScheduleTest frmScheduleTest = new frmScheduleTest(_GetSelectedTestAppointmentID());
             frmScheduleTest.ShowDialog();
             _LoadInfo();
         }
@@ -135,7 +140,7 @@ namespace DVLD.Tests
 
         private void takeTestToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmTakeTest frmTakeTest = new frmTakeTest();
+            frmTakeTest frmTakeTest = new frmTakeTest(_GetSelectedTestAppointmentID());
             frmTakeTest.ShowDialog();
             _LoadInfo();
         }
