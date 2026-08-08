@@ -103,7 +103,8 @@ namespace DVLD.Tests
             }
             if (clsLocalDrivingLicenseApplication.DoesPassTestType(_LDLAppID, _TestType))
             {
-                MessageBox.Show("Failed, this person already passed this test before, you can only retake failed tests.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("This person already passed this test before, you can only retake failed tests.",
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -130,6 +131,13 @@ namespace DVLD.Tests
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void takeTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmTakeTest frmTakeTest = new frmTakeTest();
+            frmTakeTest.ShowDialog();
+            _LoadInfo();
         }
     }
 }
