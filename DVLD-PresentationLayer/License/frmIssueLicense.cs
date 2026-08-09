@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DVLD.Common_Classes;
+using DVLD_BussinessLayer;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,6 +15,8 @@ namespace DVLD.License
     public partial class frmIssueLicense : Form
     {
         int _LDLAppID = -1;
+        clsLocalDrivingLicenseApplication _LDLApp;
+        clsDriver _Driver;
         public frmIssueLicense(int LDLAppID)
         {
             _LDLAppID = LDLAppID;
@@ -29,9 +33,58 @@ namespace DVLD.License
             this.Close();
         }
 
+
+        private bool _CreateNewDriver(clsDriver clsDriver)
+        {
+            clsDriver.PersonID = _LDLApp.ApplicantPersonID;
+            clsDriver.CreatedByUserID = _LDLApp.CreatedByUserID;
+            clsDriver.CreatedDate = DateTime.Now;
+
+            return clsDriver.Save();
+        }
+        private bool _CreateNewLicense(clsLicense license)
+        {
+            clsLicenseClass licenseClass = clsLicenseClass.Find(_LDLApp.LicenseClassID);
+
+            license.ApplicationID = _LDLApp.ApplicationID;
+            license.DriverID = _Driver.DriverID;
+            license.LicenseClassID = _LDLApp.LicenseClassID;
+            license.IssueDate = DateTime.Now;
+            license.ExpirationDate =license.IssueDate.AddYears(licenseClass.DefaultValidityLength);
+            license.Notes = txtNotes.Text.Trim();
+            license.PaidFees = licenseClass.ClassFees;
+            license.IsActive = true;
+            license.IssueReason = clsLicense.enIssueReason.FirstTime;
+            license.CreatedByUserID = clsGlobalSettings.LoggedInUserID;
+
+            return license.Save();
+            
+        }
         private void btnIssue_Click(object sender, EventArgs e)
         {
+            _LDLApp =  clsLocalDrivingLicenseApplication.Find(_LDLAppID);
 
+            _Driver = new clsDriver();
+            if (!_CreateNewDriver(_Driver))
+            {
+                MessageBox.Show($"Failed to issue license",
+                    "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            clsLicense License = new clsLicense();
+
+            if (_CreateNewLicense(License))
+            {
+                _LDLApp.ApplicationStatus = clsApplication.enApplicationStatus.Completed;
+                _LDLApp.LastStatusDate = DateTime.Now;
+                
+                _LDLApp.Save();
+
+                MessageBox.Show($"License issued successfully with ID = {License.LicenseID}",
+                    "Successful",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                this.Close();
+            }
         }
     }
 }

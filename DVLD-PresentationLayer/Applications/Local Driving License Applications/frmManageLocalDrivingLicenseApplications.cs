@@ -240,13 +240,25 @@ namespace DVLD.Applications
             editApplicationToolStripMenuItem.Enabled = perm;
            
         }
+        private void _EnableAllContextMenuItems()
+        {
+            _ChangeContextUpdatePermission(true);
+            showLicenseToolStripMenuItem.Enabled = true;
+            issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = true;
+            visionTestToolStripMenuItem.Enabled = true;
+            practicalTestToolStripMenuItem.Enabled = true;
+            writtenTestToolStripMenuItem.Enabled = true;
+            showApplicationDetailsToolStripMenuItem.Enabled = true;
+            showPersonLicenseHistoryToolStripMenuItem.Enabled = true;
+        }
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
             
+            _EnableAllContextMenuItems();
 
             int SelectedAppID = _GetSelectedLicenseApplicationID();
-
             clsLocalDrivingLicenseApplication licenseApplication  = clsLocalDrivingLicenseApplication.Find(SelectedAppID);
+
 
             if(licenseApplication.ApplicationStatus == clsApplication.enApplicationStatus.Completed)
             {
@@ -254,6 +266,7 @@ namespace DVLD.Applications
 
                 showLicenseToolStripMenuItem.Enabled =//if completed and passed tests = 3 then true
                     clsLocalDrivingLicenseApplication.DoesPassTestType(SelectedAppID, clsTestType.enTestType.Practical);
+                issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
             }
             if(licenseApplication.ApplicationStatus == clsApplication.enApplicationStatus.Cancelled)
             {

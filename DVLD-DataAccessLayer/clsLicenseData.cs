@@ -19,16 +19,16 @@ namespace DVLD_DataAccessLayer
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
             string query = @"INSERT INTO Licenses
-                                   (ApplicationIDStudents
-                                   ,DriverIDStudents
-                                   ,LicenseClassStudents
-                                   ,IssueDateStudents
-                                   ,ExpirationDateStudents
-                                   ,NotesStudents
-                                   ,PaidFeesStudents
-                                   ,IsActiveStudents
-                                   ,IssueReasonStudents
-                                   ,CreatedByUserIDStudents)
+                                   (ApplicationID
+                                   ,DriverID 
+                                   ,LicenseClass 
+                                   ,IssueDate 
+                                   ,ExpirationDate 
+                                   ,Notes 
+                                   ,PaidFees 
+                                   ,IsActive 
+                                   ,IssueReason 
+                                   ,CreatedByUserID )
                              VALUES
                                    (@ApplicationID, 
                                    @DriverID, 
@@ -39,7 +39,8 @@ namespace DVLD_DataAccessLayer
                                    @PaidFees, 
                                    @IsActive, 
                                    @IssueReason, 
-                                   @CreatedByUserID);";
+                                   @CreatedByUserID);
+                            select SCOPE_IDENTITY();";
 
             SqlCommand command = new SqlCommand(query, connection);
 
