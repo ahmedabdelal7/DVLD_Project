@@ -31,7 +31,7 @@ namespace DVLD.Common_Classes
 
         public static string CustomShortDate(DateTime date)
         {
-            return date.ToString("g");
+            return date.ToString("dd")+"/"+date.ToString("MMM")+"/"+date.ToString("yyyy");
         }
     }
 }

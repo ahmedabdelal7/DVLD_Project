@@ -11,7 +11,7 @@ namespace DVLD_BussinessLayer
     public class clsLocalDrivingLicenseApplication : clsApplication
     {
 
-        public int ID {  get; set; }
+        public int ID { get; set; }
         public int LicenseClassID { get; set; }
         public string LicenseClassName {
             get
@@ -20,17 +20,17 @@ namespace DVLD_BussinessLayer
             }
         }
 
-        enum enMode { AddNew, Update}
+        enum enMode { AddNew, Update }
         enMode _Mode;
 
 
 
-        public clsLocalDrivingLicenseApplication() 
+        public clsLocalDrivingLicenseApplication()
         {
             ID = -1;
             LicenseClassID = -1;
             ApplicationID = -1;
-            ApplicationTypeID = enApplicationType.NewLocalLicense; 
+            ApplicationTypeID = enApplicationType.NewLocalLicense;
             PaidFees = clsApplicationType.Find((int)ApplicationTypeID).ApplicationFees;
 
             _Mode = enMode.AddNew;
@@ -39,7 +39,7 @@ namespace DVLD_BussinessLayer
 
         clsLocalDrivingLicenseApplication(
                 int lDLApplicationID, int applicationID, int applicantPersonID, DateTime applicationDate,
-                enApplicationType applicationTypeID,enApplicationStatus applicationStatus,
+                enApplicationType applicationTypeID, enApplicationStatus applicationStatus,
                 DateTime lastStatusDate, double paidFees, int licenseClassID, int createdByUserID
             )
         {
@@ -56,7 +56,7 @@ namespace DVLD_BussinessLayer
 
             base._Mode = clsApplication.enMode.Update;
             _Mode = enMode.Update;
-            
+
         }
 
         public static clsLocalDrivingLicenseApplication GetPersonActiveApplicationLicenseWithClass(int personID, int licenseClass)
@@ -67,10 +67,10 @@ namespace DVLD_BussinessLayer
             int LocalLicenseAppID = -1;
 
 
-            if(clsLocalDrivingLicenseApplicationData.GetPersonActiveApplicationWithLicenseClass(personID,(int)licenseClass, ref LocalLicenseAppID, ref applicationID)){
+            if (clsLocalDrivingLicenseApplicationData.GetPersonActiveApplicationWithLicenseClass(personID, (int)licenseClass, ref LocalLicenseAppID, ref applicationID)) {
 
-                clsApplication application =  clsApplication.Find(applicationID);
-                
+                clsApplication application = clsApplication.Find(applicationID);
+
                 return new clsLocalDrivingLicenseApplication(LocalLicenseAppID, applicationID, application.ApplicationID, application.ApplicationDate, application.ApplicationTypeID
                     , application.ApplicationStatus, application.LastStatusDate, application.PaidFees, licenseClass, application.CreatedByUserID);
             }
@@ -78,16 +78,16 @@ namespace DVLD_BussinessLayer
         }
         private bool _AddNew()
         {
-            
+
 
             if (base.Save())
             {
-                
+
                 ID = clsLocalDrivingLicenseApplicationData.AddNewLocalDrivingLicenseApplication(ApplicationID, (int)LicenseClassID);
             }
 
             return ID != -1;
-            
+
         }
         public bool _Update() {
 
@@ -127,12 +127,12 @@ namespace DVLD_BussinessLayer
             enApplicationStatus applicationStatus = enApplicationStatus.New;
             DateTime lastStatusDate = DateTime.Now;
             double paidFees = 0.0;
-            int licenseClassID  = -1;
+            int licenseClassID = -1;
 
-            
-            if(clsLocalDrivingLicenseApplicationData.GetLocalDrivingLicenseApplicationInfoByID(LocalDrivingLicenseAppID,ref applicationID, ref licenseClassID))
+
+            if (clsLocalDrivingLicenseApplicationData.GetLocalDrivingLicenseApplicationInfoByID(LocalDrivingLicenseAppID, ref applicationID, ref licenseClassID))
             {
-                clsApplication Application  = clsApplication.Find(applicationID);
+                clsApplication Application = clsApplication.Find(applicationID);
                 if (Application == null)
                     return null;
 
@@ -147,11 +147,11 @@ namespace DVLD_BussinessLayer
                 //return full object
                 //
 
-                return new clsLocalDrivingLicenseApplication(LocalDrivingLicenseAppID, applicationID, applicantPersonID,applicationDate,
-                    applicationTypeID, applicationStatus, lastStatusDate, paidFees,licenseClassID,createdByUser);
+                return new clsLocalDrivingLicenseApplication(LocalDrivingLicenseAppID, applicationID, applicantPersonID, applicationDate,
+                    applicationTypeID, applicationStatus, lastStatusDate, paidFees, licenseClassID, createdByUser);
 
             }
-            return null;    
+            return null;
 
         }
 
@@ -166,7 +166,7 @@ namespace DVLD_BussinessLayer
             return false;
 
         }
-        
+
         public static DataTable ListAllLocalDrivingLicenseApplications()
         {
             return clsLocalDrivingLicenseApplicationData.GetAllLocalDrivingLicenseApplications();
@@ -174,7 +174,7 @@ namespace DVLD_BussinessLayer
 
         public static bool DoesPassTestType(int LDLAppID, clsTestType.enTestType TestType)
         {
-            return clsLocalDrivingLicenseApplicationData.DoesPassTestType(LDLAppID,(int)TestType);
+            return clsLocalDrivingLicenseApplicationData.DoesPassTestType(LDLAppID, (int)TestType);
         }
 
         public int GetPassedTestsCount()
@@ -195,6 +195,11 @@ namespace DVLD_BussinessLayer
         public static bool DoesFailPrevTest(int LDLAppID, clsTestType.enTestType TestTypeID)
         {
             return clsLocalDrivingLicenseApplicationData.DoesFailPrevTest(LDLAppID, (int)TestTypeID);
+        }
+
+        public static int GetIssuedLicenseID(int LDLAppID)
+        {
+            return clsLocalDrivingLicenseApplicationData.GetIssuedLicenseID(LDLAppID);
         }
 
 

@@ -21,6 +21,13 @@ namespace DVLD_BussinessLayer
         public bool IsActive { get; set; }
         public enIssueReason IssueReason { get; set; }
         public int CreatedByUserID { get; set; }
+        public int PersonID
+        {
+            get
+            {
+                return clsDriver.Find(DriverID).PersonID;
+            }
+        }
 
 
         public enum enIssueReason
@@ -129,5 +136,20 @@ namespace DVLD_BussinessLayer
             }
         }
 
+        public string GetIssueReasonText()
+        {
+            switch (IssueReason)
+            {
+                case enIssueReason.FirstTime:
+                    return "First Time";
+                case enIssueReason.Renew:
+                    return "Renew";
+                case enIssueReason.ReplacementForLost:
+                    return "Replacement For Lost";
+                case enIssueReason.ReplacementForDamaged:
+                    return "Replacement For Damaged";
+                default: return "";
+            }
+        }
     }
 }

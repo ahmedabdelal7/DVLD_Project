@@ -21,7 +21,7 @@ namespace DVLD.People.Controls
             InitializeComponent();
         }
         clsPerson _Person;
-        enum enGender { Male = 0, Female = 1}
+        
 
         public int PersonID
         {
@@ -32,7 +32,7 @@ namespace DVLD.People.Controls
         {
             if (string.IsNullOrEmpty(_Person.ImagePath))
             {
-                ppPersonImage.Image = (_Person.Gender == (short)enGender.Male ? Resources.man : Resources.woman);
+                ppPersonImage.Image = (_Person.Gender == clsPerson.enGender.Male ? Resources.man : Resources.woman);
             }
             else
             {
@@ -50,7 +50,7 @@ namespace DVLD.People.Controls
             lblEmail.Text = _Person.Email;
             lblAddress.Text = _Person.Address;
             lblDateOfBirth.Text = _Person.DateOfBirth.ToShortDateString();
-            lblGender.Text = (_Person.Gender == (short)enGender.Male ? "Male" : "Female");
+            lblGender.Text = (_Person.Gender == clsPerson.enGender.Male ? "Male" : "Female");
             lblCountry.Text = clsCountry.FindByID(_Person.NationalityCountryID).CountryName;
             _SetPersonImage();
         }

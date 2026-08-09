@@ -17,6 +17,10 @@ namespace DVLD_BussinessLayer
             AddNew, Update
         }
         enMode _Mode;
+        public enum enGender
+        {
+           Male = 0, Female
+        }
         public int PersonID { get; set; }
         public string NationalNo { get; set; }
         public string FirstName { get; set; }
@@ -28,7 +32,7 @@ namespace DVLD_BussinessLayer
         public string Email { get; set; }
         public string Address { get; set; }
         public string Phone { get; set; }
-        public short Gender { get; set; }
+        public enGender Gender { get; set; }
         public int NationalityCountryID { get; set; }
         public string ImagePath { get; set; }
 
@@ -45,7 +49,7 @@ namespace DVLD_BussinessLayer
             Email = string.Empty;
             Address = string.Empty;
             Phone = string.Empty;
-            Gender = 0;
+            Gender = enGender.Male;
             NationalityCountryID = -1;
             ImagePath = string.Empty;
 
@@ -54,7 +58,7 @@ namespace DVLD_BussinessLayer
         }
 
         private clsPerson(int personID, string nationalNo, string firstName, string secondName, string thirdName, string lastName,
-            DateTime dateOfBirth, string email, string address, string phone, short gender, int nationalityCountryID, string imagePath)
+            DateTime dateOfBirth, string email, string address, string phone, enGender gender, int nationalityCountryID, string imagePath)
         {
             PersonID = personID;
             NationalNo = nationalNo;
@@ -76,7 +80,7 @@ namespace DVLD_BussinessLayer
         private bool _AddNew()
         {
             this.PersonID = clsPersonData.AddNewPerson(this.NationalNo, this.FirstName, this.SecondName, this.ThirdName,
-                this.LastName, this.DateOfBirth, this.Gender, this.Address, this.Phone, this.Email, this.NationalityCountryID, this.ImagePath);
+                this.LastName, this.DateOfBirth, (byte)this.Gender, this.Address, this.Phone, this.Email, this.NationalityCountryID, this.ImagePath);
 
             return PersonID > -1;
         }
@@ -84,7 +88,7 @@ namespace DVLD_BussinessLayer
         {
 
             return clsPersonData.UpdatePerson(this.PersonID, this.NationalNo, this.FirstName, this.SecondName, this.ThirdName,
-                this.LastName, this.DateOfBirth, this.Gender, this.Address, this.Phone, this.Email, this.NationalityCountryID, this.ImagePath);
+                this.LastName, this.DateOfBirth, (byte)this.Gender, this.Address, this.Phone, this.Email, this.NationalityCountryID, this.ImagePath);
         }
 
         public static bool Delete(int PersonID)
@@ -94,7 +98,7 @@ namespace DVLD_BussinessLayer
         public static clsPerson Find(int PersonID)
         {
             string NationalNo = "", FirstName = "", SecondName = "", ThirdName = "", LastName = "", Address = "", Email = "", Phone = "", ImagePath = "";
-            short Gender = 0;
+            byte Gender = 0;
             int NationalityCountryID = -1;
             DateTime DateOfBirth = DateTime.MinValue;
 
@@ -102,7 +106,7 @@ namespace DVLD_BussinessLayer
                 ref DateOfBirth, ref Gender, ref Address, ref Phone, ref Email, ref NationalityCountryID, ref ImagePath))
             {
                 return new clsPerson(PersonID, NationalNo, FirstName, SecondName, ThirdName, LastName,
-                 DateOfBirth, Email, Address, Phone, Gender, NationalityCountryID, ImagePath);
+                 DateOfBirth, Email, Address, Phone, (enGender)Gender, NationalityCountryID, ImagePath);
             }
             return null;
 
@@ -111,7 +115,7 @@ namespace DVLD_BussinessLayer
         {
             int PersonID = 0;
             string FirstName = "", SecondName = "", ThirdName = "", LastName = "", Address = "", Email = "", Phone = "", ImagePath = "";
-            short Gender = 0;
+            byte Gender = 0;
             int NationalityCountryID = -1;
             DateTime DateOfBirth = DateTime.MinValue;
 
@@ -119,7 +123,7 @@ namespace DVLD_BussinessLayer
                 ref DateOfBirth, ref Gender, ref Address, ref Phone, ref Email, ref NationalityCountryID, ref ImagePath))
             {
                 return new clsPerson(PersonID, NationalNo, FirstName, SecondName, ThirdName, LastName,
-                 DateOfBirth, Email, Address, Phone, Gender, NationalityCountryID, ImagePath);
+                 DateOfBirth, Email, Address, Phone,(enGender) Gender, NationalityCountryID, ImagePath);
             }
             return null;
 

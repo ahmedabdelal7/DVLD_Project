@@ -11,7 +11,7 @@ namespace DVLD_DataAccessLayer
     public static class clsPersonData
     {
         public static int AddNewPerson(string NationalNo, string FirstName, string SecondName, string ThirdName, string LastName,
-            DateTime DateOfBirth, short Gendor, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
+            DateTime DateOfBirth, byte Gendor, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
         {
             int PersonID = -1;
 
@@ -80,7 +80,7 @@ namespace DVLD_DataAccessLayer
             return PersonID;
         }
         public static bool UpdatePerson(int PersonID, string NationalNo, string FirstName, string SecondName, string ThirdName, string LastName,
-            DateTime DateOfBirth, short Gendor, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
+            DateTime DateOfBirth, byte Gendor, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
         {
             int rowsAffected = 0;
 
@@ -180,7 +180,7 @@ namespace DVLD_DataAccessLayer
             return (rowsAffected > 0);
         }
         public static bool GetPersonByID(int PersonID, ref string NationalNo, ref string FirstName, ref string SecondName,
-            ref string ThirdName, ref string LastName,ref DateTime DateOfBirth, ref short Gendor, ref string Address,
+            ref string ThirdName, ref string LastName,ref DateTime DateOfBirth, ref byte Gendor, ref string Address,
             ref string Phone, ref string Email, ref int NationalityCountryID, ref string ImagePath)
         {
             bool IsFound = false;
@@ -208,7 +208,7 @@ namespace DVLD_DataAccessLayer
                     ThirdName = (reader["ThirdName"] == DBNull.Value ? "" : reader["ThirdName"].ToString());
                     LastName = reader["LastName"].ToString();
                     DateOfBirth = (DateTime)reader["DateOfBirth"];
-                    Gendor = Convert.ToInt16(reader["Gendor"]);
+                    Gendor = Convert.ToByte(reader["Gendor"]);
                     Address = reader["Address"].ToString();
                     Phone = reader["Phone"].ToString();
                     Email = (reader["Email"] == DBNull.Value ? "" : reader["Email"].ToString());
@@ -237,7 +237,7 @@ namespace DVLD_DataAccessLayer
             return IsFound;
         }
         public static bool GetPersonByNationalNo(string NationalNo, ref int PersonID, ref string FirstName, ref string SecondName,
-            ref string ThirdName, ref string LastName, ref DateTime DateOfBirth, ref short Gendor, ref string Address,
+            ref string ThirdName, ref string LastName, ref DateTime DateOfBirth, ref byte Gendor, ref string Address,
             ref string Phone, ref string Email, ref int NationalityCountryID, ref string ImagePath)
         {
             bool IsFound = false;
@@ -265,7 +265,7 @@ namespace DVLD_DataAccessLayer
                     ThirdName = (reader["ThirdName"] == DBNull.Value ? "" : reader["ThirdName"].ToString());
                     LastName = reader["LastName"].ToString();
                     DateOfBirth = (DateTime)reader["DateOfBirth"];
-                    Gendor = Convert.ToInt16( reader["Gendor"]);
+                    Gendor = Convert.ToByte( reader["Gendor"]);
                     Address = reader["Address"].ToString();
                     Phone = reader["Phone"].ToString();
                     Email = (reader["Email"] == DBNull.Value ? "" : reader["Email"].ToString());

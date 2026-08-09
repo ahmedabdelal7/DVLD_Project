@@ -74,7 +74,7 @@ namespace DVLD_DataAccessLayer
                 {
                     IsFound = true;
 
-                    PersonID = Convert.ToInt32(reader["DriverID"]);
+                    PersonID = Convert.ToInt32(reader["PersonID"]);
                     CreatedByUserID = Convert.ToInt32(reader["CreatedByUserID"]);
                     CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
 

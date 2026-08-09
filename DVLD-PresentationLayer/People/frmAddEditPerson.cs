@@ -19,7 +19,6 @@ namespace DVLD.People
     public partial class frmAddEditPerson : Form
     {
         enum enMode { AddNew, Update }
-        enum enGender { Male = 0, Female = 1 }
 
         enMode _Mode;
         int _PersonID;
@@ -108,7 +107,7 @@ namespace DVLD.People
             ppPersonImage.ImageLocation = _Person.ImagePath;
             cbCountries.SelectedItem = clsCountry.FindByID(_Person.NationalityCountryID).CountryName;
 
-            if (_Person.Gender == (short)enGender.Male)
+            if (_Person.Gender == clsPerson.enGender.Male)
                 rbMale.Checked = true;
             else
                 rbFemale.Checked = true;
@@ -218,7 +217,7 @@ namespace DVLD.People
             _Person.Phone = txtPhone.Text.Trim();
             _Person.Address = txtAddress.Text.Trim();
             _Person.DateOfBirth = dateTimePicker1.Value;
-            _Person.Gender = (rbMale.Checked == true ? (short)enGender.Male : (short)enGender.Female);
+            _Person.Gender = (rbMale.Checked == true ? clsPerson.enGender.Male : clsPerson.enGender.Female);
 
             _Person.NationalityCountryID = clsCountry.FindByName(cbCountries.SelectedItem.ToString()).CountryID;
 

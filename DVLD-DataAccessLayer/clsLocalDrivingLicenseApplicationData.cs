@@ -458,6 +458,43 @@ namespace DVLD_DataAccessLayer
 
         }
 
-        
+        public static int GetIssuedLicenseID(int LDLAppID)
+        {
+            int LicenseID = -1;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"select LicenseID from Licenses
+	                            join Applications on Licenses.ApplicationID = Applications.ApplicationID
+	                            join LocalDrivingLicenseApplications ld on ld.ApplicationID = Applications.ApplicationID
+                            where LocalDrivingLicenseApplicationID = @LDLAppID;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            //param
+
+            command.Parameters.AddWithValue("@LDLAppID", LDLAppID);
+
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                if (result != null && int.TryParse(result.ToString(), out int Count))
+                    LicenseID = Count;
+
+
+            }
+            catch { }
+            finally
+            {
+                connection.Close();
+
+            }
+            return LicenseID;
+        }
+
     }
 }

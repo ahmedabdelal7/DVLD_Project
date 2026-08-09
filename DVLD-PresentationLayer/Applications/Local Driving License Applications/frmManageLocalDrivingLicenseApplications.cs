@@ -1,5 +1,6 @@
 ﻿using DVLD.Common_Classes;
 using DVLD.License;
+using DVLD.Licenses;
 using DVLD.Tests;
 using DVLD_BussinessLayer;
 using System;
@@ -296,8 +297,6 @@ namespace DVLD.Applications
                 writtenTestToolStripMenuItem.Enabled = (PassedVision) && !PassedWritten ;
                 practicalTestToolStripMenuItem.Enabled = (PassedVision && PassedWritten) && !PassedPractical;
 
-
-
             }
 
                         
@@ -365,6 +364,7 @@ namespace DVLD.Applications
             int LDLAppID =  _GetSelectedLicenseApplicationID();
             frmManageTestAppointments frm = new frmManageTestAppointments(clsTestType.enTestType.Vision, LDLAppID);
             frm.ShowDialog();
+            _LoadInfo();
 
         }
 
@@ -373,6 +373,7 @@ namespace DVLD.Applications
             int LDLAppID = _GetSelectedLicenseApplicationID();
             frmManageTestAppointments frm = new frmManageTestAppointments(clsTestType.enTestType.Written, LDLAppID);
             frm.ShowDialog();
+            _LoadInfo();
         }
 
         private void practicalTestToolStripMenuItem_Click(object sender, EventArgs e)
@@ -380,12 +381,23 @@ namespace DVLD.Applications
             int LDLAppID = _GetSelectedLicenseApplicationID();
             frmManageTestAppointments frm = new frmManageTestAppointments(clsTestType.enTestType.Practical, LDLAppID);
             frm.ShowDialog();
+            _LoadInfo();
         }
 
         private void issueDrivingLicenseFirstTimeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmIssueLicense frmIssueLicense = new frmIssueLicense(_GetSelectedLicenseApplicationID());
             frmIssueLicense.ShowDialog();
+            _LoadInfo();
+        }
+
+        private void showLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int DLAppID = _GetSelectedLicenseApplicationID();
+
+            frmDriverLicenseCard frm = new frmDriverLicenseCard(clsLocalDrivingLicenseApplication.GetIssuedLicenseID(DLAppID));
+            frm.ShowDialog();
+
         }
     }
 }
