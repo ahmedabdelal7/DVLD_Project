@@ -376,16 +376,16 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(66, 584);
+            this.label8.Location = new System.Drawing.Point(71, 584);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(71, 20);
+            this.label8.Size = new System.Drawing.Size(66, 20);
             this.label8.TabIndex = 45;
-            this.label8.Text = "Result: ";
+            this.label8.Text = "Notes: ";
             // 
             // pictureBox8
             // 
             this.pictureBox8.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox8.Image")));
-            this.pictureBox8.Location = new System.Drawing.Point(140, 584);
+            this.pictureBox8.Location = new System.Drawing.Point(143, 584);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(34, 25);
             this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;

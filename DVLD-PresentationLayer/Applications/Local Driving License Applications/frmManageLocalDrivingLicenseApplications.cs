@@ -1,4 +1,5 @@
 ﻿using DVLD.Common_Classes;
+using DVLD.License;
 using DVLD.Tests;
 using DVLD_BussinessLayer;
 using System;
@@ -241,10 +242,7 @@ namespace DVLD.Applications
         }
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            showApplicationDetailsToolStripMenuItem.Enabled = true;
-            _ChangeContextUpdatePermission(true);
-            issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = true;
-            showLicenseToolStripMenuItem.Enabled = true;
+            
 
             int SelectedAppID = _GetSelectedLicenseApplicationID();
 
@@ -254,14 +252,15 @@ namespace DVLD.Applications
             {
                 _ChangeContextUpdatePermission(false);
 
-
-
+                showLicenseToolStripMenuItem.Enabled =//if completed and passed tests = 3 then true
+                    clsLocalDrivingLicenseApplication.DoesPassTestType(SelectedAppID, clsTestType.enTestType.Practical);
             }
             if(licenseApplication.ApplicationStatus == clsApplication.enApplicationStatus.Cancelled)
             {
                 _ChangeContextUpdatePermission(false );
                 //issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;
                 showLicenseToolStripMenuItem .Enabled = false;
+                issueDrivingLicenseFirstTimeToolStripMenuItem.Enabled = false;  
 
             }
             if(licenseApplication.ApplicationStatus == clsApplication.enApplicationStatus.New)
@@ -368,6 +367,12 @@ namespace DVLD.Applications
             int LDLAppID = _GetSelectedLicenseApplicationID();
             frmManageTestAppointments frm = new frmManageTestAppointments(clsTestType.enTestType.Practical, LDLAppID);
             frm.ShowDialog();
+        }
+
+        private void issueDrivingLicenseFirstTimeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmIssueLicense frmIssueLicense = new frmIssueLicense(_GetSelectedLicenseApplicationID());
+            frmIssueLicense.ShowDialog();
         }
     }
 }

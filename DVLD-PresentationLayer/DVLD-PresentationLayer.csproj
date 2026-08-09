@@ -91,6 +91,12 @@
     <Compile Include="frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="License\frmIssueLicense.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="License\frmIssueLicense.Designer.cs">
+      <DependentUpon>frmIssueLicense.cs</DependentUpon>
+    </Compile>
     <Compile Include="People\Controls\ctrlPersonCardWithFilter.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -129,10 +135,10 @@
     <Compile Include="Test.Designer.cs">
       <DependentUpon>Test.cs</DependentUpon>
     </Compile>
-    <Compile Include="Tests\frmTakeTest.cs">
+    <Compile Include="Tests\Test Appointments\frmTakeTest.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tests\frmTakeTest.Designer.cs">
+    <Compile Include="Tests\Test Appointments\frmTakeTest.Designer.cs">
       <DependentUpon>frmTakeTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Tests\Test Appointments\frmManageTestAppointments.cs">
@@ -210,6 +216,9 @@
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="License\frmIssueLicense.resx">
+      <DependentUpon>frmIssueLicense.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="People\Controls\ctrlPersonCardWithFilter.resx">
       <DependentUpon>ctrlPersonCardWithFilter.cs</DependentUpon>
     </EmbeddedResource>
@@ -238,7 +247,7 @@
     <EmbeddedResource Include="Test.resx">
       <DependentUpon>Test.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Tests\frmTakeTest.resx">
+    <EmbeddedResource Include="Tests\Test Appointments\frmTakeTest.resx">
       <DependentUpon>frmTakeTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tests\Test Appointments\frmManageTestAppointments.resx">

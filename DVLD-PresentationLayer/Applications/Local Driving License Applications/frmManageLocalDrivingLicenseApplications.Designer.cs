@@ -228,7 +228,7 @@
             this.visionTestToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("visionTestToolStripMenuItem.Image")));
             this.visionTestToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.visionTestToolStripMenuItem.Name = "visionTestToolStripMenuItem";
-            this.visionTestToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
+            this.visionTestToolStripMenuItem.Size = new System.Drawing.Size(180, 38);
             this.visionTestToolStripMenuItem.Text = "Vision Test";
             this.visionTestToolStripMenuItem.Click += new System.EventHandler(this.visionTestToolStripMenuItem_Click);
             // 
@@ -237,7 +237,7 @@
             this.writtenTestToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("writtenTestToolStripMenuItem.Image")));
             this.writtenTestToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.writtenTestToolStripMenuItem.Name = "writtenTestToolStripMenuItem";
-            this.writtenTestToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
+            this.writtenTestToolStripMenuItem.Size = new System.Drawing.Size(180, 38);
             this.writtenTestToolStripMenuItem.Text = "Written Test";
             this.writtenTestToolStripMenuItem.Click += new System.EventHandler(this.writtenTestToolStripMenuItem_Click);
             // 
@@ -246,7 +246,7 @@
             this.practicalTestToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("practicalTestToolStripMenuItem.Image")));
             this.practicalTestToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
             this.practicalTestToolStripMenuItem.Name = "practicalTestToolStripMenuItem";
-            this.practicalTestToolStripMenuItem.Size = new System.Drawing.Size(196, 38);
+            this.practicalTestToolStripMenuItem.Size = new System.Drawing.Size(180, 38);
             this.practicalTestToolStripMenuItem.Text = "Practical Test";
             this.practicalTestToolStripMenuItem.Click += new System.EventHandler(this.practicalTestToolStripMenuItem_Click);
             // 
@@ -257,6 +257,7 @@
             this.issueDrivingLicenseFirstTimeToolStripMenuItem.Name = "issueDrivingLicenseFirstTimeToolStripMenuItem";
             this.issueDrivingLicenseFirstTimeToolStripMenuItem.Size = new System.Drawing.Size(308, 38);
             this.issueDrivingLicenseFirstTimeToolStripMenuItem.Text = "Issue Driving License (First Time)";
+            this.issueDrivingLicenseFirstTimeToolStripMenuItem.Click += new System.EventHandler(this.issueDrivingLicenseFirstTimeToolStripMenuItem_Click);
             // 
             // showLicenseToolStripMenuItem
             // 
