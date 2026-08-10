@@ -1,4 +1,5 @@
-﻿using DVLD.Common_Classes;
+﻿using DVLD.Applications.Local_Driving_License_Applications;
+using DVLD.Common_Classes;
 using DVLD.License;
 using DVLD.Licenses;
 using DVLD.Tests;
@@ -409,6 +410,12 @@ namespace DVLD.Applications
             clsLocalDrivingLicenseApplication Application = clsLocalDrivingLicenseApplication.Find(_GetSelectedLicenseApplicationID());
             
             frmDriverLicenseHistory frm = new frmDriverLicenseHistory(Application.ApplicantPersonID);
+            frm.ShowDialog();
+        }
+
+        private void showApplicationDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmLocalDrivingLicenseAppInfo frm = new frmLocalDrivingLicenseAppInfo(_GetSelectedLicenseApplicationID());
             frm.ShowDialog();
         }
     }
