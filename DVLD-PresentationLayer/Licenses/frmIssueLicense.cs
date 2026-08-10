@@ -33,8 +33,7 @@ namespace DVLD.License
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
-            frmDriverLicenseCard licenseCard = new frmDriverLicenseCard(_LicenseID);
-            licenseCard.ShowDialog();
+            
         }
 
 
@@ -68,12 +67,16 @@ namespace DVLD.License
         {
             _LDLApp =  clsLocalDrivingLicenseApplication.Find(_LDLAppID);
 
-            _Driver = new clsDriver();
-            if (!_CreateNewDriver(_Driver))
+            //if driver not exist by person id
+
+            _Driver = clsDriver.FindByPersonID(_LDLApp.ApplicantPersonID);
+
+            if(_Driver == null)
             {
-                MessageBox.Show($"Failed to issue license",
-                    "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                //person is not a driver, create new driver
+
+                _Driver = new clsDriver();
+                _CreateNewDriver(_Driver);
             }
 
             clsLicense License = new clsLicense();
@@ -87,7 +90,11 @@ namespace DVLD.License
 
                 MessageBox.Show($"License issued successfully with ID = {License.LicenseID}",
                     "Successful",MessageBoxButtons.OK,MessageBoxIcon.Information);
+
+                //...created event on license issued and send licenseID
                 this.Close();
+                frmDriverLicenseCard card = new frmDriverLicenseCard(License.LicenseID);
+                card.ShowDialog();
             }
         }
     }

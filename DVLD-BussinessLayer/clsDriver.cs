@@ -1,6 +1,7 @@
 ﻿using DVLD_DataAccessLayer;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,16 +49,33 @@ namespace DVLD_BussinessLayer
 
             return true;
         }
-        public static clsDriver Find(int driverID)
+        public static clsDriver FindByDriverID(int driverID)
         {
             int personID = -1;
             int createdByUserID = -1;
             DateTime createdDate = DateTime.Now;
 
-            if(clsDriverData.GetDriverInfoByID(driverID,ref personID, ref createdByUserID, ref createdDate))
+            if(clsDriverData.GetDriverInfoByDriverID(driverID,ref personID, ref createdByUserID, ref createdDate))
                 return new clsDriver(driverID,personID,createdByUserID, createdDate);
             return null;
         }
+
+        public static clsDriver FindByPersonID(int personID)
+        {
+            int driverID = -1;
+            int createdByUserID = -1;
+            DateTime createdDate = DateTime.Now;
+
+            if (clsDriverData.GetDriverInfoByPersonID(personID, ref driverID,  ref createdByUserID, ref createdDate))
+                return new clsDriver(driverID, personID, createdByUserID, createdDate);
+            return null;
+        }
+
+        public static bool IsExistByPersonID(int PersonID)
+        {
+            return clsDriverData.IsDriverExistByPersonID(PersonID);
+        }
+
         public bool Save()
         {
             switch (_Mode)
@@ -76,6 +94,16 @@ namespace DVLD_BussinessLayer
 
         }
 
+
+        public static DataTable ListAllLocalLicenses(int DriverID)
+        {
+            return clsDriverData.GetAllLicensesByDriverID(DriverID, 1);
+        }
+
+        public static DataTable ListAllInternationalLicenses(int DriverID)
+        {
+            return clsDriverData.GetAllLicensesByDriverID(DriverID, 6);
+        }
 
     }
 }

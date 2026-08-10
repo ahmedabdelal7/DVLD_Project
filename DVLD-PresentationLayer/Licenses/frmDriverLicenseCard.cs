@@ -28,6 +28,7 @@ namespace DVLD.Licenses
             if (license == null) {
                 MessageBox.Show("This License is not exists!", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
+                return ;
             }
             clsPerson personInfo = clsPerson.Find(license.PersonID);
 

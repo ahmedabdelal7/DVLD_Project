@@ -53,7 +53,7 @@ namespace DVLD_DataAccessLayer
             return DriverID;
         }
 
-        public static bool GetDriverInfoByID(int DriverID, ref int PersonID, ref int CreatedByUserID, ref DateTime CreatedDate)
+        public static bool GetDriverInfoByDriverID(int DriverID, ref int PersonID, ref int CreatedByUserID, ref DateTime CreatedDate)
         {
             bool IsFound = false;
 
@@ -97,6 +97,88 @@ namespace DVLD_DataAccessLayer
 
             return IsFound;
         }
+        public static bool GetDriverInfoByPersonID(int PersonID, ref int DriverID, ref int CreatedByUserID, ref DateTime CreatedDate)
+        {
+            bool IsFound = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = "SELECT * FROM Drivers WHERE PersonID = @PersonID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@PersonID", PersonID);
+
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    IsFound = true;
+
+                    DriverID = Convert.ToInt32(reader["DriverID"]);
+                    CreatedByUserID = Convert.ToInt32(reader["CreatedByUserID"]);
+                    CreatedDate = Convert.ToDateTime(reader["CreatedDate"]);
+
+                }
+                else
+                {
+                    IsFound = false;
+                }
+
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                IsFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return IsFound;
+        }
+
+
+        public static bool IsDriverExistByPersonID(int PersonID)
+        {
+            bool IsExist = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = "SELECT Found=1 FROM Drivers WHERE PersonID = @PersonID";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@PersonID", PersonID);
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                IsExist = (result != null);
+
+                //Doctor approach:
+                //SqlDataReader reader = command.ExecuteReader();
+                //IsExist = reader.HasRows;
+                //reader.Close();
+
+            }
+            catch (Exception)
+            {
+                IsExist = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return IsExist;
+        }
 
         //under dev:
         public static DataTable GetAllDrivers()
@@ -109,6 +191,45 @@ namespace DVLD_DataAccessLayer
 
             SqlCommand command = new SqlCommand(query, connection);
 
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                    dataTable.Load(reader);
+
+                reader.Close();
+
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return dataTable;
+        }
+
+
+        public static DataTable GetAllLicensesByDriverID(int DriverID, int ApplicationTypeID)
+        {
+            DataTable dataTable = new DataTable();
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"select LicenseID, app.ApplicationID, ClassName, IssueDate,ExpirationDate, IsActive
+	                            from Licenses l  join Applications app on app.ApplicationID = l.ApplicationID
+		                                join LicenseClasses lc on l.LicenseClass = lc.LicenseClassID
+                            where ApplicationTypeID = @ApplicationTypeID and DriverID = @DriverID;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@DriverID", DriverID);
+            command.Parameters.AddWithValue("@ApplicationTypeID", ApplicationTypeID);
             try
             {
                 connection.Open();

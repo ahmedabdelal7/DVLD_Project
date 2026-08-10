@@ -161,11 +161,20 @@ namespace DVLD.Applications
 
             // If AddNew Mode
 
+            
+
             if (ActiveApplication != null) {
                 MessageBox.Show($"The selected person has already active application with same selected license class with ID = " +
                     $"{ActiveApplication.ID.ToString()}, choose another license class!","failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (clsLicense.DoesHaveLicenseOfLicenseClass(_PersonID, _LocalDrivingLicenseApplication.LicenseClassID))
+            {
+                MessageBox.Show($"The selected person has already license with the same license class, choose another license class!" ,
+                    "failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
 
             _LocalDrivingLicenseApplication.ApplicantPersonID = _PersonID;
             _LocalDrivingLicenseApplication.ApplicationDate = DateTime.Now;

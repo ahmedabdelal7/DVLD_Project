@@ -25,7 +25,7 @@ namespace DVLD_BussinessLayer
         {
             get
             {
-                return clsDriver.Find(DriverID).PersonID;
+                return clsDriver.FindByDriverID(DriverID).PersonID;
             }
         }
 
@@ -150,6 +150,11 @@ namespace DVLD_BussinessLayer
                     return "Replacement For Damaged";
                 default: return "";
             }
+        }
+
+        public static bool DoesHaveLicenseOfLicenseClass(int PersonID, int LicenseClassID)
+        {
+            return clsLicenseData.DoesHaveLicenseOfLicenseCLass(PersonID, LicenseClassID);
         }
     }
 }

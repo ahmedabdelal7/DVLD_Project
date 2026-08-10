@@ -261,6 +261,10 @@ namespace DVLD.Applications
             clsLocalDrivingLicenseApplication licenseApplication  = clsLocalDrivingLicenseApplication.Find(SelectedAppID);
 
 
+            
+            showPersonLicenseHistoryToolStripMenuItem.Enabled = clsDriver.IsExistByPersonID(licenseApplication.ApplicantPersonID);
+            
+
             if(licenseApplication.ApplicationStatus == clsApplication.enApplicationStatus.Completed)
             {
                 _ChangeContextUpdatePermission(false);
@@ -398,6 +402,14 @@ namespace DVLD.Applications
             frmDriverLicenseCard frm = new frmDriverLicenseCard(clsLocalDrivingLicenseApplication.GetIssuedLicenseID(DLAppID));
             frm.ShowDialog();
 
+        }
+
+        private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            clsLocalDrivingLicenseApplication Application = clsLocalDrivingLicenseApplication.Find(_GetSelectedLicenseApplicationID());
+            
+            frmDriverLicenseHistory frm = new frmDriverLicenseHistory(Application.ApplicantPersonID);
+            frm.ShowDialog();
         }
     }
 }

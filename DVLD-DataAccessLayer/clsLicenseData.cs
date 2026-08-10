@@ -165,6 +165,48 @@ namespace DVLD_DataAccessLayer
             return dataTable;
         }
 
+
+        public static bool DoesHaveLicenseOfLicenseCLass(int PersonID, int LicenseClassID)
+        {
+            bool DoesHaveLicense = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"select Found = 1 from Licenses
+                            join Applications on Licenses.ApplicationID = Applications.ApplicationID
+                            join LocalDrivingLicenseApplications ld on Applications.ApplicationID = ld.ApplicationID
+                            where ApplicantPersonID = @ApplicantPersonID and LicenseClass = @LicenseClass;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@ApplicantPersonID", PersonID);
+            command.Parameters.AddWithValue("@LicenseClass", LicenseClassID);
+
+            try
+            {
+                connection.Open();
+
+                object result = command.ExecuteScalar();
+
+                DoesHaveLicense = (result != null);
+
+                //Doctor approach:
+                //SqlDataReader reader = command.ExecuteReader();
+                //IsExist = reader.HasRows;
+                //reader.Close();
+
+            }
+            catch (Exception)
+            {
+                DoesHaveLicense = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return DoesHaveLicense;
+        }
+
         
     }
 }
