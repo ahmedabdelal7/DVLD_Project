@@ -105,5 +105,9 @@ namespace DVLD_BussinessLayer
             return clsDriverData.GetAllLicensesByDriverID(DriverID, 6);
         }
 
+        public static DataTable ListAllDrivers()
+        {
+            return clsDriverData.GetAllDrivers();
+        } 
     }
 }

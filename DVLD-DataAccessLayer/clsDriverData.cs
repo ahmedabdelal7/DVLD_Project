@@ -187,7 +187,7 @@ namespace DVLD_DataAccessLayer
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = "SELECT * FROM Drivers";
+            string query = "select * from Drivers_View;";
 
             SqlCommand command = new SqlCommand(query, connection);
 

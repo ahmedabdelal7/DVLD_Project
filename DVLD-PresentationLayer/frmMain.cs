@@ -1,5 +1,6 @@
 ﻿using DVLD.Applications;
 using DVLD.Common_Classes;
+using DVLD.Drivers;
 using DVLD.People;
 using DVLD.Tests;
 using DVLD.Users;
@@ -94,6 +95,12 @@ namespace DVLD
         {
             frmManageLocalDrivingLicenseApplications frm = new frmManageLocalDrivingLicenseApplications();  
             frm.ShowDialog();
+        }
+
+        private void driversToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmListDrivers frmManageDrivers = new frmListDrivers();
+            frmManageDrivers.ShowDialog();
         }
     }
 }
