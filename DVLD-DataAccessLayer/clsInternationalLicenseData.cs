@@ -12,7 +12,7 @@ namespace DVLD_DataAccessLayer
     {
 
 
-        public static int AddNewInternationalLicense(int ApplicationID, DateTime IssueDate, DateTime ExpirationDate, int LocalLicenseID,
+        public static int AddNewInternationalLicense(int ApplicationID, DateTime IssueDate, DateTime ExpirationDate, int IssuedUsingLocalLicenseID,
             int DriverID, bool IsActive, int CreatedByUserID)
         {
             int InternationalLicenseID = -1;
@@ -34,14 +34,14 @@ namespace DVLD_DataAccessLayer
 			                            @IssueDate,
 			                            @ExpirationDate,
 			                            @IsActive,
-			                            @CreatedByUserID;
+			                            @CreatedByUserID);
                             SELECT SCOPE_IDENTITY();";
 
             SqlCommand command = new SqlCommand(query, connection);
 
             command.Parameters.AddWithValue("@ApplicationID", ApplicationID);
             command.Parameters.AddWithValue("@DriverID", DriverID);
-            command.Parameters.AddWithValue("@IssuedUsingLocalLicenseID", LocalLicenseID);
+            command.Parameters.AddWithValue("@IssuedUsingLocalLicenseID", IssuedUsingLocalLicenseID);
             command.Parameters.AddWithValue("@IssueDate", IssueDate);
             command.Parameters.AddWithValue("@ExpirationDate", ExpirationDate);
             command.Parameters.AddWithValue("@IsActive", IsActive);
@@ -55,7 +55,7 @@ namespace DVLD_DataAccessLayer
                 object result = command.ExecuteScalar();
 
                 if (result != null)
-                    InternationalLicenseID = (int)result;
+                    InternationalLicenseID = Convert.ToInt32(result);
 
             }
             catch (Exception)
@@ -123,14 +123,16 @@ namespace DVLD_DataAccessLayer
 
 
 
-        public static int GetActiveInternationalLicenseIDByLocalLicenseID(int LocalLicenseID)
+        public static bool GetActiveInternationalLicenseByLocalLicenseID(int LocalLicenseID, ref int InternationalLicenseID, ref int ApplicationID, ref DateTime IssueDate, ref DateTime ExpirationDate
+            , ref int DriverID, ref bool IsActive, ref int CreatedByUserID)
         {
-            int InternationalLicenseID = -1;
+            bool IsFound = false;
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = @"select InternationalLicenseID from InternationalLicenses 
-                            where IssuedUsingLocalLicenseID = @IssuedUsingLocalLicenseID";
+            string query = @"select * from InternationalLicenses 
+                            where IssuedUsingLocalLicenseID = @IssuedUsingLocalLicenseID
+							and IsActive = 1";
 
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@IssuedUsingLocalLicenseID", LocalLicenseID);
@@ -143,24 +145,34 @@ namespace DVLD_DataAccessLayer
 
                 if (reader.Read())
                 {
-                    if(int.TryParse(reader.ToString(), out int selectedID))
-                        InternationalLicenseID= selectedID;
-                                        
+                    IsFound = true;
+
+                    ApplicationID = Convert.ToInt32(reader["ApplicationID"]);
+                    IssueDate = Convert.ToDateTime(reader["IssueDate"]);
+                    ExpirationDate = Convert.ToDateTime(reader["ExpirationDate"]);
+                    InternationalLicenseID = Convert.ToInt32(reader["InternationalLicenseID"]);
+                    DriverID = Convert.ToInt32(reader["DriverID"]);
+                    IsActive = Convert.ToBoolean(reader["IsActive"]);
+                    CreatedByUserID = Convert.ToInt32(reader["CreatedByUserID"]);
+
                 }
-               
+                else
+                {
+                    IsFound = false;
+                }
 
                 reader.Close();
             }
             catch (Exception)
             {
-                
+                IsFound = false;
             }
             finally
             {
                 connection.Close();
             }
 
-            return InternationalLicenseID;
+            return IsFound;
         }
     }
 }

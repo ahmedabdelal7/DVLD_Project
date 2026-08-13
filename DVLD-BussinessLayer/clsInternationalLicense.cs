@@ -141,9 +141,34 @@ namespace DVLD_BussinessLayer
 
         }
 
-        public static int GetActiveInternationalLicenseIDByLocalLicenseID(int LocalLicenseID)
+        public static clsInternationalLicense GetActiveInternationalLicenseByLocalLicenseID(int LocalLicenseID)
         {
-            return clsInternationalLicenseData.GetActiveInternationalLicenseIDByLocalLicenseID(LocalLicenseID);
+
+            int applicationID = -1;
+            int internationalLicenseID = -1;
+            DateTime issueDate = DateTime.MinValue;
+            DateTime expirationDate = DateTime.MinValue;
+            int driverID = -1;
+            bool isActive = false;
+            int createdByUserID = -1;
+
+
+            if (clsInternationalLicenseData.GetActiveInternationalLicenseByLocalLicenseID(LocalLicenseID,ref internationalLicenseID, ref applicationID, ref issueDate,
+                ref expirationDate, ref driverID, ref isActive, ref createdByUserID))
+            {
+
+
+                clsApplication app = clsApplication.Find(applicationID);
+                if (app == null)
+                    return null;
+
+                return new clsInternationalLicense(app.ApplicationID, app.ApplicantPersonID, app.ApplicationDate, app.ApplicationStatus,
+                    app.LastStatusDate, app.PaidFees, app.CreatedByUserID, internationalLicenseID, driverID, LocalLicenseID,
+                    issueDate, expirationDate, isActive);
+
+            }
+            return null;
+
         }
     }
 }

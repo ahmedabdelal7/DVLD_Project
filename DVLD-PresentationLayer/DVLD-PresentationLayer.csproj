@@ -46,11 +46,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Applications\International Driving License Applications\frmInternationalDrivingLicenseApplication.cs">
+    <Compile Include="Applications\International Driving License Applications\frmIssueInternationalLicense.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Applications\International Driving License Applications\frmInternationalDrivingLicenseApplication.Designer.cs">
-      <DependentUpon>frmInternationalDrivingLicenseApplication.cs</DependentUpon>
+    <Compile Include="Applications\International Driving License Applications\frmIssueInternationalLicense.Designer.cs">
+      <DependentUpon>frmIssueInternationalLicense.cs</DependentUpon>
     </Compile>
     <Compile Include="Applications\Local Driving License Applications\Controls\ctrlLocalDrivingLicenseApplicationInfo.cs">
       <SubType>UserControl</SubType>
@@ -108,6 +108,18 @@
     </Compile>
     <Compile Include="Licenses\Controls\ctrlLicenseDetails.Designer.cs">
       <DependentUpon>ctrlLicenseDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Licenses\International Driving License\ctrlInternationalLicenseCard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Licenses\International Driving License\ctrlInternationalLicenseCard.Designer.cs">
+      <DependentUpon>ctrlInternationalLicenseCard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Licenses\International Driving License\frmInternationalLicenseInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Licenses\International Driving License\frmInternationalLicenseInfo.Designer.cs">
+      <DependentUpon>frmInternationalLicenseInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Login\frmLoginScreen.cs">
       <SubType>Form</SubType>
@@ -243,8 +255,8 @@
     <Compile Include="Users\frmUserInfo.Designer.cs">
       <DependentUpon>frmUserInfo.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Applications\International Driving License Applications\frmInternationalDrivingLicenseApplication.resx">
-      <DependentUpon>frmInternationalDrivingLicenseApplication.cs</DependentUpon>
+    <EmbeddedResource Include="Applications\International Driving License Applications\frmIssueInternationalLicense.resx">
+      <DependentUpon>frmIssueInternationalLicense.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Applications\Local Driving License Applications\Controls\ctrlLocalDrivingLicenseApplicationInfo.resx">
       <DependentUpon>ctrlLocalDrivingLicenseApplicationInfo.cs</DependentUpon>
@@ -272,6 +284,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Licenses\Controls\ctrlLicenseDetails.resx">
       <DependentUpon>ctrlLicenseDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\International Driving License\ctrlInternationalLicenseCard.resx">
+      <DependentUpon>ctrlInternationalLicenseCard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\International Driving License\frmInternationalLicenseInfo.resx">
+      <DependentUpon>frmInternationalLicenseInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login\frmLoginScreen.resx">
       <DependentUpon>frmLoginScreen.cs</DependentUpon>
@@ -383,6 +401,8 @@
   <ItemGroup>
     <None Include="Resources\Vision 512.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Applications\International Driving License Applications\Controls\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

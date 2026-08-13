@@ -20,6 +20,11 @@ namespace DVLD.Licenses.Controls
         }
 
 
+        public bool EnableFilter
+        {
+            set { gbFilter.Enabled = value; }
+        }
+
         // Define a custom event handler delegate with parameters
         public event Action<int> OnLicenseSelected;
         // Create a protected method to raise the event with a parameter
@@ -39,7 +44,8 @@ namespace DVLD.Licenses.Controls
 
         private void btnFindLicense_Click(object sender, EventArgs e)
         {
-            clsLicense License = clsLicense.Find(int.Parse(txtLicenseID.Text.Trim()));
+            int LocalLicenseID = int.Parse(txtLicenseID.Text.Trim());
+            clsLicense License = clsLicense.Find(LocalLicenseID);
             if (License == null) {
                 MessageBox.Show("This license not found, please enter valid licenseID.",
                     "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -47,6 +53,17 @@ namespace DVLD.Licenses.Controls
                     LicenseSelected(-1);
                 return;
             }
+            else
+            {
+                if (OnLicenseSelected != null)
+                {
+                    ctrlLicenseDetails1.LoadLicenseInfo(LocalLicenseID);
+                    LicenseSelected(LocalLicenseID);
+                }
+                return;
+
+            }
+           
 
             
         }
