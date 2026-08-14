@@ -30,9 +30,9 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctrlFindLicenseWithFilter));
             this.gbFilter = new System.Windows.Forms.GroupBox();
+            this.btnFindLicense = new System.Windows.Forms.Button();
             this.txtLicenseID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.btnFindLicense = new System.Windows.Forms.Button();
             this.ctrlLicenseDetails1 = new DVLD.Licenses.Controls.ctrlLicenseDetails();
             this.gbFilter.SuspendLayout();
             this.SuspendLayout();
@@ -48,6 +48,19 @@
             this.gbFilter.TabIndex = 0;
             this.gbFilter.TabStop = false;
             this.gbFilter.Text = "Filter";
+            // 
+            // btnFindLicense
+            // 
+            this.btnFindLicense.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFindLicense.BackgroundImage")));
+            this.btnFindLicense.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnFindLicense.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnFindLicense.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnFindLicense.Location = new System.Drawing.Point(689, 34);
+            this.btnFindLicense.Name = "btnFindLicense";
+            this.btnFindLicense.Size = new System.Drawing.Size(64, 47);
+            this.btnFindLicense.TabIndex = 39;
+            this.btnFindLicense.UseVisualStyleBackColor = true;
+            this.btnFindLicense.Click += new System.EventHandler(this.btnFindLicense_Click);
             // 
             // txtLicenseID
             // 
@@ -66,19 +79,6 @@
             this.label1.Size = new System.Drawing.Size(93, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "License ID: ";
-            // 
-            // btnFindLicense
-            // 
-            this.btnFindLicense.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnFindLicense.BackgroundImage")));
-            this.btnFindLicense.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnFindLicense.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnFindLicense.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnFindLicense.Location = new System.Drawing.Point(689, 34);
-            this.btnFindLicense.Name = "btnFindLicense";
-            this.btnFindLicense.Size = new System.Drawing.Size(64, 47);
-            this.btnFindLicense.TabIndex = 39;
-            this.btnFindLicense.UseVisualStyleBackColor = true;
-            this.btnFindLicense.Click += new System.EventHandler(this.btnFindLicense_Click);
             // 
             // ctrlLicenseDetails1
             // 
@@ -113,7 +113,7 @@
         private System.Windows.Forms.GroupBox gbFilter;
         private System.Windows.Forms.TextBox txtLicenseID;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnFindLicense;
         private ctrlLicenseDetails ctrlLicenseDetails1;
+        public System.Windows.Forms.Button btnFindLicense;
     }
 }

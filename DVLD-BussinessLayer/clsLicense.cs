@@ -28,6 +28,13 @@ namespace DVLD_BussinessLayer
                 return clsDriver.FindByDriverID(DriverID).PersonID;
             }
         }
+        public clsLicenseClass LicenseClassInfo
+        {
+            get
+            {
+                return clsLicenseClass.Find(LicenseClassID);
+            }
+        }
 
 
         public enum enIssueReason
@@ -156,5 +163,12 @@ namespace DVLD_BussinessLayer
         {
             return clsLicenseData.DoesHaveLicenseOfLicenseCLass(PersonID, LicenseClassID);
         }
+
+        public bool Deactivate()
+        {
+            return clsLicenseData.DeactivateLicense(LicenseID);
+        }
+
+
     }
 }

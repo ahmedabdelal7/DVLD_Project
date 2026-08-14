@@ -45,6 +45,8 @@ namespace DVLD_BussinessLayer
         public double PaidFees {  get; set; }
         public int CreatedByUserID {  get; set; }
 
+        public clsApplicationType ApplicationTypeInfo { get { return clsApplicationType.Find((int)ApplicationTypeID); } }
+
 
         public clsApplication(int applicationID, int applicantPersonID, DateTime applicationDate, enApplicationType applicationTypeID,
             enApplicationStatus applicationStatus, DateTime lastStatusDate, double paidFees, int createdByUserID )
