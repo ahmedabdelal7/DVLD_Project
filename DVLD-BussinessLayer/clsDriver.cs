@@ -97,12 +97,12 @@ namespace DVLD_BussinessLayer
 
         public static DataTable ListAllLocalLicenses(int DriverID)
         {
-            return clsDriverData.GetAllLicensesByDriverID(DriverID, 1);
+            return clsDriverData.GetAllLocalLicensesByDriverID(DriverID);
         }
 
         public static DataTable ListAllInternationalLicenses(int DriverID)
         {
-            return clsDriverData.GetAllLicensesByDriverID(DriverID, 6);
+            return clsDriverData.GetAllInternationalLicensesByDriverID(DriverID);
         }
 
         public static DataTable ListAllDrivers()

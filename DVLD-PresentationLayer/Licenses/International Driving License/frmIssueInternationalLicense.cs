@@ -42,7 +42,7 @@ namespace DVLD.Applications.International_Driving_License_Applications
             _LocalLicense = clsLicense.Find(LocalLicenseID);
 
             _ActiveIntLicense =
-                clsInternationalLicense.GetActiveInternationalLicenseByLocalLicenseID(LocalLicenseID);
+                clsInternationalLicense.GetActiveInternationalLicenseByDriverID(_LocalLicense.DriverID);
 
             if (_ActiveIntLicense != null) {
                 MessageBox.Show($"This person has already active international license with id = {_ActiveIntLicense.InternationalLicenseID.ToString()}," +
@@ -113,6 +113,9 @@ namespace DVLD.Applications.International_Driving_License_Applications
                 lnkShowLicenseInfo.Enabled = true;
                 ctrlFindLicenseWithFilter1.EnableFilter = false;
 
+                lblIntLicenseAppID.Text = _ActiveIntLicense.ApplicationID.ToString();
+                lblIntLicenseID.Text = _ActiveIntLicense.InternationalLicenseID.ToString();
+
             }
 
 
@@ -128,6 +131,11 @@ namespace DVLD.Applications.International_Driving_License_Applications
         {
             frmInternationalLicenseInfo frm = new frmInternationalLicenseInfo(_ActiveIntLicense.InternationalLicenseID);
             frm.ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

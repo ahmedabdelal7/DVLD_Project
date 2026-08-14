@@ -400,7 +400,7 @@ namespace DVLD.Applications
         {
             int DLAppID = _GetSelectedLicenseApplicationID();
 
-            frmDriverLicenseCard frm = new frmDriverLicenseCard(clsLocalDrivingLicenseApplication.GetIssuedLicenseID(DLAppID));
+            frmDriverLicenseInfo frm = new frmDriverLicenseInfo(clsLocalDrivingLicenseApplication.GetIssuedLicenseID(DLAppID));
             frm.ShowDialog();
 
         }

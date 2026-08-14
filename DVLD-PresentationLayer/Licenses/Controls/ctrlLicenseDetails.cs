@@ -35,7 +35,7 @@ namespace DVLD.Licenses.Controls
 
             lblClassName.Text = clsLicenseClass.GetLicenseClassName(license.LicenseClassID);
             lblPersonName.Text = personInfo.FullName;
-            lblLicenseID.Text = license.LicenseClassID.ToString();
+            lblLicenseID.Text = license.LicenseID.ToString();
             lblNationalNo.Text = personInfo.NationalNo;
             lblGender.Text = personInfo.Gender.ToString();
             lblIssueDate.Text = clsUtil.CustomShortDate(license.IssueDate);

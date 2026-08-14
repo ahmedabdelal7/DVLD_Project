@@ -93,7 +93,7 @@ namespace DVLD.License
 
                 //...created event on license issued and send licenseID
                 this.Close();
-                frmDriverLicenseCard card = new frmDriverLicenseCard(License.LicenseID);
+                frmDriverLicenseInfo card = new frmDriverLicenseInfo(License.LicenseID);
                 card.ShowDialog();
             }
         }

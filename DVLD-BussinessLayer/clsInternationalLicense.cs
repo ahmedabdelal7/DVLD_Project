@@ -1,6 +1,7 @@
 ﻿using DVLD_DataAccessLayer;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -141,20 +142,20 @@ namespace DVLD_BussinessLayer
 
         }
 
-        public static clsInternationalLicense GetActiveInternationalLicenseByLocalLicenseID(int LocalLicenseID)
+        public static clsInternationalLicense GetActiveInternationalLicenseByDriverID(int DriverID)
         {
 
             int applicationID = -1;
+            int localLiceseID = -1;
             int internationalLicenseID = -1;
             DateTime issueDate = DateTime.MinValue;
             DateTime expirationDate = DateTime.MinValue;
-            int driverID = -1;
             bool isActive = false;
             int createdByUserID = -1;
 
 
-            if (clsInternationalLicenseData.GetActiveInternationalLicenseByLocalLicenseID(LocalLicenseID,ref internationalLicenseID, ref applicationID, ref issueDate,
-                ref expirationDate, ref driverID, ref isActive, ref createdByUserID))
+            if (clsInternationalLicenseData.GetActiveInternationalLicenseByLocalLicenseID(DriverID, ref localLiceseID, ref internationalLicenseID, ref applicationID, ref issueDate,
+                ref expirationDate, ref isActive, ref createdByUserID))
             {
 
 
@@ -163,12 +164,17 @@ namespace DVLD_BussinessLayer
                     return null;
 
                 return new clsInternationalLicense(app.ApplicationID, app.ApplicantPersonID, app.ApplicationDate, app.ApplicationStatus,
-                    app.LastStatusDate, app.PaidFees, app.CreatedByUserID, internationalLicenseID, driverID, LocalLicenseID,
+                    app.LastStatusDate, app.PaidFees, app.CreatedByUserID, internationalLicenseID, DriverID, localLiceseID,
                     issueDate, expirationDate, isActive);
 
             }
             return null;
 
         }
+        public static DataTable ListAllInternationalLicenses()
+        {
+            return clsInternationalLicenseData.GetAllInternationalLicenses();
+        }
+
     }
 }

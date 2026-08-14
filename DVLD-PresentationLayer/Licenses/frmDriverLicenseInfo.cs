@@ -13,10 +13,10 @@ using System.Windows.Forms;
 
 namespace DVLD.Licenses
 {
-    public partial class frmDriverLicenseCard : Form
+    public partial class frmDriverLicenseInfo : Form
     {
         int _LicenseID = -1;
-        public frmDriverLicenseCard(int LicenseID)
+        public frmDriverLicenseInfo(int LicenseID)
         {
             _LicenseID = LicenseID;
             InitializeComponent();

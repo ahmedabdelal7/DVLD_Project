@@ -25,24 +25,7 @@ namespace DVLD.Drivers
             None = 0, DriverID, PersonID, NationalNo, FullName
         }
 
-        private void _FillDataViewWithDrivers(DataTable dataTable)
-        {
-            dgvDrivers.Rows.Clear();
-            foreach (DataRow row in dataTable.Rows)
-            {
-                dgvDrivers.Rows.Add(
-                    row[0],
-                    row[1],
-                    row[2],
-                    row[3],
-                    clsUtil.CustomShortDate((DateTime)row[4]),
-                    row[5]
-                    );
-
-            }
-            lblRecordsCount.Text = dataTable.Rows.Count.ToString();
-        }
-
+       
         private void frmManageDrivers_Load(object sender, EventArgs e)
         {
             _dtDrivers = clsDriver.ListAllDrivers();

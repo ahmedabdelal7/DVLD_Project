@@ -216,7 +216,7 @@ namespace DVLD_DataAccessLayer
         }
 
 
-        public static DataTable GetAllLicensesByDriverID(int DriverID, int ApplicationTypeID)
+        public static DataTable GetAllLocalLicensesByDriverID(int DriverID)
         {
             DataTable dataTable = new DataTable();
 
@@ -225,11 +225,47 @@ namespace DVLD_DataAccessLayer
             string query = @"select LicenseID, app.ApplicationID, ClassName, IssueDate,ExpirationDate, IsActive
 	                            from Licenses l  join Applications app on app.ApplicationID = l.ApplicationID
 		                                join LicenseClasses lc on l.LicenseClass = lc.LicenseClassID
-                            where ApplicationTypeID = @ApplicationTypeID and DriverID = @DriverID;";
+                            where DriverID = @DriverID
+                            ORDER BY LicenseID;";
 
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@DriverID", DriverID);
-            command.Parameters.AddWithValue("@ApplicationTypeID", ApplicationTypeID);
+            try
+            {
+                connection.Open();
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.HasRows)
+                    dataTable.Load(reader);
+
+                reader.Close();
+
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return dataTable;
+        }
+
+        public static DataTable GetAllInternationalLicensesByDriverID(int DriverID)
+        {
+            DataTable dataTable = new DataTable();
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = @"SELECT     InternationalLicenseID, ApplicationID, IssuedUsingLocalLicenseID, IssueDate, ExpirationDate, IsActive
+                            FROM        InternationalLicenses 
+                            where DriverID = @DriverID;";
+
+            SqlCommand command = new SqlCommand(query, connection);
+            command.Parameters.AddWithValue("@DriverID", DriverID);
             try
             {
                 connection.Open();
