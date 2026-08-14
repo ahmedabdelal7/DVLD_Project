@@ -152,9 +152,9 @@ namespace DVLD_BussinessLayer
                 case enIssueReason.Renew:
                     return "Renew";
                 case enIssueReason.ReplacementForLost:
-                    return "Replacement For Lost";
+                    return "Lost";
                 case enIssueReason.ReplacementForDamaged:
-                    return "Replacement For Damaged";
+                    return "Damaged";
                 default: return "";
             }
         }

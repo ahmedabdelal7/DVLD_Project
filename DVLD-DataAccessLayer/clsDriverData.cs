@@ -226,7 +226,7 @@ namespace DVLD_DataAccessLayer
 	                            from Licenses l  join Applications app on app.ApplicationID = l.ApplicationID
 		                                join LicenseClasses lc on l.LicenseClass = lc.LicenseClassID
                             where DriverID = @DriverID
-                            ORDER BY LicenseID;";
+                            ORDER BY LicenseID DESC;";
 
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@DriverID", DriverID);
@@ -262,7 +262,8 @@ namespace DVLD_DataAccessLayer
 
             string query = @"SELECT     InternationalLicenseID, ApplicationID, IssuedUsingLocalLicenseID, IssueDate, ExpirationDate, IsActive
                             FROM        InternationalLicenses 
-                            where DriverID = @DriverID;";
+                            where DriverID = @DriverID
+                            ORDER BY InternationalLicenseID DESC;";
 
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("@DriverID", DriverID);
