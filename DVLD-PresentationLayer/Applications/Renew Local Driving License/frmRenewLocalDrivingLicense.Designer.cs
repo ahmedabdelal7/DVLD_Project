@@ -49,25 +49,25 @@
             this.lnkShowLicensesHistory = new System.Windows.Forms.LinkLabel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtNotes = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.lblTotalFees = new System.Windows.Forms.Label();
-            this.lblLicenseFees = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.btnRenew = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox13 = new System.Windows.Forms.PictureBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lblTotalFees = new System.Windows.Forms.Label();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
+            this.lblLicenseFees = new System.Windows.Forms.Label();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnRenew = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.ctrlFindLicenseWithFilter1 = new DVLD.Licenses.Controls.ctrlFindLicenseWithFilter();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -321,97 +321,6 @@
             this.txtNotes.Size = new System.Drawing.Size(517, 69);
             this.txtNotes.TabIndex = 28;
             // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(8, 235);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(66, 20);
-            this.label13.TabIndex = 0;
-            this.label13.Text = "Notes: ";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.Location = new System.Drawing.Point(479, 192);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(104, 20);
-            this.label14.TabIndex = 0;
-            this.label14.Text = "Total Fees: ";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(8, 195);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(126, 20);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "License Fees: ";
-            // 
-            // lblTotalFees
-            // 
-            this.lblTotalFees.AutoSize = true;
-            this.lblTotalFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotalFees.Location = new System.Drawing.Point(707, 192);
-            this.lblTotalFees.Name = "lblTotalFees";
-            this.lblTotalFees.Size = new System.Drawing.Size(29, 20);
-            this.lblTotalFees.TabIndex = 0;
-            this.lblTotalFees.Text = "??";
-            // 
-            // lblLicenseFees
-            // 
-            this.lblLicenseFees.AutoSize = true;
-            this.lblLicenseFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLicenseFees.Location = new System.Drawing.Point(216, 195);
-            this.lblLicenseFees.Name = "lblLicenseFees";
-            this.lblLicenseFees.Size = new System.Drawing.Size(29, 20);
-            this.lblLicenseFees.TabIndex = 0;
-            this.lblLicenseFees.Text = "??";
-            // 
-            // label3
-            // 
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Firebrick;
-            this.label3.Location = new System.Drawing.Point(18, 20);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(1011, 50);
-            this.label3.TabIndex = 63;
-            this.label3.Text = "Renew Local License";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnRenew
-            // 
-            this.btnRenew.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnRenew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnRenew.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRenew.Image = ((System.Drawing.Image)(resources.GetObject("btnRenew.Image")));
-            this.btnRenew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnRenew.Location = new System.Drawing.Point(914, 893);
-            this.btnRenew.Name = "btnRenew";
-            this.btnRenew.Size = new System.Drawing.Size(116, 40);
-            this.btnRenew.TabIndex = 66;
-            this.btnRenew.Text = "Renew";
-            this.btnRenew.UseVisualStyleBackColor = true;
-            this.btnRenew.Click += new System.EventHandler(this.btnIssue_Click);
-            // 
-            // button1
-            // 
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.Location = new System.Drawing.Point(768, 893);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(116, 40);
-            this.button1.TabIndex = 65;
-            this.button1.Text = "Close";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // pictureBox5
             // 
             this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
@@ -452,6 +361,46 @@
             this.pictureBox13.TabIndex = 26;
             this.pictureBox13.TabStop = false;
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(8, 235);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(66, 20);
+            this.label13.TabIndex = 0;
+            this.label13.Text = "Notes: ";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(479, 192);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(104, 20);
+            this.label14.TabIndex = 0;
+            this.label14.Text = "Total Fees: ";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(8, 195);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(126, 20);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "License Fees: ";
+            // 
+            // lblTotalFees
+            // 
+            this.lblTotalFees.AutoSize = true;
+            this.lblTotalFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTotalFees.Location = new System.Drawing.Point(707, 192);
+            this.lblTotalFees.Name = "lblTotalFees";
+            this.lblTotalFees.Size = new System.Drawing.Size(29, 20);
+            this.lblTotalFees.TabIndex = 0;
+            this.lblTotalFees.Text = "??";
+            // 
             // pictureBox9
             // 
             this.pictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox9.Image")));
@@ -461,6 +410,16 @@
             this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox9.TabIndex = 23;
             this.pictureBox9.TabStop = false;
+            // 
+            // lblLicenseFees
+            // 
+            this.lblLicenseFees.AutoSize = true;
+            this.lblLicenseFees.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLicenseFees.Location = new System.Drawing.Point(216, 195);
+            this.lblLicenseFees.Name = "lblLicenseFees";
+            this.lblLicenseFees.Size = new System.Drawing.Size(29, 20);
+            this.lblLicenseFees.TabIndex = 0;
+            this.lblLicenseFees.Text = "??";
             // 
             // pictureBox10
             // 
@@ -520,6 +479,47 @@
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox4.TabIndex = 20;
             this.pictureBox4.TabStop = false;
+            // 
+            // label3
+            // 
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Firebrick;
+            this.label3.Location = new System.Drawing.Point(18, 20);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(1011, 50);
+            this.label3.TabIndex = 63;
+            this.label3.Text = "Renew Local License";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnRenew
+            // 
+            this.btnRenew.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRenew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRenew.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRenew.Image = ((System.Drawing.Image)(resources.GetObject("btnRenew.Image")));
+            this.btnRenew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRenew.Location = new System.Drawing.Point(900, 893);
+            this.btnRenew.Name = "btnRenew";
+            this.btnRenew.Size = new System.Drawing.Size(130, 40);
+            this.btnRenew.TabIndex = 66;
+            this.btnRenew.Text = "Renew";
+            this.btnRenew.UseVisualStyleBackColor = true;
+            this.btnRenew.Click += new System.EventHandler(this.btnIssue_Click);
+            // 
+            // button1
+            // 
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(751, 893);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(116, 40);
+            this.button1.TabIndex = 65;
+            this.button1.Text = "Close";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // ctrlFindLicenseWithFilter1
             // 

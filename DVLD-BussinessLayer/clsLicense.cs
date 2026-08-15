@@ -152,9 +152,9 @@ namespace DVLD_BussinessLayer
                 case enIssueReason.Renew:
                     return "Renew";
                 case enIssueReason.ReplacementForLost:
-                    return "Lost";
+                    return "Replacement For Lost";
                 case enIssueReason.ReplacementForDamaged:
-                    return "Damaged";
+                    return "Replacement For Damaged";
                 default: return "";
             }
         }
@@ -169,6 +169,6 @@ namespace DVLD_BussinessLayer
             return clsLicenseData.DeactivateLicense(LicenseID);
         }
 
-
+        
     }
 }

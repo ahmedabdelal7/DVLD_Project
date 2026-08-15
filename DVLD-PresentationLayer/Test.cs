@@ -20,14 +20,11 @@ namespace DVLD
 
         private void button1_Click(object sender, EventArgs e)
         {
-            clsLocalDrivingLicenseApplication LocalDrivingLicenseApplication;
+            int x = 0;
 
-            LocalDrivingLicenseApplication = clsLocalDrivingLicenseApplication.Find(30);
-            //MessageBox.Show(application.ApplicationID.ToString()+" / "+application.ApplicantPersonID.ToString()+" / "+application.ApplicationDate.ToString()+" / "+
-            //    application.ApplicationStatus.ToString()+" / "+ clsApplicationType.Find(application.ApplicationTypeID).ApplicationTypeTitle+" / "+
-            //    "User: "+application.CreatedByUserID.ToString());
+            bool y = Convert.ToBoolean(x);
 
-            //MessageBox.Show(LocalDrivingLicenseApplication.CreatedByUserID.ToString());
+            MessageBox.Show($"y = {y}");
 
 
         }

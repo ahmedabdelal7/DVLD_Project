@@ -1,4 +1,5 @@
 ﻿using DVLD.Applications;
+using DVLD.Applications.Detain_License;
 using DVLD.Applications.International_Driving_License_Applications;
 using DVLD.Applications.International_License_Applications;
 using DVLD.Applications.Replacement_For_Damaged_Or_Lost_License;
@@ -135,6 +136,12 @@ namespace DVLD
         private void replacementForLostOrDamagedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmReplacementForDamageOrLostLicense frm = new frmReplacementForDamageOrLostLicense();
+            frm.ShowDialog();
+        }
+
+        private void detainLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDetainLicense frm = new frmDetainLicense();
             frm.ShowDialog();
         }
     }

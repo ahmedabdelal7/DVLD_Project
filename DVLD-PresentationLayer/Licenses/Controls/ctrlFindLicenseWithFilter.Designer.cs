@@ -28,13 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ctrlFindLicenseWithFilter));
             this.gbFilter = new System.Windows.Forms.GroupBox();
             this.btnFindLicense = new System.Windows.Forms.Button();
             this.txtLicenseID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.ctrlLicenseDetails1 = new DVLD.Licenses.Controls.ctrlLicenseDetails();
             this.gbFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // gbFilter
@@ -70,6 +73,7 @@
             this.txtLicenseID.Size = new System.Drawing.Size(328, 26);
             this.txtLicenseID.TabIndex = 1;
             this.txtLicenseID.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtLicenseID_KeyPress);
+            this.txtLicenseID.Validating += new System.ComponentModel.CancelEventHandler(this.txtLicenseID_Validating);
             // 
             // label1
             // 
@@ -79,6 +83,10 @@
             this.label1.Size = new System.Drawing.Size(93, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "License ID: ";
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // ctrlLicenseDetails1
             // 
@@ -95,6 +103,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.ctrlLicenseDetails1);
             this.Controls.Add(this.gbFilter);
@@ -104,6 +113,7 @@
             this.Size = new System.Drawing.Size(1017, 475);
             this.gbFilter.ResumeLayout(false);
             this.gbFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -115,5 +125,6 @@
         private System.Windows.Forms.Label label1;
         private ctrlLicenseDetails ctrlLicenseDetails1;
         public System.Windows.Forms.Button btnFindLicense;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

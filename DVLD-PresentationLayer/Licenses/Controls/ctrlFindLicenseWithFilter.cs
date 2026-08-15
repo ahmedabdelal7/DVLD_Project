@@ -44,6 +44,11 @@ namespace DVLD.Licenses.Controls
 
         private void btnFindLicense_Click(object sender, EventArgs e)
         {
+            if (!this.ValidateChildren()) {  return; }
+
+            if (txtLicenseID.Text == "")
+                return;
+
             int LocalLicenseID = int.Parse(txtLicenseID.Text.Trim());
             clsLicense License = clsLicense.Find(LocalLicenseID);
             if (License == null) {
@@ -66,6 +71,23 @@ namespace DVLD.Licenses.Controls
            
 
             
+        }
+
+        private void txtLicenseID_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtLicenseID.Text))
+            {
+                errorProvider1.SetError(txtLicenseID, "This filed could not be empty!");
+                e.Cancel = true;
+                return;
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider1.SetError(txtLicenseID, null);
+                return;
+
+            }
         }
     }
 }

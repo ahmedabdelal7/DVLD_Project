@@ -40,13 +40,19 @@ namespace DVLD.Licenses.Controls
             lblGender.Text = personInfo.Gender.ToString();
             lblIssueDate.Text = clsUtil.CustomShortDate(license.IssueDate);
             lblIssueReason.Text = license.GetIssueReasonText();
-            lblNotes.Text = license.Notes;
+            if(license.Notes == "")
+                lblNotes.Text = "No Notes";
+            else
+                lblNotes.Text = license.Notes;
+
             lblIsActive.Text = license.IsActive == true ? "Yes" : "No";
             lblDateOfBirth.Text = clsUtil.CustomShortDate(personInfo.DateOfBirth);
             lblDriverID.Text = license.DriverID.ToString();
             lblExpirationDate.Text = clsUtil.CustomShortDate(license.ExpirationDate);
             //we will handle it later
-            lblIsDetained.Text = "No";
+
+            
+            lblIsDetained.Text = clsDetainedLicense.IsLicenseDetained(licenseID) ?  "Yes" : "No";
 
             if (string.IsNullOrEmpty(personInfo.ImagePath))
             {
