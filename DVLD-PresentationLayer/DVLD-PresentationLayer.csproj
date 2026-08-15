@@ -435,9 +435,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DVLD-BussinessLayer\DVLD-BusinessLayer.csproj">
+    <ProjectReference Include="..\DVLD-BussinessLayer\DVLD.csproj">
       <Project>{e0b20243-d74a-44f7-9dcf-5079b8f466d6}</Project>
-      <Name>DVLD-BusinessLayer</Name>
+      <Name>DVLD</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
