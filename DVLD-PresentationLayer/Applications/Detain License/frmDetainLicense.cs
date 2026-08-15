@@ -103,11 +103,7 @@ namespace DVLD.Applications.Detain_License
 
         private void btnDetain_Click(object sender, EventArgs e)
         {
-            if (!this.ValidateChildren())
-            {
-                MessageBox.Show("Fine fees could not be blank!", "Wrong", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return;
-            }
+           
 
             DialogResult msgResult = MessageBox.Show($"Are you sure you want to Detain this license [{_License.LicenseID}] ?",
                     "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question);

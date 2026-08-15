@@ -74,7 +74,7 @@ namespace DVLD_DataAccessLayer
                                 ReleaseDate = @ReleaseDate,
                                 ReleasedByUserID = @ReleasedByUserID,
                                 ReleaseApplicationID = @ReleaseApplicationID
-                            WHERE DetainID = @DetainID";
+                            WHERE DetainID = @DetainID;";
 
             SqlCommand command = new SqlCommand(query, connection);
             command.Parameters.AddWithValue("ReleaseDate", DateTime.Now);
@@ -86,7 +86,7 @@ namespace DVLD_DataAccessLayer
             {
                 connection.Open();
 
-                object result = command.ExecuteScalar();
+                object result = command.ExecuteNonQuery();
 
 
                 if (result != null && int.TryParse(result.ToString(), out int count))
@@ -209,6 +209,82 @@ namespace DVLD_DataAccessLayer
 
             return isFound;
         }
+        public static bool GetDetainedLicenseInfoByLicenseID(int LicenseID,
+         ref int DetainID, ref DateTime DetainDate,
+         ref double FineFees, ref int CreatedByUserID,
+         ref bool IsReleased, ref DateTime ReleaseDate,
+         ref int ReleasedByUserID, ref int ReleaseApplicationID)
+        {
+            bool isFound = false;
+
+            SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
+
+            string query = "SELECT top 1 * FROM DetainedLicenses WHERE LicenseID = @LicenseID order by DetainID desc";
+
+            SqlCommand command = new SqlCommand(query, connection);
+
+            command.Parameters.AddWithValue("@LicenseID", LicenseID);
+
+            try
+            {
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+
+                if (reader.Read())
+                {
+
+                    // The record was found
+                    isFound = true;
+
+                    DetainID = (int)reader["DetainID"];
+                    DetainDate = (DateTime)reader["DetainDate"];
+                    FineFees = Convert.ToDouble(reader["FineFees"]);
+                    CreatedByUserID = (int)reader["CreatedByUserID"];
+
+                    IsReleased = (bool)reader["IsReleased"];
+
+                    if (reader["ReleaseDate"] == DBNull.Value)
+
+                        ReleaseDate = DateTime.MaxValue;
+                    else
+                        ReleaseDate = (DateTime)reader["ReleaseDate"];
+
+
+                    if (reader["ReleasedByUserID"] == DBNull.Value)
+
+                        ReleasedByUserID = -1;
+                    else
+                        ReleasedByUserID = (int)reader["ReleasedByUserID"];
+
+                    if (reader["ReleaseApplicationID"] == DBNull.Value)
+
+                        ReleaseApplicationID = -1;
+                    else
+                        ReleaseApplicationID = (int)reader["ReleaseApplicationID"];
+
+                }
+                else
+                {
+                    // The record was not found
+                    isFound = false;
+                }
+
+                reader.Close();
+
+
+            }
+            catch (Exception ex)
+            {
+                //Console.WriteLine("Error: " + ex.Message);
+                isFound = false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return isFound;
+        }
 
         public static bool UpdateDetainedLicense(int DetainID,
            int LicenseID, DateTime DetainDate,
@@ -256,7 +332,7 @@ namespace DVLD_DataAccessLayer
 
         public static bool IsLicenseDetained(int LicenseID)
         {
-            bool IsNotReleased = false;
+            bool IsDetained = false;
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
@@ -275,21 +351,24 @@ namespace DVLD_DataAccessLayer
 
 
                 if (result != null)
-                {//if the license in not released then the license is detained
-                    IsNotReleased = !Convert.ToBoolean(result);
-                }
+                {
 
+                    IsDetained = !Convert.ToBoolean(result);
+
+                }
+                else
+                    IsDetained = false;
             }
             catch (Exception)
             {
-                IsNotReleased = false;
+                IsDetained = false;
             }
             finally
             {
                 connection.Close();
             }
 
-            return IsNotReleased;
+            return IsDetained;
         }
     }
    

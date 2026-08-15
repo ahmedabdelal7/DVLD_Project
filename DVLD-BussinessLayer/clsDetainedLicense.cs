@@ -122,7 +122,7 @@ namespace DVLD_BussinessLayer
             bool IsReleased = false; DateTime ReleaseDate = DateTime.MaxValue;
             int ReleasedByUserID = -1; int ReleaseApplicationID = -1;
 
-            if (clsDetainedLicenseData.GetDetainedLicenseInfoByID(LicenseID,
+            if (clsDetainedLicenseData.GetDetainedLicenseInfoByLicenseID(LicenseID,
             ref DetainID, ref DetainDate,
             ref FineFees, ref CreatedByUserID,
             ref IsReleased, ref ReleaseDate,
