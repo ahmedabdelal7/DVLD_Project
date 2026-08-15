@@ -52,6 +52,12 @@
     <Compile Include="Applications\Detain License\frmDetainLicense.Designer.cs">
       <DependentUpon>frmDetainLicense.cs</DependentUpon>
     </Compile>
+    <Compile Include="Applications\Detain License\frmManageDetainedLicenseApplications.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Applications\Detain License\frmManageDetainedLicenseApplications.Designer.cs">
+      <DependentUpon>frmManageDetainedLicenseApplications.cs</DependentUpon>
+    </Compile>
     <Compile Include="Applications\Detain License\frmReleaseDetainedLicense.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -287,6 +293,9 @@
     </Compile>
     <EmbeddedResource Include="Applications\Detain License\frmDetainLicense.resx">
       <DependentUpon>frmDetainLicense.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Applications\Detain License\frmManageDetainedLicenseApplications.resx">
+      <DependentUpon>frmManageDetainedLicenseApplications.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Applications\Detain License\frmReleaseDetainedLicense.resx">
       <DependentUpon>frmReleaseDetainedLicense.cs</DependentUpon>

@@ -37,6 +37,13 @@ namespace DVLD.Licenses.Controls
             }
         }
 
+        public void _LoadByLicenseID(int LicenseID)
+        {
+            txtLicenseID.Text = LicenseID.ToString();
+            ctrlLicenseDetails1.LoadLicenseInfo(LicenseID);
+            gbFilter.Enabled = false;
+        }
+
         private void txtLicenseID_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = !clsValidate.IsValidInteger(sender, e);

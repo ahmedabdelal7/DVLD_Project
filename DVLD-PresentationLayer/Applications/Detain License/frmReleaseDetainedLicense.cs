@@ -15,8 +15,15 @@ namespace DVLD.Applications.Detain_License
 {
     public partial class frmReleaseDetainedLicense : Form
     {
+        int _LicenseID = -1;
         public frmReleaseDetainedLicense()
         {
+            InitializeComponent();
+        }
+
+        public frmReleaseDetainedLicense(int LicenseID)
+        {
+            _LicenseID = LicenseID;   
             InitializeComponent();
         }
         clsLicense _License;
@@ -25,18 +32,62 @@ namespace DVLD.Applications.Detain_License
         {
             //lblDetainDate.Text = clsUtil.CustomShortDate(DateTime.Now);
 
+            
+
             lblCreatedByUserID.Text = clsGlobalSettings.LoggedInUserName;
             lblApplicationFees.Text = clsApplicationType.GetApplicationFees((int)clsApplication.enApplicationType.ReleaseDetainedLicense).ToString();
 
-            btnRelease.Enabled = false;
-            lnkShowLicenseInfo.Enabled = false;
-            lnkShowLicensesHistory.Enabled = false;
+            if(_LicenseID != -1)
+            {
 
-            this.AcceptButton = ctrlFindLicenseWithFilter1.btnFindLicense;
+                ctrlFindLicenseWithFilter1._LoadByLicenseID(_LicenseID);
+
+                _License = clsLicense.Find(_LicenseID);
+
+                lblLicenseID.Text = _License.LicenseID.ToString();
+
+                if (!clsDetainedLicense.IsLicenseDetained(_LicenseID))
+                {
+                    MessageBox.Show($"This license is not detained, please choose another license.",
+                       "Wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    lblDetainDate.Text = "??";
+                    lblFineFees.Text = "[$$$]";
+                    lblTotalFees.Text = "[$$$]";
+                    lblDetainLicenseID.Text = "[???]";
+
+
+                }
+                else
+                {
+                    _DetainedInfo = clsDetainedLicense.FindByLicenseID(_LicenseID);
+                    lblDetainLicenseID.Text = _DetainedInfo.DetainID.ToString();
+                    lblDetainDate.Text = clsUtil.CustomShortDate(_DetainedInfo.DetainDate);
+                    lblFineFees.Text = Convert.ToDouble(_DetainedInfo.FineFees).ToString();
+                    lblTotalFees.Text = (Convert.ToDouble(lblFineFees.Text) + Convert.ToDouble(lblApplicationFees.Text)).ToString();
+
+                }
+
+
+            }
+            else
+            {
+                btnRelease.Enabled = false;
+                lnkShowLicenseInfo.Enabled = false;
+                lnkShowLicensesHistory.Enabled = false;
+
+                this.AcceptButton = ctrlFindLicenseWithFilter1.btnFindLicense;
+
+            }
+
+
+            
+
+
         }
 
         private void ctrlFindLicenseWithFilter1_OnLicenseSelected(int obj)
         {
+            
             int LicenseID = obj;
             btnRelease.Enabled = false;
             lnkShowLicenseInfo.Enabled = false;
@@ -126,10 +177,12 @@ namespace DVLD.Applications.Detain_License
             this.Close();   
         }
 
+        
         private void lnkShowLicensesHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             frmDriverLicenseHistory frm = new frmDriverLicenseHistory(_License.PersonID);
             frm.ShowDialog();
+
         }
 
         private void lnkShowLicenseInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
