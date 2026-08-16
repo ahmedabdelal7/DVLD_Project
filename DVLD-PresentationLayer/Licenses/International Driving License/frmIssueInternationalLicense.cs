@@ -30,16 +30,17 @@ namespace DVLD.Applications.International_Driving_License_Applications
             //MessageBox.Show($"License ID = {obj}");
 
             btnIssue.Enabled = false;
-            lnkShowLicenseInfo.Enabled = true;
+            lnkShowLicenseInfo.Enabled = false;
             lnkShowLicensesHistory.Enabled = true;
 
             if (LocalLicenseID == -1) {
-                lnkShowLicenseInfo.Enabled = false;
+                lblLocalLicenseID.Text = "";
                 lnkShowLicensesHistory.Enabled = false;
                 return;
             }
 
             _LocalLicense = clsLicense.Find(LocalLicenseID);
+            lblLocalLicenseID.Text = LocalLicenseID.ToString();
 
             _ActiveIntLicense =
                 clsInternationalLicense.GetActiveInternationalLicenseByDriverID(_LocalLicense.DriverID);
@@ -54,13 +55,19 @@ namespace DVLD.Applications.International_Driving_License_Applications
             {
                 MessageBox.Show($"This License is not active, choose another license!",
                     "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                lnkShowLicenseInfo.Enabled=false;
+                
 
                 return;
-            }        
+            }
+            if (clsDetainedLicense.IsLicenseDetained(LocalLicenseID)) {
+                MessageBox.Show($"This License is Detained, please pay fine fees first to be able to issue this license.",
+                    "Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
 
             btnIssue.Enabled = true;
-            lnkShowLicenseInfo.Enabled = false;
+            //lnkShowLicenseInfo.Enabled = false;
             lblLocalLicenseID.Text = LocalLicenseID.ToString();
 
         }
@@ -111,6 +118,7 @@ namespace DVLD.Applications.International_Driving_License_Applications
 
                 btnIssue.Enabled = false;
                 lnkShowLicenseInfo.Enabled = true;
+                
                 ctrlFindLicenseWithFilter1.EnableFilter = false;
 
                 lblIntLicenseAppID.Text = _ActiveIntLicense.ApplicationID.ToString();

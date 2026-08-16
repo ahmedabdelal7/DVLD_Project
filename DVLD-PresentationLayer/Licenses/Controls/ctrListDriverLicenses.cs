@@ -32,8 +32,13 @@ namespace DVLD.Licenses.Controls
 
             //dgvLocalLicensesHistory.Columns.Clear();
             DataTable dtLocalLicenses = clsDriver.ListAllLocalLicenses(DriverID);
+            dgvLocalLicensesHistory.DataSource = dtLocalLicenses;     
+            
+            lblLocalLicensesCount.Text = dgvLocalLicensesHistory.RowCount.ToString();
 
-            dgvLocalLicensesHistory.DataSource = dtLocalLicenses;            
+            if (dgvInternationalLicensesHistory.Columns.Count == 0)
+                return;
+
 
             dgvLocalLicensesHistory.Columns[0].HeaderText = "Lic. ID";
             dgvLocalLicensesHistory.Columns[0].Width = 180;
@@ -55,13 +60,15 @@ namespace DVLD.Licenses.Controls
             dgvLocalLicensesHistory.Columns[5].Width = 150;
 
 
-            lblLocalLicensesCount.Text = dgvLocalLicensesHistory.RowCount.ToString();
         }
         private void _LoadInternationalLicenses(int DriverID)
         {
             DataTable dtInternationalLicenses = clsDriver.ListAllInternationalLicenses(DriverID);
-
             dgvInternationalLicensesHistory.DataSource = dtInternationalLicenses;
+            lblInternationalLicensesCount.Text = dgvInternationalLicensesHistory.RowCount.ToString();
+
+            if(dgvInternationalLicensesHistory.Columns.Count == 0)
+                return;
 
             dgvInternationalLicensesHistory.Columns[0].HeaderText = "Int.License ID";
             //dgvInternationalLicensesHistory.Columns[0].Width = 180;
@@ -82,7 +89,8 @@ namespace DVLD.Licenses.Controls
             dgvInternationalLicensesHistory.Columns[5].HeaderText = "Is Active";
             dgvInternationalLicensesHistory.Columns[5].Width = 150;
 
-            lblInternationalLicensesCount.Text = dgvInternationalLicensesHistory.RowCount.ToString();
+
+
         }
         private void ctrlDriverLicenses_Load(object sender, EventArgs e)
         {

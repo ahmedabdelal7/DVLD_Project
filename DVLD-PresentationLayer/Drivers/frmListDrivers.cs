@@ -1,4 +1,6 @@
 ﻿using DVLD.Common_Classes;
+using DVLD.Licenses;
+using DVLD.People;
 using DVLD_BussinessLayer;
 using System;
 using System.Collections.Generic;
@@ -129,6 +131,18 @@ namespace DVLD.Drivers
 
             lblRecordsCount.Text = dgvDrivers.RowCount.ToString();
 
+        }
+
+        private void showPersonDetailsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmPersonDetails frm = new frmPersonDetails((int)dgvDrivers.SelectedCells[1].Value);
+            frm.ShowDialog();
+        }
+
+        private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmDriverLicenseHistory frm = new frmDriverLicenseHistory((int)dgvDrivers.SelectedCells[1].Value);
+            frm.ShowDialog();
         }
     }
 }

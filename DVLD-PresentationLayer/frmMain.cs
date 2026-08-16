@@ -41,6 +41,8 @@ namespace DVLD
         {
             //MessageBox.Show($"{clsGlobalSettings.UserName} & {clsGlobalSettings.Password}");
             _CurrentUser = clsUser.Find(clsGlobalSettings.LoggedInUserID);
+            lblLoggedInUser.Text = _CurrentUser.UserName;
+            lblDate.Text = DateTime.Now.ToString("g");
             //MessageBox.Show($"UserID = {_CurrentUser.UserID}");
         }
 

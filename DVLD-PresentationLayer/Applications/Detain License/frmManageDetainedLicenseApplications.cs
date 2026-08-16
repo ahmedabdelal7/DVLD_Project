@@ -16,7 +16,7 @@ namespace DVLD.Applications.Detain_License
 {
     public partial class frmManageDetainedLicenseApplications : Form
     {
-        DataTable _dtDetainedLicenses;
+        DataTable _dtDetainedLicenses = new DataTable();
         public frmManageDetainedLicenseApplications()
         {
             InitializeComponent();
@@ -34,9 +34,25 @@ namespace DVLD.Applications.Detain_License
         //License ID, Detain ID, National No, Is Released
         private void frmManageDetainedLicenseApplications_Load(object sender, EventArgs e)
         {
-            _dtDetainedLicenses = clsDetainedLicense.GetAllDetainedLicenses();
+            cbFilter.SelectedIndex = 0;
+            cbIsReleased.SelectedIndex = 0;
+            txtFilterValue.Visible = false;
+            cbIsReleased.Visible = false;
+            lblNoApp.Visible = false;
 
+            _dtDetainedLicenses = clsDetainedLicense.GetAllDetainedLicenses();
             dgvDetainedLicenses.DataSource = _dtDetainedLicenses;
+
+            if (_dtDetainedLicenses.Rows.Count == 0)
+            {
+                lblNoApp.Visible = true;
+                cbFilter.Enabled = false;
+                lblRecordsCount.Text = "0";
+                return;
+            }
+
+            
+
 
             dgvDetainedLicenses.Columns[0].HeaderText = "D.ID";
             dgvDetainedLicenses.Columns[0].Width = 80;
@@ -67,10 +83,7 @@ namespace DVLD.Applications.Detain_License
 
             lblRecordsCount.Text = dgvDetainedLicenses.RowCount.ToString();
 
-            cbFilter.SelectedIndex = 0;
-            cbIsReleased.SelectedIndex = 0;
-            txtFilterValue.Visible = false;
-            cbIsReleased.Visible = false; 
+            
 
         }
 
@@ -124,6 +137,8 @@ namespace DVLD.Applications.Detain_License
 
         private void txtFilterValue_TextChanged(object sender, EventArgs e)
         {
+            
+
             if (string.IsNullOrEmpty(txtFilterValue.Text))
             {
                 _dtDetainedLicenses.DefaultView.RowFilter = "";

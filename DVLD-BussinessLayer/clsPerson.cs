@@ -1,4 +1,5 @@
-﻿using DVLD_DataAccessLayer;
+﻿using DVLD_BusinessLayer;
+using DVLD_DataAccessLayer;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -35,6 +36,9 @@ namespace DVLD_BussinessLayer
         public enGender Gender { get; set; }
         public int NationalityCountryID { get; set; }
         public string ImagePath { get; set; }
+
+        //Composition with country table.
+        public clsCountry CountryInfo;
 
 
         public clsPerson()
@@ -74,6 +78,7 @@ namespace DVLD_BussinessLayer
             NationalityCountryID = nationalityCountryID;
             ImagePath = imagePath;
 
+            CountryInfo = clsCountry.FindByID(nationalityCountryID);
             _Mode = enMode.Update;
         }
 

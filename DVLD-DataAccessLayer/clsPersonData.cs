@@ -377,17 +377,15 @@ namespace DVLD_DataAccessLayer
 			                            SecondName,
 			                            ThirdName,
 			                            LastName,
-			                            Gendor = 
+			                            Gender = 
 			                            CASE 
-				                            WHEN Gendor = 1 THEN 'Female'
 				                            WHEN Gendor = 0 THEN 'Male'
-				                            ELSE 'Unknown'
+				                            ELSE 'Female'
 			                            END,
-			                            Address,
 			                            DateOfBirth,
 			                            Phone,
-			                            CountryName AS Nationality,
-			                            Email
+                                        Email,
+			                            CountryName
                             FROM People INNER JOIN Countries ON
 			                            People.NationalityCountryID = Countries.CountryID";
 

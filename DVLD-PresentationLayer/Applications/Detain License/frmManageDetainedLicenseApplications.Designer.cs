@@ -39,6 +39,8 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.showPersonDetailsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showPersonLicenseHistoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.releaseDetinedLicenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txtFilterValue = new System.Windows.Forms.TextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -49,8 +51,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnDetain = new System.Windows.Forms.Button();
-            this.releaseDetinedLicenseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.lblNoApp = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDetainedLicenses)).BeginInit();
@@ -105,7 +106,7 @@
             this.toolStripSeparator1,
             this.releaseDetinedLicenseToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(281, 184);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(281, 162);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // showPersonDetailsToolStripMenuItem
@@ -125,6 +126,20 @@
             this.showPersonLicenseHistoryToolStripMenuItem.Size = new System.Drawing.Size(280, 38);
             this.showPersonLicenseHistoryToolStripMenuItem.Text = "Show Person License History";
             this.showPersonLicenseHistoryToolStripMenuItem.Click += new System.EventHandler(this.showPersonLicenseHistoryToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(277, 6);
+            // 
+            // releaseDetinedLicenseToolStripMenuItem
+            // 
+            this.releaseDetinedLicenseToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("releaseDetinedLicenseToolStripMenuItem.Image")));
+            this.releaseDetinedLicenseToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.releaseDetinedLicenseToolStripMenuItem.Name = "releaseDetinedLicenseToolStripMenuItem";
+            this.releaseDetinedLicenseToolStripMenuItem.Size = new System.Drawing.Size(280, 38);
+            this.releaseDetinedLicenseToolStripMenuItem.Text = "Release Detined License";
+            this.releaseDetinedLicenseToolStripMenuItem.Click += new System.EventHandler(this.releaseDetinedLicenseToolStripMenuItem_Click);
             // 
             // txtFilterValue
             // 
@@ -268,19 +283,16 @@
             this.btnDetain.UseVisualStyleBackColor = true;
             this.btnDetain.Click += new System.EventHandler(this.btnDetain_Click);
             // 
-            // releaseDetinedLicenseToolStripMenuItem
+            // lblNoApp
             // 
-            this.releaseDetinedLicenseToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("releaseDetinedLicenseToolStripMenuItem.Image")));
-            this.releaseDetinedLicenseToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.releaseDetinedLicenseToolStripMenuItem.Name = "releaseDetinedLicenseToolStripMenuItem";
-            this.releaseDetinedLicenseToolStripMenuItem.Size = new System.Drawing.Size(280, 38);
-            this.releaseDetinedLicenseToolStripMenuItem.Text = "Release Detined License";
-            this.releaseDetinedLicenseToolStripMenuItem.Click += new System.EventHandler(this.releaseDetinedLicenseToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(277, 6);
+            this.lblNoApp.Font = new System.Drawing.Font("Palatino Linotype", 15.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNoApp.ForeColor = System.Drawing.Color.RosyBrown;
+            this.lblNoApp.Location = new System.Drawing.Point(24, 512);
+            this.lblNoApp.Name = "lblNoApp";
+            this.lblNoApp.Size = new System.Drawing.Size(1336, 50);
+            this.lblNoApp.TabIndex = 66;
+            this.lblNoApp.Text = "There is no applications found";
+            this.lblNoApp.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // frmManageDetainedLicenseApplications
             // 
@@ -288,6 +300,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1384, 761);
+            this.Controls.Add(this.lblNoApp);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.cbIsReleased);
             this.Controls.Add(this.txtFilterValue);
@@ -332,5 +345,6 @@
         private System.Windows.Forms.Button btnDetain;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem releaseDetinedLicenseToolStripMenuItem;
+        private System.Windows.Forms.Label lblNoApp;
     }
 }

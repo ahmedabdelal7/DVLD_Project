@@ -73,6 +73,14 @@ namespace DVLD.Applications.Detain_License
                 return;
             }
 
+            if (clsDetainedLicense.IsLicenseDetained(LicenseID))
+            {
+                MessageBox.Show($"This license is already detained, please choose another license.",
+                   "Wrong", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                return;
+            }
+
             btnDetain.Enabled = true;
         }
 

@@ -20,8 +20,8 @@ namespace DVLD.People
     {
         enum enMode { AddNew, Update }
 
-        enMode _Mode;
-        int _PersonID;
+        enMode _Mode = enMode.AddNew;
+        int _PersonID = -1;
         clsPerson _Person;
 
         public delegate void DataBackEventHandler(int PersonID );
@@ -58,9 +58,93 @@ namespace DVLD.People
             //Set Minimum date date now - 100 year, to prevent adding user grater than 100 years old
             dateTimePicker1.MinDate = DateTime.Today.AddYears(-100);
         }
-        private void _LoadData()
-        {
 
+        private void _GenderCheckedChange(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(ppPersonImage.ImageLocation))
+            {
+                ppPersonImage.Image = (rbMale.Checked == true ? Resources.man : Resources.woman);
+            }
+
+        }
+        private void _ValidateTextBox(object sender, CancelEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (string.IsNullOrEmpty(textBox.Text.Trim()))
+            {
+                e.Cancel = true;
+                
+                errorProvider1.SetError(textBox, "This field should not be empty!");
+                return;
+            }
+            else
+            {
+                e.Cancel = false;
+                errorProvider1.SetError(textBox, null);
+            }
+        }
+        private void _ValidateEmail(object sender, CancelEventArgs e)
+        {
+            TextBox email = sender as TextBox;
+            if (string.IsNullOrEmpty(email.Text) || clsValidate.IsValidEmail(email.Text))
+            {
+                e.Cancel = false;
+                errorProvider1.SetError(email, null);
+                return;
+            }
+
+            e.Cancel = true;
+            
+            errorProvider1.SetError(email, "Email address is not valid!");
+            return;
+
+        }
+        private void _ValidateNationalNo(object sender, CancelEventArgs e)
+        {
+            
+            if (string.IsNullOrEmpty(txtNationalNo.Text.Trim()))
+            {
+                e.Cancel = true;
+                
+                errorProvider1.SetError(txtNationalNo, "National Number should not be empty!");
+                return;
+            }
+
+            if(_Mode == enMode.AddNew)
+            {
+                if (clsPerson.IsExist(txtNationalNo.Text.Trim()))
+                {
+                    e.Cancel = true;
+                    
+                    errorProvider1.SetError(txtNationalNo, "National Number is already exist, enter another one!");
+                    return;
+                }
+            }
+            else
+            {
+
+                if(clsPerson.IsExist(txtNationalNo.Text) && _Person.NationalNo != txtNationalNo.Text)
+                {
+                    e.Cancel = true;
+                    
+
+                    errorProvider1.SetError(txtNationalNo, "National Number is already exist to another user, enter another one!");
+                    return;
+                }
+            }
+
+            e.Cancel = false;
+            errorProvider1.SetError(txtNationalNo, null);
+        }
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+           //DataBack?.Invoke(_PersonID);
+
+            this.Close();
+        }
+
+        private void frmAddEditPerson_Load(object sender, EventArgs e)
+        {
             _FillCountriesInComboBox();
             _SetDateOfBirthSelectRange();
 
@@ -93,7 +177,6 @@ namespace DVLD.People
             lblAddEditPerson.Text = "Update Person";
             _Person = clsPerson.Find(_PersonID);
 
-
             lblPersonID.Text = _Person.PersonID.ToString();
             txtFirstName.Text = _Person.FirstName.ToString();
             txtSecondName.Text = _Person.SecondName.ToString();
@@ -105,7 +188,7 @@ namespace DVLD.People
             txtPhone.Text = _Person.Phone.ToString();
             txtAddress.Text = _Person.Address.ToString();
             ppPersonImage.ImageLocation = _Person.ImagePath;
-            cbCountries.SelectedItem = clsCountry.FindByID(_Person.NationalityCountryID).CountryName;
+            cbCountries.SelectedItem = _Person.CountryInfo.CountryName;
 
             if (_Person.Gender == clsPerson.enGender.Male)
                 rbMale.Checked = true;
@@ -113,97 +196,6 @@ namespace DVLD.People
                 rbFemale.Checked = true;
 
             llRemove.Visible = (ppPersonImage.ImageLocation == "" ? false : true);
-
-        }
-        private void _GenderCheckedChange(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(ppPersonImage.ImageLocation))
-            {
-                ppPersonImage.Image = (rbMale.Checked == true ? Resources.man : Resources.woman);
-            }
-
-        }
-        private void _ValidateTextBox(object sender, CancelEventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-            if (string.IsNullOrEmpty(textBox.Text.Trim()))
-            {
-                e.Cancel = true;
-                textBox.Focus();
-                errorProvider1.SetError(textBox, "This field should not be empty!");
-                return;
-            }
-            else
-            {
-                e.Cancel = false;
-                errorProvider1.SetError(textBox, null);
-            }
-        }
-        private void _ValidateEmail(object sender, CancelEventArgs e)
-        {
-            TextBox email = sender as TextBox;
-            if (string.IsNullOrEmpty(email.Text) || clsValidate.IsValidEmail(email.Text))
-            {
-                e.Cancel = false;
-                errorProvider1.SetError(email, null);
-                return;
-            }
-
-            e.Cancel = true;
-            email.Focus();
-            errorProvider1.SetError(email, "Email address is not valid!");
-            return;
-
-        }
-        private void _ValidateNationalNo(object sender, CancelEventArgs e)
-        {
-            TextBox nationalNo = sender as TextBox;
-            if (string.IsNullOrEmpty(txtNationalNo.Text.Trim()))
-            {
-                e.Cancel = true;
-                nationalNo.Focus();
-                errorProvider1.SetError(nationalNo, "National Number should not be empty!");
-                return;
-            }
-
-            if(_Mode == enMode.AddNew)
-            {
-                if (clsPerson.IsExist(nationalNo.Text.Trim()))
-                {
-                    e.Cancel = true;
-                    nationalNo.Focus();
-                    errorProvider1.SetError(nationalNo, "National Number is already exist, enter another one!");
-                    return;
-                }
-            }
-            else
-            {
-
-                if(clsPerson.IsExist(txtNationalNo.Text) && _Person.NationalNo != txtNationalNo.Text)
-                {
-                    e.Cancel = true;
-                    nationalNo.Focus();
-
-                    errorProvider1.SetError(nationalNo, "National Number is already exist to another user, enter another one!");
-                    return;
-                }
-            }
-
-            e.Cancel = false;
-            errorProvider1.SetError(nationalNo, null);
-        }
-
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            DataBack?.Invoke(_PersonID);
-
-            this.Close();
-        }
-
-        private void frmAddEditPerson_Load(object sender, EventArgs e)
-        {
-            _LoadData();
         }
 
         private void _FillDataToPersonObject()
@@ -224,8 +216,6 @@ namespace DVLD.People
             //_Person.NationalityCountryID = cbCountries.SelectedIndex;
 
             //_Person.ImagePath = ppPersonImage.ImageLocation;
-
-
 
         }
         private void _HandelPersonImage()
@@ -294,26 +284,32 @@ namespace DVLD.People
                 {
                     _Mode = enMode.Update;
                     _PersonID = _Person.PersonID;
-                    MessageBox.Show($"Person added successfully with id [{_PersonID}]");
-                    //_LoadData();
+                    MessageBox.Show($"Person added successfully with id [{_PersonID}]", "Successful",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //this.Text = "Updated Person";
                     lblAddEditPerson.Text = "Update Person";
                     lblPersonID.Text = _PersonID.ToString();
                     return;
                 }
                 else { 
-                    MessageBox.Show($"Person Updated successfully.");
+                    MessageBox.Show($"Person Updated successfully.", "Successful",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
                 return;
 
             }
+
+            MessageBox.Show("Failed to save this person.", "Error",
+                   MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         } 
                
         private void llSetImage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             openFileDialog1.InitialDirectory = @"E:\";
             openFileDialog1.FileName = "";
-            openFileDialog1.Title = "Select an Image";
+            openFileDialog1.Title = "Select Person Image";
             openFileDialog1.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.tif;*.tiff;*.webp";
             openFileDialog1.FilterIndex = 1;
             openFileDialog1.RestoreDirectory = true;
@@ -329,6 +325,11 @@ namespace DVLD.People
             ppPersonImage.ImageLocation = "";
             llRemove.Visible = false;
             ppPersonImage.Image = (rbMale.Checked == true ? Resources.man : Resources.woman);
+        }
+
+        private void frmAddEditPerson_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DataBack?.Invoke(_PersonID);
         }
     }
 }

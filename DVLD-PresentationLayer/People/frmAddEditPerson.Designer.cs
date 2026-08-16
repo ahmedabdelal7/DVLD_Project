@@ -587,11 +587,12 @@
             // 
             // frmAddEditPerson
             // 
+            this.AcceptButton = this.btnSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnableAllowFocusChange;
             this.BackColor = System.Drawing.Color.White;
-            this.CausesValidation = false;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(1081, 586);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.panel1);
@@ -603,6 +604,7 @@
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add/Edit Person Info";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmAddEditPerson_FormClosing);
             this.Load += new System.EventHandler(this.frmAddEditPerson_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
