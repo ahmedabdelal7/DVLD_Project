@@ -187,7 +187,21 @@ The system manages the required testing process for obtaining a driving license:
 
 * View current user information.
 * Change password.
-* Sign out from the system.
+* Login and sign out from the system.
+
+<table>
+  <tr>
+    <td align="center" >
+      <img src="https://github.com/user-attachments/assets/6b88323d-d118-4056-b9dd-a8669aaab3a8"/>
+    </td>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/a774d5e1-5522-43cb-81a2-f276da7de885"/>
+    </td>
+    <td align="center">
+      <img src="https://github.com/user-attachments/assets/a63d9b3c-b984-41bd-a9d9-38feef3e7fae"/>
+    </td>
+  </tr>
+</table>
 
 ### 🛠️ System Configuration
 
