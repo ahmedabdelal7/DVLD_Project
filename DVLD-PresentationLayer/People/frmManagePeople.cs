@@ -59,7 +59,7 @@ namespace DVLD.People
 
             dgvPeople.Columns[5].HeaderText = "Last Name";
             dgvPeople.Columns[5].Width = 140;
-            dgvPeople.Columns[4].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvPeople.Columns[5].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
             dgvPeople.Columns[6].HeaderText = "Gender";
             dgvPeople.Columns[6].Width = 95;
@@ -97,6 +97,7 @@ namespace DVLD.People
         private void btnAdd_Click(object sender, EventArgs e)
         {
             frmAddEditPerson frmAddEditPerson = new frmAddEditPerson();
+            frmAddEditPerson.IsSaved += _RefreshDataTable;
             frmAddEditPerson.ShowDialog();
            
         }
@@ -111,7 +112,7 @@ namespace DVLD.People
             int PersonID = _GetSelectedPersonID();
 
             frmAddEditPerson editPerson = new frmAddEditPerson(PersonID);
-            editPerson.DataBack += _RefreshDataTable;
+            editPerson.IsSaved += _RefreshDataTable;
             editPerson.ShowDialog();
         }
 
@@ -130,10 +131,10 @@ namespace DVLD.People
                 if (clsPerson.Delete(PersonID))
                 {
 
+                    _RefreshDataTable();
                     MessageBox.Show("Person deleted successfully.", "Success",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                       
+                                          
                     return;
                 }
 
@@ -176,13 +177,13 @@ namespace DVLD.People
         private void addNewPersonToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAddEditPerson AddNewPerson = new frmAddEditPerson();
-            AddNewPerson.DataBack += _RefreshDataTable;
+            AddNewPerson.IsSaved += _RefreshDataTable;
             AddNewPerson.ShowDialog();            
         }
 
-        private void _RefreshDataTable(int PersonID =1)
+        private void _RefreshDataTable(bool isSaved =true)
         {
-            if (PersonID != -1)
+            if (isSaved)
             {
                  _dtPeople = clsPerson.ListAllPeople();
                 dgvPeople.DataSource = _dtPeople;

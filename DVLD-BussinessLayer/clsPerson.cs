@@ -78,7 +78,7 @@ namespace DVLD_BussinessLayer
             NationalityCountryID = nationalityCountryID;
             ImagePath = imagePath;
 
-            CountryInfo = clsCountry.FindByID(nationalityCountryID);
+            CountryInfo = clsCountry.Find(nationalityCountryID);
             _Mode = enMode.Update;
         }
 

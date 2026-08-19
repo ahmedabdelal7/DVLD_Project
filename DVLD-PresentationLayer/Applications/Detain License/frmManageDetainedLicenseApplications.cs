@@ -96,12 +96,14 @@ namespace DVLD.Applications.Detain_License
         {
             frmDetainLicense frmDetainLicense = new frmDetainLicense();
             frmDetainLicense.ShowDialog();
+            _RefreshDetainedLicenses();
         }
 
         private void btnRelease_Click(object sender, EventArgs e)
         {
            frmReleaseDetainedLicense frmReleaseLicense = new frmReleaseDetainedLicense();
             frmReleaseLicense.ShowDialog();
+            _RefreshDetainedLicenses();
         }
 
         private void cbFilter_SelectedIndexChanged(object sender, EventArgs e)

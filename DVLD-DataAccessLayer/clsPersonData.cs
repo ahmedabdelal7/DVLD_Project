@@ -387,7 +387,8 @@ namespace DVLD_DataAccessLayer
                                         Email,
 			                            CountryName
                             FROM People INNER JOIN Countries ON
-			                            People.NationalityCountryID = Countries.CountryID";
+			                            People.NationalityCountryID = Countries.CountryID
+                            ORDER BY FirstName";
 
             SqlCommand command = new SqlCommand(query, connection);
 

@@ -39,17 +39,18 @@ namespace DVLD
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            //MessageBox.Show($"{clsGlobalSettings.UserName} & {clsGlobalSettings.Password}");
+
             _CurrentUser = clsUser.Find(clsGlobalSettings.LoggedInUserID);
             lblLoggedInUser.Text = _CurrentUser.UserName;
             lblDate.Text = DateTime.Now.ToString("g");
-            //MessageBox.Show($"UserID = {_CurrentUser.UserID}");
         }
 
         private void peopleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmManagePeople frmManagePeople = new frmManagePeople();
-            frmManagePeople.ShowDialog();
+           // frmManagePeople.MdiParent = this;
+            frmManagePeople.Show();
+
         }
 
         private void usersToolStripMenuItem_Click(object sender, EventArgs e)

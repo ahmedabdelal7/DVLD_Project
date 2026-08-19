@@ -130,7 +130,7 @@ namespace DVLD.Users
                 {
                     MessageBox.Show($"User with ID = {UserID} is delete successfully.", "Done",
                         MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                    _RefreshUsers();
                 }
                 else
                 {

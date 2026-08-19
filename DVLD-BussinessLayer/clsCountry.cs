@@ -20,7 +20,7 @@ namespace DVLD_BusinessLayer
             CountryName = countryName;
         }
 
-        public static clsCountry FindByID(int countryID) { 
+        public static clsCountry Find(int countryID) { 
             string countryName = "";   
 
             if(clsCountryData.GetCountryByID(countryID,ref countryName))
@@ -30,7 +30,7 @@ namespace DVLD_BusinessLayer
             return null;
         }
 
-        public static clsCountry FindByName(string countryName)
+        public static clsCountry Find(string countryName)
         {
             int countryID = -1;
 

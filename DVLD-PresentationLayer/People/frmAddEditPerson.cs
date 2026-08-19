@@ -24,10 +24,16 @@ namespace DVLD.People
         int _PersonID = -1;
         clsPerson _Person;
 
-        public delegate void DataBackEventHandler(int PersonID );
+        public delegate void DataBackEventHandler(int PersonID);
 
         // 2. Declare event based on delegate
         public event DataBackEventHandler DataBack;
+
+
+        public delegate void IsSavedEventHandler(bool IsDataSaved);
+
+        // 2. Declare event based on delegate
+        public event IsSavedEventHandler IsSaved;
         public frmAddEditPerson()
         {
             InitializeComponent();
@@ -45,11 +51,10 @@ namespace DVLD.People
         {
             //Load all countries from database
             DataTable dt = clsCountry.ListAllCountries();
-            foreach (DataRow country in dt.Rows)
-            {
-                //add countries to ComboBox control
-                cbCountries.Items.Add(country["CountryName"]);
-            }
+            cbCountries.DataSource = dt;
+
+            cbCountries.DisplayMember = "CountryName";
+            cbCountries.ValueMember = "CountryID";
         }
         private void _SetDateOfBirthSelectRange()
         {
@@ -143,38 +148,48 @@ namespace DVLD.People
             this.Close();
         }
 
-        private void frmAddEditPerson_Load(object sender, EventArgs e)
+        private void _ResetDefaultValues()
         {
             _FillCountriesInComboBox();
             _SetDateOfBirthSelectRange();
 
-            if (_Mode == enMode.AddNew)
-            {
+            if (_Mode == enMode.AddNew) {
                 _Person = new clsPerson();
                 lblAddEditPerson.Text = "Add New Person";
-                lblPersonID.Text = "N/A";
-                rbMale.Checked = true;
 
-                //Set default person image to man 
-                ppPersonImage.Image = Resources.man;
-                ppPersonImage.ImageLocation = "";
-                cbCountries.SelectedItem = "Egypt";
-
-                llRemove.Visible = false;
-
-                return;
+            }
+            else
+            {
+                lblAddEditPerson.Text = "Update Person";
             }
 
+            lblPersonID.Text = "N/A";
+            txtNationalNo.Text = "";
+            txtFirstName.Text = "";
+            txtSecondName.Text = "";
+            txtThirdName.Text = "";
+            txtLastName.Text = "";
+            txtEmail.Text = "";
+            txtPhone.Text = "";
+            txtAddress.Text = "";
+            rbMale.Checked = true;
+            ppPersonImage.Image = Resources.man;
+            ppPersonImage.ImageLocation = "";
+            cbCountries.SelectedIndex = cbCountries.FindString("Egypt");
+
+            llRemove.Visible = false;
+
+        }
+        private void _LoadData()
+        {
             if (!clsPerson.IsExist(_PersonID))
             {
-                //do something and return if the user not exist in database.
-                //
-                MessageBox.Show("this person does not exist!");
+                _ResetDefaultValues();
+                MessageBox.Show("Person Does not exist, choose another person!", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 this.Close();
                 return;
             }
 
-            lblAddEditPerson.Text = "Update Person";
             _Person = clsPerson.Find(_PersonID);
 
             lblPersonID.Text = _Person.PersonID.ToString();
@@ -187,8 +202,12 @@ namespace DVLD.People
             txtEmail.Text = _Person.Email.ToString();
             txtPhone.Text = _Person.Phone.ToString();
             txtAddress.Text = _Person.Address.ToString();
-            ppPersonImage.ImageLocation = _Person.ImagePath;
-            cbCountries.SelectedItem = _Person.CountryInfo.CountryName;
+            if(_Person.ImagePath != "")
+            {
+                ppPersonImage.ImageLocation = _Person.ImagePath;
+
+            }
+            cbCountries.SelectedValue = _Person.NationalityCountryID;
 
             if (_Person.Gender == clsPerson.enGender.Male)
                 rbMale.Checked = true;
@@ -196,6 +215,18 @@ namespace DVLD.People
                 rbFemale.Checked = true;
 
             llRemove.Visible = (ppPersonImage.ImageLocation == "" ? false : true);
+
+        }
+        private void frmAddEditPerson_Load(object sender, EventArgs e)
+        {
+
+            _ResetDefaultValues();
+
+            if(_Mode == enMode.Update)
+            {
+                _LoadData();
+            }
+            
         }
 
         private void _FillDataToPersonObject()
@@ -211,57 +242,90 @@ namespace DVLD.People
             _Person.DateOfBirth = dateTimePicker1.Value;
             _Person.Gender = (rbMale.Checked == true ? clsPerson.enGender.Male : clsPerson.enGender.Female);
 
-            _Person.NationalityCountryID = clsCountry.FindByName(cbCountries.SelectedItem.ToString()).CountryID;
+            _Person.NationalityCountryID = (int)cbCountries.SelectedValue;
+            if (ppPersonImage.ImageLocation != null)
+                _Person.ImagePath = ppPersonImage.ImageLocation;
+            else
+                _Person.ImagePath = "";
 
             //_Person.NationalityCountryID = cbCountries.SelectedIndex;
 
             //_Person.ImagePath = ppPersonImage.ImageLocation;
 
         }
-        private void _HandelPersonImage()
+        //private void _HandelPersonImage()
+        //{
+
+        //    if (ppPersonImage.ImageLocation == _Person.ImagePath)
+        //        return;
+            
+        //    string folderPath = @"C:\DVLD\People-Images\";
+
+        //    if (_Person.ImagePath.Contains(folderPath) )
+        //    {
+        //        try
+        //        {
+        //            File.Delete(_Person.ImagePath.ToString());
+                    
+        //        }
+        //        catch { }
+        //    }
+
+        //    if (ppPersonImage.ImageLocation == "")
+        //    {
+        //        _Person.ImagePath = "";
+        //        return;
+        //    }
+
+        //    if (!Directory.Exists(folderPath))
+        //        Directory.CreateDirectory(folderPath);
+
+        //    string sourceImage = ppPersonImage.ImageLocation;
+        //    string imageExtension = clsUtil.GetPathExtension(sourceImage);
+        //    string destinationFileName = folderPath + Guid.NewGuid().ToString() + imageExtension;
+
+        //    try
+        //    {
+        //        File.Copy(sourceImage, destinationFileName, true);
+        //    }
+        //    catch { }
+
+        //    //Update person object to new to the new image path
+        //    _Person.ImagePath = destinationFileName;
+
+        //    //Update pictureBox to new image path, to be ready if an update happened without reload form.
+        //    ppPersonImage.ImageLocation = destinationFileName;
+
+        //}
+        private bool _HandelPersonImage()
         {
 
-            if (ppPersonImage.ImageLocation == _Person.ImagePath)
-                return;
-            
-            string folderPath = @"C:\DVLD\People-Images\";
-
-            if (_Person.ImagePath.Contains(folderPath) )
+            if(_Person.ImagePath != ppPersonImage.ImageLocation)
             {
-                try
+
+                if (_Person.ImagePath != "")
                 {
-                    File.Delete(_Person.ImagePath.ToString());
-                    
+                    try
+                    {
+                        File.Delete(_Person.ImagePath);
+
+                    }catch { }
+
+
                 }
-                catch { }
+                if (ppPersonImage.ImageLocation != null)
+                {
+                    string SourceImageLocation = ppPersonImage.ImageLocation;
+
+                    if(!clsUtil.CopyImageToProjectFolderImages(ref SourceImageLocation))
+                        return false;
+
+                    ppPersonImage.ImageLocation = SourceImageLocation;
+
+                }
+
             }
-
-            if (ppPersonImage.ImageLocation == "")
-            {
-                _Person.ImagePath = "";
-                return;
-            }
-
-            if (!Directory.Exists(folderPath))
-                Directory.CreateDirectory(folderPath);
-
-            string sourceImage = ppPersonImage.ImageLocation;
-            string imageExtension = clsUtil.GetPathExtension(sourceImage);
-            string destinationFileName = folderPath + Guid.NewGuid().ToString() + imageExtension;
-
-
-            try
-            {
-                File.Copy(sourceImage, destinationFileName, true);
-            }
-            catch { }
-
-            //Update person object to new to the new image path
-            _Person.ImagePath = destinationFileName;
-
-            //Update pictureBox to new image path, to be ready if an update happened without reload form.
-            ppPersonImage.ImageLocation = destinationFileName;
-
+            return true;
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -280,21 +344,26 @@ namespace DVLD.People
 
             if (_Person.Save())
             {
-                if (_Mode == enMode.AddNew)
+                if(_Mode == enMode.AddNew)
                 {
                     _Mode = enMode.Update;
                     _PersonID = _Person.PersonID;
+
                     MessageBox.Show($"Person added successfully with id [{_PersonID}]", "Successful",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    //this.Text = "Updated Person";
+
                     lblAddEditPerson.Text = "Update Person";
                     lblPersonID.Text = _PersonID.ToString();
-                    return;
+
                 }
-                else { 
+                else
+                {
                     MessageBox.Show($"Person Updated successfully.", "Successful",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
+
+                DataBack?.Invoke(_PersonID);
+                IsSaved?.Invoke(true);
 
                 return;
 
@@ -304,7 +373,6 @@ namespace DVLD.People
                    MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         } 
-               
         private void llSetImage_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             openFileDialog1.InitialDirectory = @"E:\";
@@ -322,14 +390,14 @@ namespace DVLD.People
 
         private void llRemove_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            ppPersonImage.ImageLocation = "";
+            ppPersonImage.ImageLocation = null;
             llRemove.Visible = false;
             ppPersonImage.Image = (rbMale.Checked == true ? Resources.man : Resources.woman);
         }
 
         private void frmAddEditPerson_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DataBack?.Invoke(_PersonID);
+           
         }
     }
 }

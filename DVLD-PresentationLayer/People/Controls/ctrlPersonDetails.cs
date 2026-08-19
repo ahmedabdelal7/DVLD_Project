@@ -51,7 +51,7 @@ namespace DVLD.People.Controls
             lblAddress.Text = _Person.Address;
             lblDateOfBirth.Text = _Person.DateOfBirth.ToShortDateString();
             lblGender.Text = (_Person.Gender == clsPerson.enGender.Male ? "Male" : "Female");
-            lblCountry.Text = clsCountry.FindByID(_Person.NationalityCountryID).CountryName;
+            lblCountry.Text = clsCountry.Find(_Person.NationalityCountryID).CountryName;
             _SetPersonImage();
         }
         public void LoadPersonInfo(int personID)
