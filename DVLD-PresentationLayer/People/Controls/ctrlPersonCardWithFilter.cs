@@ -47,7 +47,7 @@ namespace DVLD.People.Controls
             if (string.IsNullOrEmpty(searchText))
             {
                 MessageBox.Show("Please choose person first!", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                ctrlPersonDetails1.ResetPersonCard();
+                //ctrlPersonDetails1.ResetPersonCard();
                 return;
             }
 
@@ -59,7 +59,7 @@ namespace DVLD.People.Controls
                 if (!clsPerson.IsExist(NationalNo))
                 {
                     MessageBox.Show("This person does not exist!","Info",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                    ctrlPersonDetails1.ResetPersonCard();
+                    ///ctrlPersonDetails1.ResetPersonCard();
                     return;
                 }
 
@@ -76,7 +76,7 @@ namespace DVLD.People.Controls
                 if (!clsPerson.IsExist(PersonID))
                 {
                     MessageBox.Show("This person does not exist!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    ctrlPersonDetails1.ResetPersonCard();
+                    //ctrlPersonDetails1.ResetPersonCard();
                     return;
                 }
 

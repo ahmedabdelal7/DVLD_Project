@@ -172,9 +172,9 @@
             this.lblDateOfBirth.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDateOfBirth.Location = new System.Drawing.Point(520, 115);
             this.lblDateOfBirth.Name = "lblDateOfBirth";
-            this.lblDateOfBirth.Size = new System.Drawing.Size(35, 20);
+            this.lblDateOfBirth.Size = new System.Drawing.Size(44, 20);
             this.lblDateOfBirth.TabIndex = 17;
-            this.lblDateOfBirth.Text = "[??]";
+            this.lblDateOfBirth.Text = "[???]";
             // 
             // label20
             // 
@@ -192,9 +192,9 @@
             this.lblCountry.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCountry.Location = new System.Drawing.Point(520, 190);
             this.lblCountry.Name = "lblCountry";
-            this.lblCountry.Size = new System.Drawing.Size(35, 20);
+            this.lblCountry.Size = new System.Drawing.Size(44, 20);
             this.lblCountry.TabIndex = 18;
-            this.lblCountry.Text = "[??]";
+            this.lblCountry.Text = "[???]";
             // 
             // label12
             // 
@@ -212,9 +212,9 @@
             this.lblPhone.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPhone.Location = new System.Drawing.Point(520, 152);
             this.lblPhone.Name = "lblPhone";
-            this.lblPhone.Size = new System.Drawing.Size(35, 20);
+            this.lblPhone.Size = new System.Drawing.Size(44, 20);
             this.lblPhone.TabIndex = 19;
-            this.lblPhone.Text = "[??]";
+            this.lblPhone.Text = "[???]";
             // 
             // label14
             // 
@@ -282,9 +282,9 @@
             this.lblAddress.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAddress.Location = new System.Drawing.Point(163, 227);
             this.lblAddress.Name = "lblAddress";
-            this.lblAddress.Size = new System.Drawing.Size(35, 20);
+            this.lblAddress.Size = new System.Drawing.Size(44, 20);
             this.lblAddress.TabIndex = 10;
-            this.lblAddress.Text = "[??]";
+            this.lblAddress.Text = "[???]";
             // 
             // label13
             // 
@@ -302,9 +302,9 @@
             this.lblEmail.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEmail.Location = new System.Drawing.Point(163, 190);
             this.lblEmail.Name = "lblEmail";
-            this.lblEmail.Size = new System.Drawing.Size(35, 20);
+            this.lblEmail.Size = new System.Drawing.Size(44, 20);
             this.lblEmail.TabIndex = 11;
-            this.lblEmail.Text = "[??]";
+            this.lblEmail.Text = "[???]";
             // 
             // label11
             // 
@@ -322,9 +322,9 @@
             this.lblGender.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGender.Location = new System.Drawing.Point(163, 152);
             this.lblGender.Name = "lblGender";
-            this.lblGender.Size = new System.Drawing.Size(35, 20);
+            this.lblGender.Size = new System.Drawing.Size(44, 20);
             this.lblGender.TabIndex = 12;
-            this.lblGender.Text = "[??]";
+            this.lblGender.Text = "[???]";
             // 
             // label9
             // 
@@ -342,9 +342,9 @@
             this.lblNationalNo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblNationalNo.Location = new System.Drawing.Point(163, 115);
             this.lblNationalNo.Name = "lblNationalNo";
-            this.lblNationalNo.Size = new System.Drawing.Size(35, 20);
+            this.lblNationalNo.Size = new System.Drawing.Size(44, 20);
             this.lblNationalNo.TabIndex = 13;
-            this.lblNationalNo.Text = "[??]";
+            this.lblNationalNo.Text = "[???]";
             // 
             // label4
             // 

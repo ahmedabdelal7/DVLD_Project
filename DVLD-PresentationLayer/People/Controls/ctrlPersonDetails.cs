@@ -11,6 +11,7 @@ using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace DVLD.People.Controls
 {
@@ -20,29 +21,54 @@ namespace DVLD.People.Controls
         {
             InitializeComponent();
         }
-        clsPerson _Person;
-        
+
+
+        int _PersonID = -1;
+
+        clsPerson _Person;        
+        public clsPerson SelectedPersonInfo
+        {
+            get { return _Person; }
+        }
 
         public int PersonID
         {
-            get { return _Person.PersonID; }
+            get { return _PersonID; }
         }
         
         private void _SetPersonImage()
         {
-            if (string.IsNullOrEmpty(_Person.ImagePath))
-            {
-                ppPersonImage.Image = (_Person.Gender == clsPerson.enGender.Male ? Resources.man : Resources.woman);
-            }
-            else
-            {
-                ppPersonImage.ImageLocation = _Person.ImagePath;
-            }
-            
+            ppPersonImage.Image = (_Person.Gender == clsPerson.enGender.Male ? Resources.man : Resources.woman);
+
+            if (_Person.ImagePath != "")
+                if (File.Exists(_Person.ImagePath))
+                    ppPersonImage.ImageLocation = _Person.ImagePath;
+                else MessageBox.Show("Could`t Find this Image [" + _Person.ImagePath + "] .", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
 
-        private void _LoadInfo()
+        public void _ResetDefaultValues()
         {
+            lblPersonID.Text = "N/A";
+            lblNationalNo.Text = "[???]";
+            lblName.Text = "[???]";
+            lblGender.Text = "[???]";
+            lblCountry.Text = "[???]";
+            lblEmail.Text = "[???]";
+            lblPhone.Text = "[???]";
+            lblAddress.Text = "[???]";
+            lblDateOfBirth.Text = "[???]";
+            ppPersonImage.Image = Resources.man;
+            _Person = null;
+
+        }
+    
+
+        private void _FillPersonInfo()
+        {
+
+            _PersonID = _Person.PersonID; 
+
             lblPersonID.Text = _Person.PersonID.ToString();
             lblNationalNo.Text = _Person.NationalNo;
             lblName.Text = _Person.FullName;
@@ -56,18 +82,37 @@ namespace DVLD.People.Controls
         }
         public void LoadPersonInfo(int personID)
         {
-            ResetPersonCard();
-            _Person = clsPerson.Find(personID);
 
-            _LoadInfo();
+            _Person = clsPerson.Find(personID);
+            if( _Person == null)
+            {
+                _ResetDefaultValues();
+                MessageBox.Show($"This person with ID {_Person.PersonID.ToString()} is not found", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            _FillPersonInfo();
         }
 
         public void LoadPersonInfo( string NationalNo)
         {
-            ResetPersonCard();
             _Person = clsPerson.Find(NationalNo);
+            if (_Person == null)
+            {
+                _ResetDefaultValues();
+                MessageBox.Show($"This person with NationalNo. {_Person.NationalNo} is not found", "Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            _LoadInfo();
+            _FillPersonInfo();
+        }
+
+        private void _RefreshPersonInfo(bool IsChanged = true)
+        {
+            if (IsChanged)
+            {
+                LoadPersonInfo(_PersonID);
+            }
         }
         private void llEditPerson_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
@@ -76,23 +121,9 @@ namespace DVLD.People.Controls
                 return; 
             }
             frmAddEditPerson frm = new frmAddEditPerson(_Person.PersonID);
-            frm.DataBack += LoadPersonInfo;
+            frm.IsSaved += _RefreshPersonInfo;
             frm.ShowDialog();
         }
-        public void ResetPersonCard()
-        {
-            lblPersonID.Text = "N/A";
-            lblNationalNo.Text = "[??]";
-            lblName.Text = "[???]";
-            lblGender.Text = "[??]";
-            lblCountry.Text = "[??]";
-            lblEmail.Text = "[??]";
-            lblPhone.Text = "[??]";
-            lblAddress.Text = "[??]";
-            lblDateOfBirth.Text = "[??]";
-            ppPersonImage.Image = Resources.man;
-            _Person = null;
 
-        }
     }
 }

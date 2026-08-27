@@ -45,14 +45,20 @@ namespace DVLD
             if (chkRememberMe.Checked)
             {
 
-                File.WriteAllLines(_SavedLoginPath, new string[] { txtUserName.Text.ToString() , txtPassword.Text.ToString()});
+                //Save login info to file
+                //File.WriteAllLines(_SavedLoginPath, new string[] { txtUserName.Text.ToString() , txtPassword.Text.ToString()});
+
+                //Save login info to registry
+                clsUtil.SaveLoginInformationToRegistry(txtUserName.Text.Trim(), txtPassword.Text.Trim());
+
 
             }
             else
             {
                 try
                 {
-                    File.Delete(_SavedLoginPath);
+                    //File.Delete(_SavedLoginPath);
+                    clsUtil.DeleteLoginInfoFromRegistry();
 
                 }catch { }
             }
@@ -97,24 +103,36 @@ namespace DVLD
         private void frmLoginScreen_Load(object sender, EventArgs e)
         {
 
-            
             //Read login info fom text file.
-            if (File.Exists(_SavedLoginPath)) {
+            //if (File.Exists(_SavedLoginPath)) {
 
-                string[] lines = File.ReadAllLines(_SavedLoginPath);
+            //    string[] lines = File.ReadAllLines(_SavedLoginPath);
 
-                try {
-                    //if text file was empty for any reason, it will throw exception here.
-                    txtUserName.Text = lines[0];
-                    txtPassword.Text = lines[1];
+            //    try {
+            //        //if text file was empty for any reason, it will throw exception here.
+            //        txtUserName.Text = lines[0];
+            //        txtPassword.Text = lines[1];
 
-                    //if exception not be thrown then Check remember me again.
-                    chkRememberMe.Checked = true;   
-                }catch { 
-                    chkRememberMe.Checked= false;
-                }
-                
-            }
+            //        //if exception not be thrown then Check remember me again.
+            //        chkRememberMe.Checked = true;   
+            //    }catch { 
+            //        chkRememberMe.Checked= false;
+            //    }
+
+            //}
+
+            string userName = "";
+            string password = "";
+
+            if(clsUtil.LoadLoginInformationFromRegistry(ref userName,ref password))
+            {
+                chkRememberMe.Checked = true;
+                txtUserName.Text = userName;
+                txtPassword.Text = password;
+            }else
+                chkRememberMe.Checked = false;
+
+
 
         }
     }
