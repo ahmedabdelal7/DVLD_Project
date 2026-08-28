@@ -24,7 +24,7 @@ namespace DVLD
         private void btnLogin_Click(object sender, EventArgs e)
         {
             //check login information right and user is active. 
-            _User = clsUser.Find(txtUserName.Text.ToString(), txtPassword.Text.ToString());
+            _User = clsUser.Find(txtUserName.Text.Trim(), clsUtil.ComputeHash(txtPassword.Text.Trim()));
 
             if (_User == null)
             {

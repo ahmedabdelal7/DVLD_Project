@@ -1,4 +1,5 @@
-﻿using DVLD_BussinessLayer;
+﻿using DVLD.Common_Classes;
+using DVLD_BussinessLayer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,7 +38,9 @@ namespace DVLD.Users
                 return;
             } 
 
-            if(txtCurrentPassword.Text.ToString() != _User.Password)
+            //using Compute hash to compute hashed password
+            //
+            if(clsUtil.ComputeHash(txtCurrentPassword.Text.Trim()) !=  _User.Password)
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txtCurrentPassword, "Invalid current password!");
@@ -56,7 +59,7 @@ namespace DVLD.Users
                 return;
             }
 
-            if(txtNewPassword.Text.ToString() == _User.Password)
+            if(clsUtil.ComputeHash(txtNewPassword.Text.Trim() )== _User.Password)
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txtNewPassword, "New password should not be same as current password");
@@ -74,7 +77,7 @@ namespace DVLD.Users
                 return;
             }
 
-            if(txtNewPassword.Text.ToString() != txtConfirmPassword.Text.ToString())
+            if(txtNewPassword.Text.Trim() != txtConfirmPassword.Text.Trim())
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txtConfirmPassword, "Confirm password does not match new password!");
@@ -97,7 +100,7 @@ namespace DVLD.Users
                 return;
             }
 
-            _User.Password = txtNewPassword.Text;
+            _User.Password = clsUtil.ComputeHash(txtNewPassword.Text.Trim());
             if (_User.Save())
             {
                 MessageBox.Show("Password changed successfully.", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);

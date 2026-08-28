@@ -1,14 +1,9 @@
-﻿using DVLD_BussinessLayer;
+﻿using DVLD.Common_Classes;
+using DVLD_BussinessLayer;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+
 //using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace DVLD.Users
@@ -65,8 +60,8 @@ namespace DVLD.Users
             lblUserID.Text = _UserID.ToString();
 
             txtUserName.Text = _User.UserName.ToString();
-            txtPassword.Text = _User.Password.ToString();
-            txtConfirmPassword.Text = _User.Password.ToString();
+            //txtPassword.Text = _User.Password.ToString();
+            //txtConfirmPassword.Text = _User.Password.ToString();
             chkIsActive.Checked = _User.IsActive;
 
             
@@ -136,8 +131,9 @@ namespace DVLD.Users
             }
 
             
-            _User.UserName = txtUserName.Text;
-            _User.Password = txtPassword.Text;
+            _User.UserName = txtUserName.Text.Trim();
+            //Store password in hashed string
+            _User.Password = clsUtil.ComputeHash(txtPassword.Text.Trim());
             _User.PersonID = ctrlPersonCardWithFilter1.PersonID;
             _User.IsActive = chkIsActive.Checked;
 
@@ -148,10 +144,10 @@ namespace DVLD.Users
                     MessageBox.Show($"User added successfully with user id [{_User.UserID}].", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     lblUserID.Text = _User.UserID.ToString();
                     _UserID = _User.UserID;
+                    _Mode = enMode.Update;
                 }
                 else
                 {
-                    _Mode = enMode.Update;
                     MessageBox.Show($"User updated successfully with id [{_User.UserID}].", "Done", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 }
@@ -238,6 +234,11 @@ namespace DVLD.Users
         {
             //this.Activate();
             
+        }
+
+        private void tabPersonInfo_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

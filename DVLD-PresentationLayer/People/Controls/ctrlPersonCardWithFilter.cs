@@ -91,7 +91,7 @@ namespace DVLD.People.Controls
 
         private void ctrlPersonCardWithFilter_Load(object sender, EventArgs e)
         {
-            _dtPeople  = clsPerson.ListAllPeople();
+            //_dtPeople  = clsPerson.ListAllPeople();
             cbFindBy.SelectedIndex = 1;
 
         }
